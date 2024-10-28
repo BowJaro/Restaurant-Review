@@ -40,21 +40,16 @@ class SignInController extends GetxController {
         if (user != null) {
           Get.offAllNamed(Routes.home);
         }
-
-        // Example: Show a success snackbar after signing in
-        Get.snackbar(
-            FlutterI18n.translate(Get.context!, "authentication.sign_in"),
-            'Successfully signed in as $email');
       } on AuthException catch (error) {
         Get.back();
         Get.snackbar(
-          'Sign In Failed',
+          FlutterI18n.translate(Get.context!, "authentication.sign_in_failed"),
           error.message,
         );
       } catch (error) {
         Get.back();
         Get.snackbar(
-          'Sign In Failed',
+          FlutterI18n.translate(Get.context!, "authentication.sign_in_failed"),
           error.toString(),
         );
       }

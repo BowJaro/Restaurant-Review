@@ -19,7 +19,9 @@
         "invalid_confirm_password": "Mật khẩu xác nhận không hợp lệ",
         "invalid_phone": "Số điện thoại không hợp lệ",
         "dont_have_account": "Chưa có tài khoản?",
-        "already_have_account": "Đã có tài khoản?"
+        "already_have_account": "Đã có tài khoản?",
+        "sign_in_failed": "Đăng nhập thất bại",
+        "sign_up_failed": "Đăng kí tài khoản thất bại"
     },
     "languages": {
         "en": "English",

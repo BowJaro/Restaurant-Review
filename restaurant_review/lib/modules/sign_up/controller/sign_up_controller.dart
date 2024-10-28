@@ -32,23 +32,40 @@ class SignUpController extends GetxController {
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
 
-      final AuthResponse res = await supabase.auth.signUp(
-        email: email,
-        password: password,
-        // emailRedirectTo: deepLinkUrl,
-      );
+      // final AuthResponse res = await supabase.auth.signUp(
+      //   email: email,
+      //   password: password,
+      //   // emailRedirectTo: deepLinkUrl,
+      // );
 
-      final User? user = res.user;
+      // final User? user = res.user;
 
-      Get.back();
-      if (user != null) {
-        Get.offAllNamed(Routes.home);
+      // Get.back();
+      // if (user != null) {
+      //   Get.offAllNamed(Routes.home);
+      // }
+      try {
+        final AuthResponse res = await supabase.auth.signUp(
+          email: email,
+          password: password,
+        );
+        final User? user = res.user;
+        if (user != null) {
+          Get.offAllNamed(Routes.home);
+        }
+      } on AuthException catch (error) {
+        Get.back();
+        Get.snackbar(
+          FlutterI18n.translate(Get.context!, "authentication.sign_up_failed"),
+          error.message,
+        );
+      } catch (error) {
+        Get.back();
+        Get.snackbar(
+          FlutterI18n.translate(Get.context!, "authentication.sign_up_failed"),
+          error.toString(),
+        );
       }
-
-      // Example: Show a success snackbar after signing up
-      Get.snackbar(
-          FlutterI18n.translate(Get.context!, "authentication.sign_in"),
-          'Successfully signed up as $email');
     }
   }
 
