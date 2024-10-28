@@ -4,12 +4,20 @@ import 'package:flutter_i18n/loaders/decoders/json_decode_strategy.dart';
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:restaurant_review/constants/colors.dart';
-import 'package:restaurant_review/modules/sign_in/binding/sign_in_binding.dart';
+import 'package:restaurant_review/modules/splash/binding/splash_binding.dart';
 import 'package:restaurant_review/routes/routes.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'modules/language/controller/language_controller.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: 'https://edspkihukjhdlbyydnks.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkc3BraWh1a2poZGxieXlkbmtzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAwODYyNzQsImV4cCI6MjA0NTY2MjI3NH0.yXlg9FzcgebLD5s5SExQ3uMQ4VAqPZBVkryo_0qcruM',
+  );
+
   runApp(MyApp());
 }
 
@@ -45,8 +53,8 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('vi'),
         ],
-        initialBinding: SignInBinding(),
-        initialRoute: Routes.signIn,
+        initialBinding: SplashBinding(),
+        initialRoute: Routes.splash,
         getPages: AppPages.routes,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
