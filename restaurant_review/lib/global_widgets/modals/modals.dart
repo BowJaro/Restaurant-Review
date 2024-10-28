@@ -116,4 +116,14 @@ class ModalUtils {
       snackStyle: SnackStyle.FLOATING,
     );
   }
+
+  /// Show a loading indicator with optional message
+  static void showLoadingIndicator({String message = 'Loading...'}) {
+    Get.dialog(
+      const Center(
+        child: CircularProgressIndicator(),
+      ),
+      barrierDismissible: false, // Prevent user from dismissing while loading
+    );
+  }
 }
