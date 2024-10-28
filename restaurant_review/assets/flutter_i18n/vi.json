@@ -17,7 +17,9 @@
         "invalid_email": "Email không hợp lệ",
         "invalid_password": "Mật khẩu phải ít nhất 8 kí tự, bao gồm số và kí tự đặc biệt",
         "invalid_confirm_password": "Mật khẩu xác nhận không hợp lệ",
-        "invalid_phone": "Số điện thoại không hợp lệ"
+        "invalid_phone": "Số điện thoại không hợp lệ",
+        "dont_have_account": "Chưa có tài khoản?",
+        "already_have_account": "Đã có tài khoản?"
     },
     "languages": {
         "en": "English",

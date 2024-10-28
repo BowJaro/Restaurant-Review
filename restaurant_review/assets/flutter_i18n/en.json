@@ -17,7 +17,9 @@
         "invalid_email": "Invalid email",
         "invalid_password": "Password must be at least 8 characters long and include a number and special character",
         "invalid_confirm_password": "Password does not match",
-        "invalid_phone": "Invalid phone number"
+        "invalid_phone": "Invalid phone number",
+        "dont_have_account": "Don't have an account?",
+        "already_have_account": "Already have an account?"
     },
     "languages": {
         "en": "English",
