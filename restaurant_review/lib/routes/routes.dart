@@ -1,8 +1,12 @@
 import 'package:get/get.dart';
+import 'package:restaurant_review/modules/home/view/home_view.dart';
 import 'package:restaurant_review/modules/sign_in/binding/sign_in_binding.dart';
 import 'package:restaurant_review/modules/sign_in/view/sign_in_view.dart';
 import 'package:restaurant_review/modules/sign_up/binding/sign_up_binding.dart';
 import 'package:restaurant_review/modules/sign_up/view/sign_up_view.dart';
+import 'package:restaurant_review/modules/splash/view/splash_view.dart';
+
+import '../modules/splash/binding/splash_binding.dart';
 
 abstract class Routes {
   static const String splash = '/';
@@ -25,5 +29,14 @@ class AppPages {
       page: () => const SignUpView(),
       binding: SignUpBinding(),
     ),
+    GetPage(
+      name: Routes.splash,
+      page: () => const SplashView(),
+      binding: SplashBinding(),
+    ),
+    GetPage(
+      name: Routes.home,
+      page: () => const HomeView(),
+    )
   ];
 }
