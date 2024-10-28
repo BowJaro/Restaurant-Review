@@ -4,13 +4,14 @@ import 'package:get/get.dart';
 import 'package:restaurant_review/routes/routes.dart';
 import '../../../utils/validators.dart';
 
-class SignInController extends GetxController {
+class SignUpController extends GetxController {
   // Form key for validation
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   // Email and password controllers
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
 
   // Obscure password (toggle password visibility)
   var obscurePassword = true.obs;
@@ -20,19 +21,19 @@ class SignInController extends GetxController {
     obscurePassword.value = !obscurePassword.value;
   }
 
-  // Sign-in function
-  void signIn() {
+  // Sign-up function
+  void signUp() {
     if (formKey.currentState!.validate()) {
-      // Perform sign-in logic
+      // Perform sign-up logic
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
 
-      print("Sign In with Email: $email, Password: $password");
+      print("Sign up with Email: $email, Password: $password");
 
-      // Example: Show a success snackbar after signing in
+      // Example: Show a success snackbar after signing up
       Get.snackbar(
           FlutterI18n.translate(Get.context!, "authentication.sign_in"),
-          'Successfully signed in as $email');
+          'Successfully signed up as $email');
     }
   }
 
@@ -46,14 +47,30 @@ class SignInController extends GetxController {
     return ValidatorUtils.validatePassword(value);
   }
 
-  void goToSignUp() {
-    Get.offAllNamed(Routes.signUp);
+  // Validate confirm password (matches password)
+  String? validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return FlutterI18n.translate(
+          Get.context!, "authentication.require_confirm_password");
+    }
+
+    if (value != passwordController.text) {
+      return FlutterI18n.translate(
+          Get.context!, "authentication.invalid_confirm_password");
+    }
+
+    return null; // Passwords match
+  }
+
+  void goToSignIn() {
+    Get.offAllNamed(Routes.signIn);
   }
 
   @override
   void onClose() {
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.onClose();
   }
 }

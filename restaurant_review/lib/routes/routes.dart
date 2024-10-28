@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:restaurant_review/modules/sign_in/binding/sign_in_binding.dart';
 import 'package:restaurant_review/modules/sign_in/view/sign_in_view.dart';
+import 'package:restaurant_review/modules/sign_up/binding/sign_up_binding.dart';
+import 'package:restaurant_review/modules/sign_up/view/sign_up_view.dart';
 
 abstract class Routes {
   static const String splash = '/';
@@ -17,6 +19,11 @@ class AppPages {
       name: Routes.signIn,
       page: () => const SignInView(),
       binding: SignInBinding(),
+    ),
+    GetPage(
+      name: Routes.signUp,
+      page: () => const SignUpView(),
+      binding: SignUpBinding(),
     ),
   ];
 }

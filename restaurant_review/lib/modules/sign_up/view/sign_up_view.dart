@@ -6,16 +6,16 @@ import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/buttons/full_width_button.dart';
 import 'package:restaurant_review/global_widgets/input_fields/input_field.dart';
 import 'package:restaurant_review/modules/language/widget/language_radio_button.dart';
-import '../../sign_in/controller/sign_in_controller.dart';
+import 'package:restaurant_review/modules/sign_up/controller/sign_up_controller.dart';
 
-class SignInView extends GetView<SignInController> {
-  const SignInView({super.key});
+class SignUpView extends GetView<SignUpController> {
+  const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(FlutterI18n.translate(context, "authentication.sign_in")),
+        title: Text(FlutterI18n.translate(context, "authentication.sign_up")),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -42,57 +42,54 @@ class SignInView extends GetView<SignInController> {
                   validator: controller.validatePassword,
                   isPassword: true,
                 ),
+                const SizedBox(height: 16),
+                // Confirm Password input
+                MyInputField(
+                  label: FlutterI18n.translate(
+                      context, "authentication.confirm_password"),
+                  textController: controller.confirmPasswordController,
+                  validator: controller.validateConfirmPassword,
+                  isPassword: true,
+                ),
                 const SizedBox(height: 24),
-
-                // Sign In button
+                // Sign up button
                 FullWidthButton(
                   title:
-                      FlutterI18n.translate(context, "authentication.sign_in"),
-                  onPressed: () => controller.signIn(),
+                      FlutterI18n.translate(context, "authentication.sign_up"),
+                  onPressed: () => controller.signUp(),
                 ),
-
                 const SizedBox(height: 24),
-
-                // Forgot your password?
-                TextButton(
-                  onPressed: () {},
-                  child: Text(FlutterI18n.translate(
-                      context, "authentication.forgot_password")),
-                ),
-
-                const SizedBox(height: 16),
-
-                // Don't have an account? Sign Up button
+                // Already have an account? Sign in button
                 RichText(
                   text: TextSpan(
                     text: FlutterI18n.translate(
-                        context, "authentication.dont_have_account"),
+                        context, "authentication.already_have_account"),
                     style: const TextStyle(color: AppColors.textBlack),
                     children: [
                       TextSpan(
                         text:
-                            " ${FlutterI18n.translate(context, "authentication.sign_up")}",
+                            " ${FlutterI18n.translate(context, "authentication.sign_in")}",
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            controller.goToSignUp();
+                            controller.goToSignIn();
                           },
                       ),
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 24),
-
-                const LanguageRadioButton()
+                const LanguageRadioButton(),
               ],
             ),
           ),
         ),
       ),
+      resizeToAvoidBottomInset:
+          true, // Allow screen to adjust when keyboard appears
     );
   }
 }
