@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/full_image_view.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/image_grid.dart';
 
@@ -36,7 +37,8 @@ class ImageGallery extends StatelessWidget {
                     ),
                     Text(
                       '(${urls.length} ' "This is text 2",
-                      style: const TextStyle(color: Colors.grey, fontSize: 10),
+                      style: const TextStyle(
+                          color: AppColors.textGray, fontSize: 10),
                     ),
                   ],
                 )
@@ -84,12 +86,12 @@ class ImageGallery extends StatelessWidget {
                                       Container(
                                         width: imageSize,
                                         height: imageSize,
-                                        color: Colors.black.withOpacity(0.2),
+                                        color: AppColors.shadowGray,
                                         alignment: Alignment.center,
                                         child: Text(
                                           '+${urls.length - (maxImages - 1)}',
                                           style: const TextStyle(
-                                            color: Colors.white,
+                                            color: AppColors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15,
                                           ),
@@ -122,7 +124,7 @@ class ImageGallery extends StatelessWidget {
                                                     CircularProgressIndicator()),
                                         errorWidget: (context, url, error) =>
                                             const Icon(Icons.error,
-                                                color: Colors.red),
+                                                color: AppColors.errorRed),
                                       ),
                                     ),
                                   ),
@@ -146,7 +148,7 @@ class ImageGallery extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             elevation: 5,
-            color: Colors.white,
+            color: AppColors.white,
             child: content,
           )
         : content; // Directly return the content if not in a card

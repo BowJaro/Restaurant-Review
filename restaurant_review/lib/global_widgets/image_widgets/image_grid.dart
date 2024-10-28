@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/full_image_view.dart';
 
 class FullImageGrid extends StatelessWidget {
@@ -12,14 +13,14 @@ class FullImageGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.black,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: AppColors.white),
           onPressed: () => Get.back(),
         ),
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.black,
       body: GridView.builder(
         padding: const EdgeInsets.all(10),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -44,7 +45,7 @@ class FullImageGrid extends StatelessWidget {
                 placeholder: (context, url) =>
                     const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) =>
-                    const Icon(Icons.error, color: Colors.red),
+                    const Icon(Icons.error, color: AppColors.errorRed),
               ),
             ),
           );

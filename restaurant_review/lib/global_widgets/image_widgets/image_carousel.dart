@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/full_image_view.dart';
 
 class ImageCarouselController extends GetxController {
@@ -46,7 +47,7 @@ class ImageCarousel extends StatelessWidget {
                       child: const Center(
                         child: Icon(
                           Icons.error,
-                          color: Colors.red,
+                          color: AppColors.errorRed,
                           size: 30,
                         ),
                       ),

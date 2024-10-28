@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/colors.dart';
 
 class ModalUtils {
   /// Show a message without title
@@ -21,7 +22,7 @@ class ModalUtils {
               ),
             ),
             const SizedBox(height: 20),
-            const Icon(Icons.close, color: Colors.grey),
+            const Icon(Icons.close, color: AppColors.textGray),
           ],
         ),
       ),
@@ -50,7 +51,7 @@ class ModalUtils {
               ),
             ),
             const SizedBox(height: 20),
-            const Icon(Icons.close, color: Colors.grey),
+            const Icon(Icons.close, color: AppColors.textGray),
           ],
         ),
       ),
@@ -80,7 +81,7 @@ class ModalUtils {
           const SizedBox(height: 20),
         ],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       radius: 10,
       confirm: ElevatedButton(
         onPressed: onYes,
@@ -88,7 +89,7 @@ class ModalUtils {
       ),
       cancel: ElevatedButton(
         onPressed: () => Get.back(),
-        style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
+        style: ElevatedButton.styleFrom(backgroundColor: AppColors.textGray),
         child: const Text('Cancel'),
       ),
     );
@@ -98,8 +99,8 @@ class ModalUtils {
   static void showSnackbar({
     required String title,
     String? message,
-    Color backgroundColor = Colors.red,
-    Color textColor = Colors.white,
+    Color backgroundColor = AppColors.errorRed,
+    Color textColor = AppColors.white,
     SnackPosition snackPosition = SnackPosition.TOP,
     Duration duration = const Duration(seconds: 3),
   }) {

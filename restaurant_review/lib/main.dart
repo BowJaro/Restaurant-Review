@@ -3,6 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_i18n/loaders/decoders/json_decode_strategy.dart';
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/modules/sign_in/binding/sign_in_binding.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
@@ -47,6 +48,10 @@ class MyApp extends StatelessWidget {
         initialBinding: SignInBinding(),
         initialRoute: Routes.signIn,
         getPages: AppPages.routes,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
+          useMaterial3: true,
+        ),
       );
     });
   }

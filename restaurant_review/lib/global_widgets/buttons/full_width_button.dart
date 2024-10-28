@@ -19,8 +19,7 @@ class FullWidthButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 50),
         padding: const EdgeInsets.symmetric(vertical: 15.0),
-        backgroundColor: AppColors.greenPrimary,
-        shadowColor: Colors.black.withOpacity(0.5),
+        shadowColor: AppColors.shadowGray,
         elevation: 5,
       ),
       child: Text(
