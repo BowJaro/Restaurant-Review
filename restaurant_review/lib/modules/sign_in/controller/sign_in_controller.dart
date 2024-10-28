@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/global_widgets/modals/modals.dart';
 import 'package:restaurant_review/routes/routes.dart';
+import 'package:restaurant_review/services/supabase.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../utils/validators.dart';
 
 class SignInController extends GetxController {
@@ -21,18 +24,40 @@ class SignInController extends GetxController {
   }
 
   // Sign-in function
-  void signIn() {
+  void signIn() async {
     if (formKey.currentState!.validate()) {
+      ModalUtils.showLoadingIndicator();
       // Perform sign-in logic
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
 
-      print("Sign In with Email: $email, Password: $password");
+      try {
+        final AuthResponse res = await supabase.auth.signInWithPassword(
+          email: email,
+          password: password,
+        );
+        final User? user = res.user;
+        if (user != null) {
+          Get.offAllNamed(Routes.home);
+        }
 
-      // Example: Show a success snackbar after signing in
-      Get.snackbar(
-          FlutterI18n.translate(Get.context!, "authentication.sign_in"),
-          'Successfully signed in as $email');
+        // Example: Show a success snackbar after signing in
+        Get.snackbar(
+            FlutterI18n.translate(Get.context!, "authentication.sign_in"),
+            'Successfully signed in as $email');
+      } on AuthException catch (error) {
+        Get.back();
+        Get.snackbar(
+          'Sign In Failed',
+          error.message,
+        );
+      } catch (error) {
+        Get.back();
+        Get.snackbar(
+          'Sign In Failed',
+          error.toString(),
+        );
+      }
     }
   }
 

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/global_widgets/modals/modals.dart';
 import 'package:restaurant_review/routes/routes.dart';
-import '../../../utils/validators.dart';
+import 'package:restaurant_review/services/supabase.dart';
+import 'package:restaurant_review/utils/validators.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignUpController extends GetxController {
   // Form key for validation
@@ -22,13 +25,25 @@ class SignUpController extends GetxController {
   }
 
   // Sign-up function
-  void signUp() {
+  void signUp() async {
     if (formKey.currentState!.validate()) {
+      ModalUtils.showLoadingIndicator();
       // Perform sign-up logic
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
 
-      print("Sign up with Email: $email, Password: $password");
+      final AuthResponse res = await supabase.auth.signUp(
+        email: email,
+        password: password,
+        // emailRedirectTo: deepLinkUrl,
+      );
+
+      final User? user = res.user;
+
+      Get.back();
+      if (user != null) {
+        Get.offAllNamed(Routes.home);
+      }
 
       // Example: Show a success snackbar after signing up
       Get.snackbar(
