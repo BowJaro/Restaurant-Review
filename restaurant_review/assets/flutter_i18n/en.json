@@ -21,10 +21,15 @@
         "dont_have_account": "Don't have an account?",
         "already_have_account": "Already have an account?",
         "sign_in_failed": "Sign in failed",
-        "sign_up_failed": "Sign up failed"
+        "sign_in_succeeded": "Sign in succeeded",
+        "sign_up_failed": "Sign up failed",
+        "sign_up_succeeded": "Sign up succeeded"
     },
     "languages": {
         "en": "English",
         "vi": "Tiếng Việt"
+    },
+    "error": {
+        "unknown": "Unknown error"
     }
 }

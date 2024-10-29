@@ -50,8 +50,6 @@ class ModalUtils {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 20),
-            const Icon(Icons.close, color: AppColors.textGray),
           ],
         ),
       ),

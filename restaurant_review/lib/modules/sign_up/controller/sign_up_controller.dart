@@ -3,13 +3,15 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
 import 'package:restaurant_review/routes/routes.dart';
-import 'package:restaurant_review/services/supabase.dart';
 import 'package:restaurant_review/utils/validators.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../repository/sign_up_repository.dart';
 
 class SignUpController extends GetxController {
   // Form key for validation
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final SignUpRepository signUpRepository;
+
+  SignUpController(this.signUpRepository);
 
   // Email and password controllers
   var emailController = TextEditingController();
@@ -24,47 +26,22 @@ class SignUpController extends GetxController {
     obscurePassword.value = !obscurePassword.value;
   }
 
-  // Sign-up function
-  void signUp() async {
-    if (formKey.currentState!.validate()) {
+  Future<void> signUp() async {
+    if (formKey.currentState?.validate() ?? false) {
       ModalUtils.showLoadingIndicator();
-      // Perform sign-up logic
-      String email = emailController.text.trim();
-      String password = passwordController.text.trim();
+      final response = await signUpRepository.signUp(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+      );
+      Get.back();
 
-      // final AuthResponse res = await supabase.auth.signUp(
-      //   email: email,
-      //   password: password,
-      //   // emailRedirectTo: deepLinkUrl,
-      // );
-
-      // final User? user = res.user;
-
-      // Get.back();
-      // if (user != null) {
-      //   Get.offAllNamed(Routes.home);
-      // }
-      try {
-        final AuthResponse res = await supabase.auth.signUp(
-          email: email,
-          password: password,
-        );
-        final User? user = res.user;
-        if (user != null) {
-          Get.offAllNamed(Routes.home);
-        }
-      } on AuthException catch (error) {
-        Get.back();
-        Get.snackbar(
-          FlutterI18n.translate(Get.context!, "authentication.sign_up_failed"),
-          error.message,
-        );
-      } catch (error) {
-        Get.back();
-        Get.snackbar(
-          FlutterI18n.translate(Get.context!, "authentication.sign_up_failed"),
-          error.toString(),
-        );
+      if (response.isSuccess) {
+        Get.offAllNamed(Routes.home);
+      } else {
+        ModalUtils.showMessageWithTitleModal(
+            FlutterI18n.translate(
+                Get.context!, "authentication.sign_up_failed"),
+            response.message);
       }
     }
   }
