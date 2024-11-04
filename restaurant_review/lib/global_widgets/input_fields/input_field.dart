@@ -3,9 +3,21 @@ import 'package:get/get.dart';
 
 class MyInputFieldController extends GetxController {
   bool isPasswordVisible = false;
+  bool isTextNotEmpty = false;
 
   void toggleIsPassword() {
     isPasswordVisible = !isPasswordVisible;
+    update();
+  }
+
+  void updateIsTextNotEmpty(String text) {
+    isTextNotEmpty = text.isNotEmpty;
+    update();
+  }
+
+  void clearText(TextEditingController controller) {
+    controller.clear();
+    updateIsTextNotEmpty('');
     update();
   }
 }
@@ -31,6 +43,10 @@ class MyInputField extends StatelessWidget {
     return GetBuilder<MyInputFieldController>(
       init: MyInputFieldController(),
       builder: (controller) {
+        textController.addListener(() {
+          controller.updateIsTextNotEmpty(textController.text);
+        });
+
         return TextFormField(
           controller: textController,
           decoration: InputDecoration(
@@ -49,7 +65,12 @@ class MyInputField extends StatelessWidget {
                     ),
                     onPressed: controller.toggleIsPassword,
                   )
-                : null,
+                : controller.isTextNotEmpty
+                    ? IconButton(
+                        icon: Icon(Icons.clear),
+                        onPressed: () => controller.clearText(textController),
+                      )
+                    : null,
           ),
           validator: validator,
           keyboardType: keyboardType,
