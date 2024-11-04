@@ -30,6 +30,22 @@
         "vi": "Tiếng Việt"
     },
     "error": {
-        "unknown": "Unknown error"
+        "unknown": "Unknown error",
+        "select_valid_option": "Please select a valid option"
+    },
+    "new_post": {
+        "title": "Create post",
+        "post": "Post",
+        "name": "Title",
+        "topic": "Topic",
+        "restaurant": "Restaurant",
+        "content_placeholder": "Write review...",
+        "new": "New",
+        "hash_tags": "Hash tags",
+        "Taste": "Taste",
+        "Service": "Service",
+        "Price": "Price",
+        "Ambiance": "Ambiance",
+        "Cleanliness": "Cleanliness"
     }
 }

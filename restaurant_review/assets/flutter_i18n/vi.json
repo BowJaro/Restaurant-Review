@@ -26,5 +26,24 @@
     "languages": {
         "en": "English",
         "vi": "Tiếng Việt"
+    },
+    "error": {
+        "unknown": "Lỗi không xác định!",
+        "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ"
+    },
+    "new_post": {
+        "title": "Viết bài",
+        "post": "Đăng bài",
+        "name": "Tiêu đề",
+        "topic": "Chủ đề",
+        "restaurant": "Nhà hàng",
+        "content_placeholder": "Viết đánh giá...",
+        "new": "Thêm mới",
+        "hash_tags": "Hash tags",
+        "Taste": "Hương vị",
+        "Service": "Dịch vụ",
+        "Price": "Giá cả",
+        "Ambiance": "Không gian",
+        "Cleanliness": "Vệ sinh"
     }
 }
