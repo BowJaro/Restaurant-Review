@@ -45,6 +45,7 @@ dependencies:
   flutter_i18n: ^0.36.2
   shared_preferences: ^2.3.2
   supabase_flutter: ^2.8.0
+  flutter_quill: ^10.8.5
 
 dev_dependencies:
   flutter_test:
