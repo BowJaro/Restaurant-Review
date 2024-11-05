@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 
@@ -83,12 +84,12 @@ class ModalUtils {
       radius: 10,
       confirm: ElevatedButton(
         onPressed: onYes,
-        child: const Text('Yes'),
+        child: Text(FlutterI18n.translate(Get.context!, 'modal.yes')),
       ),
       cancel: ElevatedButton(
         onPressed: () => Get.back(),
         style: ElevatedButton.styleFrom(backgroundColor: AppColors.textGray),
-        child: const Text('Cancel'),
+        child: Text(FlutterI18n.translate(Get.context!, 'modal.cancel')),
       ),
     );
   }
@@ -116,7 +117,7 @@ class ModalUtils {
   }
 
   /// Show a loading indicator with optional message
-  static void showLoadingIndicator({String message = 'Loading...'}) {
+  static void showLoadingIndicator() {
     Get.dialog(
       const Center(
         child: CircularProgressIndicator(),

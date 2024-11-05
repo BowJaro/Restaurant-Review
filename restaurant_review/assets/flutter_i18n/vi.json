@@ -31,19 +31,32 @@
         "unknown": "Lỗi không xác định!",
         "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ"
     },
-    "new_post": {
-        "title": "Viết bài",
+    "post_detail": {
+        "create_post": "Viết bài",
+        "edit_post": "Sửa bài viết",
         "post": "Đăng bài",
         "name": "Tiêu đề",
         "topic": "Chủ đề",
         "restaurant": "Nhà hàng",
         "content_placeholder": "Viết đánh giá...",
         "new": "Thêm mới",
-        "hash_tags": "Hash tags",
-        "Taste": "Hương vị",
-        "Service": "Dịch vụ",
-        "Price": "Giá cả",
-        "Ambiance": "Không gian",
-        "Cleanliness": "Vệ sinh"
+        "hashtags": "Hash tags",
+        "taste": "Hương vị",
+        "service": "Dịch vụ",
+        "price": "Giá cả",
+        "ambiance": "Không gian",
+        "cleanliness": "Vệ sinh",
+        "add": "Thêm",
+        "enter_new_hash_tags": "Nhập hashtag mới"
+    },
+    "rich_text_editor": {
+        "save": "Lưu",
+        "discard_title": "Loại bỏ nội dung?",
+        "discard_content": "Bạn có chắc muốn loại bỏ toàn bộ nội dung vừa nhập hay không?",
+        "discard": "Loại bỏ"
+    },
+    "modal": {
+        "yes": "Đồng ý",
+        "cancel": "Hủy"
     }
 }

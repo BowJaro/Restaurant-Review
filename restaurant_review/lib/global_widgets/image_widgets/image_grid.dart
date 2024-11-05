@@ -38,8 +38,6 @@ class FullImageGrid extends StatelessWidget {
             child: Hero(
               tag: 'imageHero_$index',
               child: CachedNetworkImage(
-                memCacheHeight: 600,
-                memCacheWidth: 600,
                 imageUrl: urls[index],
                 fit: BoxFit.cover,
                 placeholder: (context, url) =>

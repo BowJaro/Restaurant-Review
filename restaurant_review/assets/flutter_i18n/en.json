@@ -33,19 +33,32 @@
         "unknown": "Unknown error",
         "select_valid_option": "Please select a valid option"
     },
-    "new_post": {
-        "title": "Create post",
+    "post_detail": {
+        "create_post": "Create post",
+        "edit_post": "Edit post",
         "post": "Post",
         "name": "Title",
         "topic": "Topic",
         "restaurant": "Restaurant",
         "content_placeholder": "Write review...",
         "new": "New",
-        "hash_tags": "Hash tags",
-        "Taste": "Taste",
-        "Service": "Service",
-        "Price": "Price",
-        "Ambiance": "Ambiance",
-        "Cleanliness": "Cleanliness"
+        "hashtags": "Hash tags",
+        "taste": "Taste",
+        "service": "Service",
+        "price": "Price",
+        "ambiance": "Ambiance",
+        "cleanliness": "Cleanliness",
+        "add": "Add",
+        "enter_new_hash_tags": "Enter new hashtag"
+    },
+    "rich_text_editor": {
+        "save": "Save",
+        "discard_title": "Discard changes?",
+        "discard_content": "Are you sure you want to discard your changes?",
+        "discard": "Discard"
+    },
+    "modal": {
+        "yes": "Yes",
+        "cancel": "Cancel"
     }
 }

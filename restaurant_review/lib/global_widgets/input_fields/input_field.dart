@@ -67,7 +67,7 @@ class MyInputField extends StatelessWidget {
                   )
                 : controller.isTextNotEmpty
                     ? IconButton(
-                        icon: Icon(Icons.clear),
+                        icon: const Icon(Icons.clear),
                         onPressed: () => controller.clearText(textController),
                       )
                     : null,
