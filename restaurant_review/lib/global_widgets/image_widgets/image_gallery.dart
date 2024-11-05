@@ -38,33 +38,19 @@ class ImageGallery extends StatelessWidget {
                         onTap: () {
                           Get.to(() => FullImageGrid(urls: urls));
                         },
-                        child: Stack(
+                        child: Container(
+                          width: imageSize,
+                          height: imageSize,
+                          color: AppColors.shadowGray,
                           alignment: Alignment.center,
-                          children: [
-                            Opacity(
-                              opacity: 0.5,
-                              child: Image.network(
-                                urls[index],
-                                width: imageSize,
-                                height: imageSize,
-                                fit: BoxFit.cover,
-                              ),
+                          child: Text(
+                            '+${urls.length - (maxImages - 1)}',
+                            style: const TextStyle(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
                             ),
-                            Container(
-                              width: imageSize,
-                              height: imageSize,
-                              color: AppColors.shadowGray,
-                              alignment: Alignment.center,
-                              child: Text(
-                                '+${urls.length - (maxImages - 1)}',
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       );
                     }

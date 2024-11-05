@@ -57,6 +57,8 @@
     },
     "modal": {
         "yes": "Đồng ý",
-        "cancel": "Hủy"
+        "cancel": "Hủy",
+        "camera": "Máy ảnh",
+        "gallery": "Thư viện"
     }
 }

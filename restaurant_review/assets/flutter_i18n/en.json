@@ -59,6 +59,8 @@
     },
     "modal": {
         "yes": "Yes",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "camera": "Camera",
+        "gallery": "Gallery"
     }
 }
