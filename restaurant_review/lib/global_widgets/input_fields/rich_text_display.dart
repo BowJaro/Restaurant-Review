@@ -48,7 +48,7 @@ class RichTextDisplay extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(15.0),
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.textBlack, width: 0.5),
+            border: Border.all(color: AppColors.textBlack, width: 0.7),
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: Obx(() => quill.QuillEditor.basic(

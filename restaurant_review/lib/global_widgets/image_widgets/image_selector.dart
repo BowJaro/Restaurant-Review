@@ -5,16 +5,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:restaurant_review/constants/colors.dart';
-
-class ImageItem {
-  final String? url;
-  final XFile? file;
-  final bool isLocal;
-
-  ImageItem({this.url, this.file}) : isLocal = file != null;
-
-  String get path => file?.path ?? url!;
-}
+import 'package:restaurant_review/global_classes/image_item.dart';
 
 class ImageSelectorController extends GetxController {
   final RxList<ImageItem> imageItems = <ImageItem>[].obs;
