@@ -9,13 +9,14 @@ import 'package:restaurant_review/global_widgets/input_fields/rich_text_editor.d
 class RichTextDisplayController extends GetxController {
   var quillController = quill.QuillController.basic().obs;
 
-  void setContent(List<dynamic> content) {
-    quillController.value.document = quill.Document.fromJson(content);
+  void setContent(String content) {
+    var value = jsonDecode(content);
+    quillController.value.document = quill.Document.fromJson(value);
   }
 }
 
 class RichTextDisplay extends StatelessWidget {
-  final List<dynamic> content;
+  final String content;
   final ValueChanged<String?> onContentChanged;
 
   const RichTextDisplay({
@@ -39,7 +40,7 @@ class RichTextDisplay extends StatelessWidget {
 
         if (result != null) {
           onContentChanged(result);
-          controller.setContent(jsonDecode(result));
+          controller.setContent(result);
         }
       },
       child: AbsorbPointer(

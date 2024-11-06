@@ -24,7 +24,7 @@ class MyRichTextEditorController extends GetxController {
 }
 
 class MyRichTextEditor extends StatelessWidget {
-  final List<dynamic>? initialContent;
+  final String? initialContent;
 
   const MyRichTextEditor({super.key, this.initialContent});
 
@@ -34,8 +34,8 @@ class MyRichTextEditor extends StatelessWidget {
         Get.put(MyRichTextEditorController());
 
     if (initialContent != null) {
-      controller.quillController.document =
-          quill.Document.fromJson(initialContent!);
+      var value = jsonDecode(initialContent!);
+      controller.quillController.document = quill.Document.fromJson(value);
     }
 
     // Request focus on the text editor when the widget is built
