@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/modules/splash/binding/splash_binding.dart';
 import 'package:restaurant_review/routes/routes.dart';
+import 'package:restaurant_review/services/global_services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'modules/language/controller/language_controller.dart';
@@ -17,7 +18,7 @@ Future<void> main() async {
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkc3BraWh1a2poZGxieXlkbmtzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAwODYyNzQsImV4cCI6MjA0NTY2MjI3NH0.yXlg9FzcgebLD5s5SExQ3uMQ4VAqPZBVkryo_0qcruM',
   );
-
+  GlobalBinding().dependencies();
   runApp(MyApp());
 }
 

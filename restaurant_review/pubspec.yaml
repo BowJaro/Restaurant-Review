@@ -47,6 +47,7 @@ dependencies:
   supabase_flutter: ^2.8.0
   flutter_quill: ^10.8.5
   image_picker: ^1.1.2
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
