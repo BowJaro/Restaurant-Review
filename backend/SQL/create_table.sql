@@ -99,3 +99,26 @@ CREATE TABLE location (
     latitude DOUBLE PRECISION DEFAULT 0
 );
 
+-- Create Hashtag
+create table hashtag (
+    id serial primary key,
+    name varchar(255) unique not null,
+    description text default ''
+);
+
+-- Create Restaurant
+create table restaurant (
+    id serial primary key,
+    brand_id int references brand(id) on delete set null,
+    restaurant_category_id int references restaurant_category(id) on delete set null,
+    address_id int references address(id) on delete set null,
+    location_id int references location(id) on delete set null,
+    image_id int references image(id) on delete set null,
+    metadata_id int references metadata(id) on delete set null,
+    name varchar(255) not null default '',
+    rate_total double precision default 0,
+    rate_quantity int default 0,
+    status varchar(50) default 'active',
+    hashtag_list int[] -- Array of integers to store hashtag IDs
+);
+
