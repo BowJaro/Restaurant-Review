@@ -98,8 +98,8 @@ class AvatarSelectorWidget extends StatelessWidget {
                             width: size,
                             height: size,
                           ))
-                    : const Icon(Icons.person,
-                        size: 40, color: AppColors.black),
+                    : Icon(Icons.person,
+                        size: size * 0.8, color: AppColors.black),
               ),
             ),
             if (imageItem != null)
