@@ -1,5 +1,10 @@
 import 'package:get/get.dart';
+import 'package:restaurant_review/modules/brand_detail/binding/brand_detail_binding.dart';
+import 'package:restaurant_review/modules/brand_detail/view/brand_detail_view.dart';
+import 'package:restaurant_review/modules/home/binding/home_binding.dart';
 import 'package:restaurant_review/modules/home/view/home_view.dart';
+import 'package:restaurant_review/modules/post_detail/binding/post_detail_binding.dart';
+import 'package:restaurant_review/modules/post_detail/view/post_detail_view.dart';
 import 'package:restaurant_review/modules/sign_in/binding/sign_in_binding.dart';
 import 'package:restaurant_review/modules/sign_in/view/sign_in_view.dart';
 import 'package:restaurant_review/modules/sign_up/binding/sign_up_binding.dart';
@@ -14,6 +19,8 @@ abstract class Routes {
   static const String language = '/language';
   static const String signIn = '/sign_in';
   static const String signUp = '/sign_up';
+  static const String postDetail = '/post_detail';
+  static const String brandDetail = '/brand_detail';
 }
 
 class AppPages {
@@ -36,7 +43,18 @@ class AppPages {
     ),
     GetPage(
       name: Routes.home,
-      page: () => const HomeView(),
-    )
+      page: () => HomeView(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: Routes.postDetail,
+      page: () => PostDetailView(),
+      binding: PostDetailBinding(),
+    ),
+    GetPage(
+      name: Routes.brandDetail,
+      page: () => BrandDetailView(),
+      binding: BrandDetailBinding(),
+    ),
   ];
 }

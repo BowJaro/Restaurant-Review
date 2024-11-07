@@ -1,0 +1,17 @@
+import 'package:get/get.dart';
+import 'package:restaurant_review/modules/brand_detail/provider/brand_detail_provider.dart';
+import 'package:restaurant_review/modules/brand_detail/repository/brand_detail_repository.dart';
+import 'package:restaurant_review/services/supabase.dart';
+
+import '../controller/brand_detail_controller.dart';
+
+class BrandDetailBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<BrandDetailProvider>(() => BrandDetailProvider(supabase));
+    Get.lazyPut<BrandDetailRepository>(
+        () => BrandDetailRepository(Get.find<BrandDetailProvider>()));
+    Get.lazyPut<BrandDetailController>(
+        () => BrandDetailController(Get.find<BrandDetailRepository>()));
+  }
+}

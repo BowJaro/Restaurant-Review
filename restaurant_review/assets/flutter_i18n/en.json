@@ -31,7 +31,8 @@
     },
     "error": {
         "unknown": "Unknown error",
-        "select_valid_option": "Please select a valid option"
+        "select_valid_option": "Please select a valid option",
+        "missing_image": "Please select an image!"
     },
     "post_detail": {
         "create_post": "Create post",
@@ -50,6 +51,14 @@
         "cleanliness": "Cleanliness",
         "add": "Add",
         "enter_new_hash_tags": "Enter new hashtag"
+    },
+    "brand_detail": {
+        "create_brand": "Create brand",
+        "edit_brand": "Edit brand",
+        "name": "Name",
+        "description": "Description",
+        "add": "Add",
+        "success": "Successfully!"
     },
     "rich_text_editor": {
         "save": "Save",

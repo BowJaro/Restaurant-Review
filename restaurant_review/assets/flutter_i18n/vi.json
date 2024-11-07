@@ -29,7 +29,8 @@
     },
     "error": {
         "unknown": "Lỗi không xác định!",
-        "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ"
+        "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ",
+        "missing_image": "Vui lòng chọn ảnh!"
     },
     "post_detail": {
         "create_post": "Viết bài",
@@ -48,6 +49,13 @@
         "cleanliness": "Vệ sinh",
         "add": "Thêm",
         "enter_new_hash_tags": "Nhập hashtag mới"
+    },
+    "brand_detail": {
+        "create_brand": "Tạo thương hiệu",
+        "edit_brand": "Sửa thương hiệu",
+        "name": "Tên thương hiệu",
+        "description": "Mô tả",
+        "add": "Thêm"
     },
     "rich_text_editor": {
         "save": "Lưu",
