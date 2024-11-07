@@ -53,6 +53,23 @@ class AutocompleteFieldController extends GetxController {
     update();
   }
 
+  void onTextChanged(String text, TextEditingController textController,
+      ValueChanged<String?>? onSelected, BuildContext context) {
+    updateIsTextNotEmpty(text);
+    // Check if input text matches any suggestion
+    final match = suggestions.firstWhereOrNull((s) => s['name'] == text);
+    selectedValue = match?['value'];
+    hasError = selectedValue == null;
+
+    if (filteredSuggestions.isNotEmpty && focusNode.hasFocus) {
+      showOverlay(context, textController, onSelected);
+    } else {
+      closeOverlay();
+    }
+
+    update();
+  }
+
   void showOverlay(BuildContext context, TextEditingController textController,
       ValueChanged<String?>? onSelected) {
     closeOverlay();
@@ -111,16 +128,12 @@ class AutocompleteFieldController extends GetxController {
 
 class MyAutocompleteField extends StatelessWidget {
   final String label;
-  final TextEditingController textController;
-  final String? Function(String?)? validator;
   final List<Map<String, String>> suggestions;
   final ValueChanged<String?> onSelected;
 
   const MyAutocompleteField({
     super.key,
     required this.label,
-    required this.textController,
-    this.validator,
     required this.suggestions,
     required this.onSelected,
   });
@@ -128,6 +141,7 @@ class MyAutocompleteField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(AutocompleteFieldController());
+    final TextEditingController textController = TextEditingController();
     controller.initialize(suggestions);
 
     return GetBuilder<AutocompleteFieldController>(
@@ -148,7 +162,8 @@ class MyAutocompleteField extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                   ),
                   errorText: controller.hasError
-                      ? 'Please select a valid option'
+                      ? FlutterI18n.translate(
+                          context, "error.select_valid_option")
                       : null,
                   suffixIcon: controller.isTextNotEmpty
                       ? IconButton(
@@ -164,21 +179,8 @@ class MyAutocompleteField extends StatelessWidget {
                       : null;
                 },
                 onChanged: (text) {
-                  controller.updateIsTextNotEmpty(text);
-                  // Check if input text matches any suggestion
-                  final match = controller.suggestions
-                      .firstWhereOrNull((s) => s['name'] == text);
-                  controller.selectedValue = match?['value'];
-                  controller.hasError = controller.selectedValue == null;
-
-                  if (controller.filteredSuggestions.isNotEmpty &&
-                      controller.focusNode.hasFocus) {
-                    controller.showOverlay(context, textController, onSelected);
-                  } else {
-                    controller.closeOverlay();
-                  }
-
-                  controller.update();
+                  controller.onTextChanged(
+                      text, textController, onSelected, context);
                 },
               ),
             ],
