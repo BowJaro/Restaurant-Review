@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:restaurant_review/services/supabase.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ImageService extends GetxService {
   Future<Uint8List?> fetchImage(String url) async {
@@ -27,13 +28,24 @@ class ImageService extends GetxService {
       final file = File(image.path); // Convert XFile to File
       final response =
           await supabase.storage.from(bucketName).upload(path, file);
+
       if (response.isEmpty) {
         print('=========Failed to upload image=========');
+        return ""; // Return an empty string if the upload fails
       }
-      return response;
+
+      return response; // Return the path if upload is successful
+    } on StorageException catch (e) {
+      if (e.statusCode == 409.toString() &&
+          e.message.contains('The resource already exists')) {
+        return "$bucketName/$path";
+      } else {
+        print('=========Error uploading image: $e=========');
+        return ""; // Return an empty string for other errors
+      }
     } catch (e) {
-      print('=========Error uploading image: $e=========');
-      return "";
+      print('=========Unexpected error uploading image: $e=========');
+      return ""; // Handle any other types of exceptions
     }
   }
 }
