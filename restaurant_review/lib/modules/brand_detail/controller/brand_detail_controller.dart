@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'package:restaurant_review/global_classes/image_item.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/avatar_selector.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
-import 'package:restaurant_review/modules/brand_detail/model/brand_detail_model.dart';
-import 'package:restaurant_review/modules/brand_detail/repository/brand_detail_repository.dart';
+
+import '../model/brand_detail_model.dart';
+import '../repository/brand_detail_repository.dart';
 
 class BrandDetailController extends GetxController {
   var isLoading = true.obs;

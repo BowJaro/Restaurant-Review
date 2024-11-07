@@ -1,7 +1,8 @@
-import 'package:restaurant_review/modules/brand_detail/model/brand_detail_model.dart';
 import 'package:restaurant_review/services/image_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../model/brand_detail_model.dart';
 
 class BrandDetailProvider {
   final SupabaseClient supabase;

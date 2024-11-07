@@ -1,5 +1,5 @@
-import 'package:restaurant_review/modules/brand_detail/model/brand_detail_model.dart';
-import 'package:restaurant_review/modules/brand_detail/provider/brand_detail_provider.dart';
+import '../model/brand_detail_model.dart';
+import '../provider/brand_detail_provider.dart';
 
 class BrandDetailRepository {
   final BrandDetailProvider provider;

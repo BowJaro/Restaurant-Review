@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:restaurant_review/modules/brand_detail/provider/brand_detail_provider.dart';
-import 'package:restaurant_review/modules/brand_detail/repository/brand_detail_repository.dart';
 import 'package:restaurant_review/services/supabase.dart';
 
 import '../controller/brand_detail_controller.dart';
+import '../provider/brand_detail_provider.dart';
+import '../repository/brand_detail_repository.dart';
 
 class BrandDetailBinding extends Bindings {
   @override
