@@ -11,8 +11,9 @@ class DetailPageAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.buttonLabel,
     required this.onPressed,
   });
+
   @override
-  AppBar build(BuildContext context) {
+  Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
       centerTitle: true,
@@ -22,7 +23,9 @@ class DetailPageAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Text(
             buttonLabel,
             style: const TextStyle(
-                fontSize: AppFontSizes.s7, fontWeight: FontWeight.bold),
+              fontSize: AppFontSizes.s7,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         const SizedBox(width: 5),
