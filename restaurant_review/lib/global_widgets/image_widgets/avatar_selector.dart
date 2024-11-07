@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,6 +20,7 @@ class AvatarSelectorController extends GetxController {
 }
 
 class AvatarSelectorWidget extends StatelessWidget {
+  final baseImageUrl = dotenv.env['BASE_IMAGE_URL']!;
   final AvatarSelectorController controller;
   final double size;
   final ImagePicker _picker = ImagePicker();
@@ -91,7 +93,7 @@ class AvatarSelectorWidget extends StatelessWidget {
                             height: size,
                           )
                         : Image.network(
-                            imageItem.path,
+                            baseImageUrl + imageItem.path,
                             fit: BoxFit.cover,
                             width: size,
                             height: size,
