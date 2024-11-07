@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_i18n/loaders/decoders/json_decode_strategy.dart';
 import 'package:get/get.dart';
@@ -13,10 +14,18 @@ import 'modules/language/controller/language_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    print("=========Error loading .env file: $e=========");
+    throw Exception("Error loading .env file: $e");
+  }
+  final url = dotenv.env['URL']!;
+  final anonKey = dotenv.env['ANON_KEY']!;
   await Supabase.initialize(
-    url: 'https://edspkihukjhdlbyydnks.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkc3BraWh1a2poZGxieXlkbmtzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAwODYyNzQsImV4cCI6MjA0NTY2MjI3NH0.yXlg9FzcgebLD5s5SExQ3uMQ4VAqPZBVkryo_0qcruM',
+    url: url,
+    anonKey: anonKey,
   );
   GlobalBinding().dependencies();
   runApp(MyApp());
