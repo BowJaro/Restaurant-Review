@@ -3,8 +3,6 @@ import 'package:restaurant_review/modules/brand_detail/binding/brand_detail_bind
 import 'package:restaurant_review/modules/brand_detail/view/brand_detail_view.dart';
 import 'package:restaurant_review/modules/home/binding/home_binding.dart';
 import 'package:restaurant_review/modules/home/view/home_view.dart';
-import 'package:restaurant_review/modules/post_detail/binding/post_detail_binding.dart';
-import 'package:restaurant_review/modules/post_detail/view/post_detail_view.dart';
 import 'package:restaurant_review/modules/sign_in/binding/sign_in_binding.dart';
 import 'package:restaurant_review/modules/sign_in/view/sign_in_view.dart';
 import 'package:restaurant_review/modules/sign_up/binding/sign_up_binding.dart';
@@ -46,14 +44,14 @@ class AppPages {
       page: () => HomeView(),
       binding: HomeBinding(),
     ),
-    GetPage(
-      name: Routes.postDetail,
-      page: () => PostDetailView(),
-      binding: PostDetailBinding(),
-    ),
+    // GetPage(
+    //   name: Routes.postDetail,
+    //   page: () => const PostDetailView(),
+    //   binding: PostDetailBinding(),
+    // ),
     GetPage(
       name: Routes.brandDetail,
-      page: () => BrandDetailView(),
+      page: () => const BrandDetailView(),
       binding: BrandDetailBinding(),
     ),
   ];

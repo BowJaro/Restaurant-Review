@@ -13,7 +13,6 @@ class SplashController extends GetxController {
   Future<void> _redirect() async {
     await Future.delayed(Duration.zero);
     final session = Supabase.instance.client.auth.currentSession;
-    print("This is session $session");
 
     if (session != null) {
       Get.offNamed(Routes.home);

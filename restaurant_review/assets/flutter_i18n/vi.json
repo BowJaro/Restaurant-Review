@@ -3,6 +3,14 @@
     "welcome": "Chào mừng bạn đến với Flutter",
     "change_language": "Thay đổi ngôn ngữ",
     "language": "Tiếng Việt",
+    "home": {
+        "explore": "Khám phá",
+        "notifications": "Thông báo",
+        "bookmarks": "Đã lưu",
+        "account": "Tài khoản",
+        "more": "Mở rộng",
+        "feed": "Bản tin"
+    },
     "authentication": {
         "sign_in": "Đăng nhập",
         "sign_up": "Đăng kí",

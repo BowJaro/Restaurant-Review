@@ -3,6 +3,14 @@
     "welcome": "Welcome to Flutter",
     "change_language": "Change Language",
     "language": "English",
+    "home": {
+        "explore": "Explore",
+        "notifications": "Notifications",
+        "bookmarks": "Bookmarks",
+        "account": "Account",
+        "more": "More",
+        "feed": "Feed"
+    },
     "authentication": {
         "sign_in": "Sign In",
         "sign_up": "Sign Up",
