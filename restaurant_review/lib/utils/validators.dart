@@ -38,6 +38,7 @@ class ValidatorUtils {
 
   /// Validate a password (at least 8 characters, includes a number and a special character)
   static String? validatePassword(String? value) {
+    print("validateCoordinates called with value: $value");
     if (value == null || value.isEmpty) {
       return FlutterI18n.translate(
           Get.context!, "authentication.require_password");
@@ -52,5 +53,38 @@ class ValidatorUtils {
           Get.context!, "authentication.invalid_password");
     }
     return null; // Password is valid
+  }
+
+  static String? validateCoordinates(String? value) {
+    if (value == null || value.isEmpty) {
+      return FlutterI18n.translate(Get.context!, "error.invalid_coordinates");
+    }
+
+    final coordinates = value.split(",");
+    if (coordinates.length != 2) {
+      return FlutterI18n.translate(Get.context!, "error.invalid_coordinates");
+    }
+
+    double tryParse(String s) {
+      try {
+        return double.parse(s);
+      } on FormatException {
+        return double.nan;
+      }
+    }
+
+    final lat = tryParse(coordinates[0]);
+    final lon = tryParse(coordinates[1]);
+
+    if (lat.isNaN ||
+        lon.isNaN ||
+        lat < -90 ||
+        lat > 90 ||
+        lon < -180 ||
+        lon > 180) {
+      return FlutterI18n.translate(Get.context!, "error.invalid_coordinates");
+    }
+
+    return null;
   }
 }
