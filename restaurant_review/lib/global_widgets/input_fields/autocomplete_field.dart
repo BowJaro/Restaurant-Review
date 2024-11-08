@@ -131,20 +131,27 @@ class MyAutocompleteField extends StatelessWidget {
   final List<Map<String, String>> suggestions;
   final ValueChanged<String?> onSelected;
 
-  const MyAutocompleteField({
+  MyAutocompleteField({
     super.key,
     required this.label,
     required this.suggestions,
     required this.onSelected,
-  });
+  }) : uniqueTag = DateTime.now()
+            .microsecondsSinceEpoch
+            .toString(); // Generate unique tag
+
+  final String uniqueTag; // Unique tag generated internally
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(AutocompleteFieldController());
+    // Use Get.put with the internally generated unique tag
+    final controller = Get.put(AutocompleteFieldController(), tag: uniqueTag);
     final TextEditingController textController = TextEditingController();
     controller.initialize(suggestions);
 
     return GetBuilder<AutocompleteFieldController>(
+      init: controller,
+      tag: uniqueTag, // Attach unique tag to GetBuilder
       builder: (controller) {
         return CompositedTransformTarget(
           link: controller.layerLink,
