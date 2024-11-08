@@ -42,6 +42,16 @@
         "select_valid_option": "Please select a valid option",
         "missing_image": "Please select an image!"
     },
+    "location": {
+        "invalid_coordinates": "Invalid coordinates! Use latitude,longitude",
+        "could_not_launch": "Could not launch",
+        "missing_location": "Enter Coordinates",
+        "location": "Location",
+        "select_address": "Select Address",
+        "province": "Province / City",
+        "district": "District",
+        "ward": "Ward"
+    },
     "post_detail": {
         "create_post": "Create post",
         "edit_post": "Edit post",
@@ -66,6 +76,21 @@
         "name": "Name",
         "description": "Description",
         "add": "Add",
+        "success": "Successfully!"
+    },
+    "restaurant_detail": {
+        "create_restaurant": "Create restaurant",
+        "edit_restaurant": "Edit restaurant",
+        "name": "Name",
+        "description": "Description",
+        "category": "Restaurant category",
+        "add": "Add",
+        "edit": "Edit",
+        "new": "New",
+        "brand": "Brand",
+        "features": "Features",
+        "address": "Address",
+        "location": "Location",
         "success": "Successfully!"
     },
     "rich_text_editor": {

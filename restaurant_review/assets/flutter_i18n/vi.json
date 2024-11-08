@@ -40,6 +40,16 @@
         "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ",
         "missing_image": "Vui lòng chọn ảnh!"
     },
+    "location": {
+        "invalid_coordinates": "Nhập đúng tọa độ! Vui lòng nhập latitude,longitude",
+        "could_not_launch": "Không thể mở trang",
+        "missing_location": "Vui lòng nhập tọa độ",
+        "location": "Vị trí",
+        "select_address": "Chọn địa chỉ",
+        "province": "Tỉnh / Thành phố",
+        "district": "Quận / Huyện",
+        "ward": "Phường / Xã"
+    },
     "post_detail": {
         "create_post": "Viết bài",
         "edit_post": "Sửa bài viết",
@@ -63,7 +73,23 @@
         "edit_brand": "Sửa thương hiệu",
         "name": "Tên thương hiệu",
         "description": "Mô tả",
-        "add": "Thêm"
+        "add": "Thêm",
+        "success": "Thành công!"
+    },
+    "restaurant_detail": {
+        "create_restaurant": "Tạo quán",
+        "edit_restaurant": "Sửa thông tin quán",
+        "name": "Tên quán",
+        "description": "Mô tả",
+        "category": "Loại quán",
+        "add": "Thêm",
+        "edit": "Sửa",
+        "new": "Tạo mới",
+        "brand": "Thương hiệu",
+        "features": "Đặc điểm",
+        "address": "Địa chỉ",
+        "location": "Vị trí",
+        "success": "Thành công!"
     },
     "rich_text_editor": {
         "save": "Lưu",
