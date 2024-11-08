@@ -81,18 +81,23 @@ class HashtagSelectorController extends GetxController {
 
 class HashtagSelector extends StatelessWidget {
   final HashtagSelectorController controller;
+  final double size;
 
-  const HashtagSelector({super.key, required this.controller});
+  const HashtagSelector(
+      {super.key, required this.controller, this.size = 120.0});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ElevatedButton(
-          onPressed: () {
-            controller.showHashtagModal();
-          },
-          child: Text(FlutterI18n.translate(context, "post_detail.hashtags")),
+        SizedBox(
+          width: size,
+          child: ElevatedButton(
+            onPressed: () {
+              controller.showHashtagModal();
+            },
+            child: Text(FlutterI18n.translate(context, "post_detail.hashtags")),
+          ),
         ),
         const SizedBox(width: 10),
         Expanded(
