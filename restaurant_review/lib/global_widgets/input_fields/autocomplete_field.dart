@@ -130,12 +130,14 @@ class MyAutocompleteField extends StatelessWidget {
   final String label;
   final List<Map<String, String>> suggestions;
   final ValueChanged<String?> onSelected;
+  final String? defaultValue; // Optional default value parameter for 'value'
 
   MyAutocompleteField({
     super.key,
     required this.label,
     required this.suggestions,
     required this.onSelected,
+    this.defaultValue, // Initialize the optional parameter
   }) : uniqueTag = DateTime.now()
             .microsecondsSinceEpoch
             .toString(); // Generate unique tag
@@ -144,14 +146,29 @@ class MyAutocompleteField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Use Get.put with the internally generated unique tag
     final controller = Get.put(AutocompleteFieldController(), tag: uniqueTag);
-    final TextEditingController textController = TextEditingController();
+
+    // Find the matching suggestion based on the 'value' field
+    final matchingSuggestion = suggestions.firstWhere(
+      (s) => s['value'] == defaultValue,
+      orElse: () => {'name': '', 'value': ''},
+    );
+
+    // Initialize TextEditingController with the 'name' from matching suggestion
+    final TextEditingController textController = TextEditingController(
+      text: matchingSuggestion['name'] ?? '',
+    );
+
     controller.initialize(suggestions);
+
+    // Set selectedValue in the controller if a default value is provided
+    if (defaultValue != null) {
+      controller.selectedValue = defaultValue;
+    }
 
     return GetBuilder<AutocompleteFieldController>(
       init: controller,
-      tag: uniqueTag, // Attach unique tag to GetBuilder
+      tag: uniqueTag,
       builder: (controller) {
         return CompositedTransformTarget(
           link: controller.layerLink,

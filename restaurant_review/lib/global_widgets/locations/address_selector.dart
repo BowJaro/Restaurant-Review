@@ -20,6 +20,28 @@ class AddressSelectorController extends GetxController {
     loadProvinces();
   }
 
+  void setDefaultAddress(
+      {required String provinceCode,
+      required String districtCode,
+      required String wardCode}) {
+    selectedProvince.value = provinceCode;
+    selectedDistrict.value = districtCode;
+    selectedWard.value = wardCode;
+    print("this is provinces $provinces");
+    final tempProvince = provinces.firstWhere((p) => p['Code'] == provinceCode);
+    print("this is temp province $tempProvince");
+    // Convert each district to Map<String, dynamic> explicitly
+    districts.value = ((tempProvince['District'] as List)
+        .map((d) => Map<String, dynamic>.from(d))
+        .toList());
+
+    final tempDistrict = districts.firstWhere((d) => d['Code'] == districtCode);
+    // Convert each ward to Map<String, dynamic> explicitly
+    wards.value = ((tempDistrict['Ward'] as List)
+        .map((w) => Map<String, dynamic>.from(w))
+        .toList());
+  }
+
   Future<void> loadProvinces() async {
     final String response =
         await rootBundle.loadString('assets/addresses/vi.json');
@@ -33,6 +55,7 @@ class AddressSelectorController extends GetxController {
 
     final temp = provinces.firstWhere((p) => p['Code'] == provinceCode);
     // Convert each district to Map<String, dynamic> explicitly
+    districts.clear();
     districts.value = ((temp['District'] as List)
         .map((d) => Map<String, dynamic>.from(d))
         .toList());
@@ -46,6 +69,7 @@ class AddressSelectorController extends GetxController {
 
     final temp = districts.firstWhere((d) => d['Code'] == districtCode);
     // Convert each ward to Map<String, dynamic> explicitly
+    wards.clear();
     wards.value = ((temp['Ward'] as List)
         .map((w) => Map<String, dynamic>.from(w))
         .toList());
@@ -120,6 +144,9 @@ class AddressSelectorView extends StatelessWidget {
                     if (selected == null) return;
                     controller.selectProvince(selected);
                   },
+                  defaultValue: controller.selectedProvince.value.isEmpty
+                      ? null
+                      : controller.selectedProvince.value,
                 )),
             Obx(() {
               if (controller.districts.isNotEmpty) {
@@ -136,6 +163,9 @@ class AddressSelectorView extends StatelessWidget {
                     if (selected == null) return;
                     controller.selectDistrict(selected);
                   },
+                  defaultValue: controller.selectedDistrict.value.isEmpty
+                      ? null
+                      : controller.selectedDistrict.value,
                 );
               }
               return const SizedBox();
@@ -155,6 +185,9 @@ class AddressSelectorView extends StatelessWidget {
                     if (selected == null) return;
                     controller.selectWard(selected);
                   },
+                  defaultValue: controller.selectedWard.value.isEmpty
+                      ? null
+                      : controller.selectedWard.value,
                 );
               }
               return const SizedBox();
@@ -168,15 +201,18 @@ class AddressSelectorView extends StatelessWidget {
   Widget _buildAutocompleteField(BuildContext context,
       {required String label,
       required List<Map<String, String>> suggestions,
-      required ValueChanged<String?> onSelected}) {
+      required ValueChanged<String?> onSelected,
+      String? defaultValue}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: MyAutocompleteField(
+        key: Key(DateTime.now().microsecondsSinceEpoch.toString()),
         label: label,
         suggestions: suggestions,
         onSelected: (selected) {
           onSelected(selected);
         },
+        defaultValue: defaultValue,
       ),
     );
   }

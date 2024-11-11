@@ -9,6 +9,7 @@ class HashtagSelectorController extends GetxController {
 
   HashtagSelectorController({List<String>? initialHashtags}) {
     if (initialHashtags != null) {
+      hashtags.clear();
       hashtags.addAll(initialHashtags);
     }
   }
@@ -18,6 +19,11 @@ class HashtagSelectorController extends GetxController {
       hashtags.add(hashtag);
       newHashtagController.clear();
     }
+  }
+
+  void setHashtags(List<String> newHashtags) {
+    hashtags.clear();
+    hashtags.addAll(newHashtags);
   }
 
   void showHashtagModal() {

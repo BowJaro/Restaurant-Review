@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,6 +32,10 @@ class ImageSelectorController extends GetxController {
 
   List<ImageItem> get remoteImages =>
       imageItems.where((item) => !item.isLocal).toList();
+
+  setImageList(List<String> urls) {
+    imageItems.addAll(urls.map((url) => ImageItem(url: url)));
+  }
 }
 
 class ImageSelectorWidget extends StatelessWidget {
@@ -85,6 +90,7 @@ class ImageSelectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final baseImageUrl = dotenv.env['BASE_IMAGE_URL']!;
     return Row(
       children: [
         GestureDetector(
@@ -119,7 +125,8 @@ class ImageSelectorWidget extends StatelessWidget {
                           image: DecorationImage(
                             image: imageItem.file != null
                                 ? FileImage(File(imageItem.path))
-                                : NetworkImage(imageItem.path) as ImageProvider,
+                                : NetworkImage(baseImageUrl + imageItem.path)
+                                    as ImageProvider,
                             fit: BoxFit.cover,
                           ),
                         ),
