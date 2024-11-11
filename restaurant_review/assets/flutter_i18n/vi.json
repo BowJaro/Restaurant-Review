@@ -36,9 +36,11 @@
         "vi": "Tiếng Việt"
     },
     "error": {
+        "error": "Lỗi",
         "unknown": "Lỗi không xác định!",
         "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ",
-        "missing_image": "Vui lòng chọn ảnh!"
+        "missing_image": "Vui lòng chọn ảnh!",
+        "please_fill_all_required_fields": "Vui lòng nhập đủ các thông tin bắt buộc."
     },
     "location": {
         "invalid_coordinates": "Nhập đúng tọa độ! Vui lòng nhập latitude,longitude",
@@ -48,7 +50,8 @@
         "select_address": "Chọn địa chỉ",
         "province": "Tỉnh / Thành phố",
         "district": "Quận / Huyện",
-        "ward": "Phường / Xã"
+        "ward": "Phường / Xã",
+        "street": "Đường"
     },
     "post_detail": {
         "create_post": "Viết bài",
@@ -78,11 +81,12 @@
     },
     "restaurant_detail": {
         "create_restaurant": "Tạo quán",
-        "edit_restaurant": "Sửa thông tin quán",
+        "edit_restaurant": "Sửa thông tin",
         "name": "Tên quán",
         "description": "Mô tả",
         "category": "Loại quán",
         "add": "Thêm",
+        "save": "Lưu",
         "edit": "Sửa",
         "new": "Tạo mới",
         "brand": "Thương hiệu",

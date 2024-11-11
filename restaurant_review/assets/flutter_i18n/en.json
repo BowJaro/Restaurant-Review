@@ -38,9 +38,11 @@
         "vi": "Tiếng Việt"
     },
     "error": {
+        "error": "Error",
         "unknown": "Unknown error",
         "select_valid_option": "Please select a valid option",
-        "missing_image": "Please select an image!"
+        "missing_image": "Please select an image!",
+        "please_fill_all_required_fields": "Please fill all required fields."
     },
     "location": {
         "invalid_coordinates": "Invalid coordinates! Use latitude,longitude",
@@ -50,7 +52,8 @@
         "select_address": "Select Address",
         "province": "Province / City",
         "district": "District",
-        "ward": "Ward"
+        "ward": "Ward",
+        "street": "Street"
     },
     "post_detail": {
         "create_post": "Create post",
@@ -85,6 +88,7 @@
         "description": "Description",
         "category": "Restaurant category",
         "add": "Add",
+        "save": "Save",
         "edit": "Edit",
         "new": "New",
         "brand": "Brand",
