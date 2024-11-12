@@ -42,7 +42,8 @@
         "unknown": "Unknown error",
         "select_valid_option": "Please select a valid option",
         "missing_image": "Please select an image!",
-        "please_fill_all_required_fields": "Please fill all required fields."
+        "please_fill_all_required_fields": "Please fill all required fields.",
+        "please_sign_in_first": "Please sign in first"
     },
     "location": {
         "invalid_coordinates": "Invalid coordinates! Use latitude,longitude",
@@ -62,9 +63,10 @@
         "name": "Title",
         "topic": "Topic",
         "restaurant": "Restaurant",
-        "content_placeholder": "Write review...",
+        "description": "Write review...",
         "new": "New",
         "hashtags": "Hash tags",
+        "rate": "Rate",
         "taste": "Taste",
         "service": "Service",
         "price": "Price",

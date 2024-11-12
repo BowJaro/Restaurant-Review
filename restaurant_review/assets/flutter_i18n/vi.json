@@ -40,7 +40,8 @@
         "unknown": "Lỗi không xác định!",
         "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ",
         "missing_image": "Vui lòng chọn ảnh!",
-        "please_fill_all_required_fields": "Vui lòng nhập đủ các thông tin bắt buộc."
+        "please_fill_all_required_fields": "Vui lòng nhập đủ các thông tin bắt buộc.",
+        "please_sign_in_first": "Vui lòng đăng nhập lại!"
     },
     "location": {
         "invalid_coordinates": "Nhập đúng tọa độ! Vui lòng nhập latitude,longitude",
@@ -60,9 +61,10 @@
         "name": "Tiêu đề",
         "topic": "Chủ đề",
         "restaurant": "Nhà hàng",
-        "content_placeholder": "Viết đánh giá...",
+        "description": "Viết đánh giá...",
         "new": "Thêm mới",
         "hashtags": "Hash tags",
+        "rate": "Đánh giá",
         "taste": "Hương vị",
         "service": "Dịch vụ",
         "price": "Giá cả",
