@@ -167,3 +167,195 @@ EXCEPTION
         RETURN FALSE;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION upsert_post(
+    p_id INT,
+    p_topic_id INT,
+    p_name VARCHAR,
+    p_metadata_id INT,
+    p_content TEXT,
+    p_hashtag_list TEXT[],
+    p_image_url_list TEXT[],
+    p_profile_id UUID,
+    p_restaurant_id INT
+) RETURNS VOID AS $$
+DECLARE
+    v_post_id INT;
+    v_metadata_id INT;
+    v_image_id INT;
+    v_image_ids INT[];
+    v_hashtag_id INT;
+    v_hashtag_ids INT[];
+    v_image_url TEXT;
+    v_hashtag TEXT;
+BEGIN
+    -- Insert images and get their ids
+    FOREACH v_image_url IN ARRAY p_image_url_list
+    LOOP
+        INSERT INTO image (url) VALUES (v_image_url)
+        RETURNING id INTO v_image_id;
+        v_image_ids := array_append(v_image_ids, v_image_id);
+    END LOOP;
+
+    -- Upsert metadata
+    IF p_metadata_id IS NULL THEN
+        INSERT INTO metadata (text, image_list)
+        VALUES (p_content, v_image_ids)
+        RETURNING id INTO v_metadata_id;
+    ELSE
+        UPDATE metadata
+        SET text = p_content,
+            image_list = v_image_ids
+        WHERE id = p_metadata_id
+        RETURNING id INTO v_metadata_id;
+    END IF;
+
+    -- Insert hashtags and get their ids
+    FOREACH v_hashtag IN ARRAY p_hashtag_list
+    LOOP
+        INSERT INTO hashtag (name) VALUES (v_hashtag)
+        ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name
+        RETURNING id INTO v_hashtag_id;
+        v_hashtag_ids := array_append(v_hashtag_ids, v_hashtag_id);
+    END LOOP;
+
+    -- Upsert post
+    IF p_id IS NULL THEN
+        INSERT INTO post (topic_id, name, metadata_id, hashtag_list, profile_id, restaurant_id)
+        VALUES (p_topic_id, p_name, v_metadata_id, v_hashtag_ids, p_profile_id, p_restaurant_id)
+        RETURNING id INTO v_post_id;
+    ELSE
+        UPDATE post
+        SET topic_id = p_topic_id,
+            name = p_name,
+            metadata_id = v_metadata_id,
+            hashtag_list = v_hashtag_ids,
+            profile_id = p_profile_id,
+            restaurant_id = p_restaurant_id
+        WHERE id = p_id
+        RETURNING id INTO v_post_id;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+CREATE OR REPLACE FUNCTION upsert_post_with_rate(
+    p_id INT,
+    p_topic_id INT,
+    p_name VARCHAR,
+    p_metadata_id INT,
+    p_content TEXT,
+    p_hashtag_list TEXT[],
+    p_image_url_list TEXT[],
+    p_profile_id UUID,
+    p_restaurant_id INT,
+    p_rate_list JSONB,
+    p_rate_id INT
+) RETURNS VOID AS $$
+DECLARE
+    v_post_id INT;
+    v_metadata_id INT;
+    v_image_id INT;
+    v_image_ids INT[];
+    v_hashtag_id INT;
+    v_hashtag_ids INT[];
+    v_image_url TEXT;
+    v_hashtag TEXT;
+    v_rate_id INT;
+    v_average DOUBLE PRECISION;
+    v_item JSONB;
+    v_total INT = 0;
+    v_count INT = 0;
+BEGIN
+    -- Insert images and get their ids
+    FOREACH v_image_url IN ARRAY p_image_url_list
+    LOOP
+        INSERT INTO image (url) VALUES (v_image_url)
+        RETURNING id INTO v_image_id;
+        v_image_ids := array_append(v_image_ids, v_image_id);
+    END LOOP;
+
+    -- Upsert metadata
+    IF p_metadata_id IS NULL THEN
+        INSERT INTO metadata (text, image_list)
+        VALUES (p_content, v_image_ids)
+        RETURNING id INTO v_metadata_id;
+    ELSE
+        UPDATE metadata
+        SET text = p_content,
+            image_list = v_image_ids
+        WHERE id = p_metadata_id
+        RETURNING id INTO v_metadata_id;
+    END IF;
+
+    -- Insert hashtags and get their ids
+    FOREACH v_hashtag IN ARRAY p_hashtag_list
+    LOOP
+        INSERT INTO hashtag (name) VALUES (v_hashtag)
+        ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name
+        RETURNING id INTO v_hashtag_id;
+        v_hashtag_ids := array_append(v_hashtag_ids, v_hashtag_id);
+    END LOOP;
+
+    -- Calculate average value from rate list
+    IF p_rate_list IS NOT NULL THEN
+        FOR v_item IN SELECT * FROM jsonb_array_elements(p_rate_list)
+        LOOP
+            v_total := v_total + (v_item->>'value')::INT;
+            v_count := v_count + 1;
+        END LOOP;
+        v_average := v_total::DOUBLE PRECISION / v_count;
+
+        -- Upsert rate
+        IF p_rate_id IS NULL THEN
+            INSERT INTO rate (profile_id, restaurant_id, average)
+            VALUES (p_profile_id, p_restaurant_id, v_average)
+            RETURNING id INTO v_rate_id;
+        ELSE
+            UPDATE rate
+            SET average = v_average
+            WHERE id = p_rate_id;
+            v_rate_id := p_rate_id;
+        END IF;
+
+        -- Upsert rate content
+        FOR v_item IN SELECT * FROM jsonb_array_elements(p_rate_list)
+        LOOP
+            IF (v_item->>'id') IS NULL THEN
+                INSERT INTO rate_content (rate_id, rate_type_id, value)
+                VALUES (v_rate_id, (v_item->>'rate_type_id')::INT, (v_item->>'value')::INT);
+            ELSE
+                UPDATE rate_content
+                SET rate_id = v_rate_id,
+                    rate_type_id = (v_item->>'rate_type_id')::INT,
+                    value = (v_item->>'value')::INT
+                WHERE id = (v_item->>'id')::INT;
+            END IF;
+        END LOOP;
+    END IF;
+
+    -- Upsert post
+    IF p_id IS NULL THEN
+        INSERT INTO post (topic_id, name, metadata_id, hashtag_list, profile_id, restaurant_id, rate_id)
+        VALUES (p_topic_id, p_name, v_metadata_id, v_hashtag_ids, p_profile_id, p_restaurant_id, v_rate_id)
+        RETURNING id INTO v_post_id;
+    ELSE
+        UPDATE post
+        SET topic_id = p_topic_id,
+            name = p_name,
+            metadata_id = v_metadata_id,
+            hashtag_list = v_hashtag_ids,
+            profile_id = p_profile_id,
+            restaurant_id = p_restaurant_id,
+            rate_id = v_rate_id
+        WHERE id = p_id
+        RETURNING id INTO v_post_id;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+

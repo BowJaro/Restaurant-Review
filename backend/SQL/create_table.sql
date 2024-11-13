@@ -122,3 +122,41 @@ create table restaurant (
     hashtag_list int[] -- Array of integers to store hashtag IDs
 );
 
+-- Create Rate
+CREATE TABLE rate (
+    id SERIAL PRIMARY KEY,
+    profile_id UUID REFERENCES profiles(id),
+    restaurant_id INT REFERENCES restaurant(id),
+    created_at TIMESTAMPTZ DEFAULT now(),
+    average DOUBLE PRECISION DEFAULT 0
+);
+
+-- Create RateType
+CREATE TABLE rate_type (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) DEFAULT '',
+    description TEXT DEFAULT ''
+);
+
+-- Create RateContent
+CREATE TABLE rate_content (
+    id SERIAL PRIMARY KEY,
+    rate_id INT REFERENCES rate(id),
+    rate_type_id INT REFERENCES rate_type(id),
+    value INT CHECK (value >= 1 AND value <= 5) DEFAULT 5
+);
+
+-- Create Post
+CREATE TABLE post (
+    id SERIAL PRIMARY KEY,
+    topic_id INT REFERENCES topic(id),
+    name VARCHAR(255) DEFAULT '',
+    metadata_id INT REFERENCES metadata(id),
+    created_at TIMESTAMPTZ DEFAULT now(),
+    hashtag_list INT[],
+    status VARCHAR(50) DEFAULT 'published',
+    view_count INT DEFAULT 0,
+    profile_id UUID REFERENCES profiles(id),
+    restaurant_id INT REFERENCES restaurant(id) ON DELETE SET NULL,
+    rate_id INT REFERENCES rate(id) ON DELETE SET NULL
+);
