@@ -21,10 +21,10 @@ class StarRating extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(5, (index) {
         return GestureDetector(
-          onTap: isReadOnly ? null : () => onPressed(index),
+          onTap: isReadOnly ? null : () => onPressed(index + 1),
           child: Icon(
             Icons.star,
-            color: index <= value ? AppColors.rateYellow : AppColors.rateGray,
+            color: index < value ? AppColors.rateYellow : AppColors.rateGray,
             size: size,
           ),
         );
