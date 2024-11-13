@@ -15,11 +15,26 @@ class HomeView extends GetView<HomeController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text('Explore'),
-          // TextButton(
-          //     onPressed: () {
-          //       Get.toNamed(Routes.postDetail);
-          //     },
-          //     child: const Text("Go to post detail")),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.postDetail,
+                  arguments: {'isNew': false, 'id': 4});
+            },
+            child: const Text("Go to post detail to edit"),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.postDetail, arguments: {'isNew': true});
+            },
+            child: const Text("Go to post detail"),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.toNamed(Routes.restaurantDetail,
+                  arguments: {'isNew': false, 'id': 1});
+            },
+            child: const Text("Go to restaurant detail"),
+          ),
           TextButton(
               onPressed: () {
                 Get.toNamed(Routes.brandDetail, arguments: {'isNew': true});
