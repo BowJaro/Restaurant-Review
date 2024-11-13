@@ -132,8 +132,8 @@ class RestaurantDetailController extends GetxController {
   // Method to validate required fields
   bool validateFields() {
     if (name.isEmpty ||
-        restaurantCategoryId == 0 ||
-        brandId == 0 ||
+        restaurantCategoryId.value == 0 ||
+        brandId.value == 0 ||
         provinceId.isEmpty ||
         districtId.isEmpty ||
         location.isEmpty ||
@@ -153,8 +153,6 @@ class RestaurantDetailController extends GetxController {
     street.value = streetController.text;
     location.value = locationController.text;
     hashtag.value = hashtagController.hashtags;
-    // restaurantCategoryId.value = restaurantCategoryId.value;
-    // brandId.value = brandId.value;
     provinceId.value = addressSelectorController.selectedProvince.value;
     districtId.value = addressSelectorController.selectedDistrict.value;
     wardId.value = addressSelectorController.selectedWard.value;
@@ -228,49 +226,3 @@ class RestaurantDetailController extends GetxController {
         restaurantDetailModel.restaurantCategoryList);
   }
 }
-
-/*
-    p_id INT,
-    p_name VARCHAR(255),
-    p_restaurant_category_id INT,
-    p_brand_id INT,
-    p_description TEXT,
-    p_hashtag_list TEXT[],
-    p_image_urls TEXT[],
-    p_avatar_url TEXT,
-    p_province VARCHAR(255),
-    p_district VARCHAR(255),
-    p_ward VARCHAR(255),
-    p_street VARCHAR(255),
-    p_latitude DOUBLE PRECISION,
-    p_longitude DOUBLE PRECISION,
-    p_metadata_id INT DEFAULT NULL,
-    p_avatar_id INT DEFAULT NULL,
-    p_address_id INT DEFAULT NULL,
-    p_location_id INT DEFAULT NULL
-*/
-
-/*
-  p_id,
-    p_name,
-     p_restaurant_category_id, 
-  p_brand_id, 
-  p_description, 
-  p_hashtag_list, 
-   p_image_urls, 
-p_address_id,
- p_avatar_id,
-  p_avatar_url, 
-     p_province, 
-  p_district, 
-     p_ward
-     p_street, 
-   p_latitude,
-    p_location_id, 
-   p_longitude, 
-   p_metadata,
-*/
-
-//=========Error upserting restaurant: 
-//Error occurred: 
-//insert or update on table "restaurant" violates foreign key constraint "restaurant_image_id_fkey"=========
