@@ -26,8 +26,15 @@ class ImageService extends GetxService {
       XFile image, String bucketName, String path) async {
     try {
       final file = File(image.path); // Convert XFile to File
+      // Add a timestamp to the file name
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final fileName = path.split('/').last; // Extract the original file name
+      final directory =
+          path.substring(0, path.lastIndexOf('/')); // Extract the directory
+      final newPath =
+          '$directory/${timestamp}_$fileName'; // Append timestamp to the file name
       final response =
-          await supabase.storage.from(bucketName).upload(path, file);
+          await supabase.storage.from(bucketName).upload(newPath, file);
 
       if (response.isEmpty) {
         print('=========Failed to upload image=========');
