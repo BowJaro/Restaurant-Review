@@ -27,9 +27,7 @@ class AddressSelectorController extends GetxController {
     selectedProvince.value = provinceCode;
     selectedDistrict.value = districtCode;
     selectedWard.value = wardCode;
-    print("this is provinces $provinces");
     final tempProvince = provinces.firstWhere((p) => p['Code'] == provinceCode);
-    print("this is temp province $tempProvince");
     // Convert each district to Map<String, dynamic> explicitly
     districts.value = ((tempProvince['District'] as List)
         .map((d) => Map<String, dynamic>.from(d))

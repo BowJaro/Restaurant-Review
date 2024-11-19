@@ -30,6 +30,12 @@ class HomeView extends GetView<HomeController> {
           ),
           TextButton(
             onPressed: () {
+              Get.toNamed(Routes.restaurantDetail, arguments: {'isNew': true});
+            },
+            child: const Text("Go to add new restaurant"),
+          ),
+          TextButton(
+            onPressed: () {
               Get.toNamed(Routes.restaurantDetail,
                   arguments: {'isNew': false, 'id': 1});
             },
