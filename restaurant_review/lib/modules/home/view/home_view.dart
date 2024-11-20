@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/modules/account/view/account_view.dart';
 import 'package:restaurant_review/modules/language/widget/language_radio_button.dart';
 import 'package:restaurant_review/routes/routes.dart';
 import 'package:restaurant_review/services/supabase.dart';
@@ -70,7 +71,7 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
     ),
-    const Center(child: Text('Account')),
+    const AccountView()
   ];
 
   @override
@@ -86,10 +87,10 @@ class HomeView extends GetView<HomeController> {
                 icon: const Icon(Icons.explore),
                 label: FlutterI18n.translate(context, "home.explore")),
             BottomNavigationBarItem(
-                icon: Icon(Icons.notifications),
+                icon: const Icon(Icons.notifications),
                 label: FlutterI18n.translate(context, "home.notifications")),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
+                icon: const Icon(Icons.account_circle),
                 label: FlutterI18n.translate(context, "home.account")),
           ],
         ),

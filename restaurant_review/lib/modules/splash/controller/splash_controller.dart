@@ -16,8 +16,13 @@ class SplashController extends GetxController {
     final session = supabase.auth.currentSession;
 
     final prefs = await SharedPreferences.getInstance();
+    print("test plash");
+
     if (session != null) {
       await prefs.setString('sessionId', session.user.id);
+      print("test plash");
+      print(
+          "this is sessionId in splash: ${(await SharedPreferences.getInstance()).getString('sessionId')}");
       Get.offNamed(Routes.home);
     } else {
       await prefs.remove('sessionId');
