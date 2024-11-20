@@ -1,20 +1,20 @@
 class RestaurantUpsertModel {
   final int? id;
   final String name;
-  final int metadataId;
+  final int? metadataId;
   final String description;
   final int restaurantCategoryId;
   final int brandId;
   final List<String> hashtagList;
   final List<dynamic> imageList;
-  final int avatarId;
+  final int? avatarId;
   final dynamic avatar;
-  final int addressId;
+  final int? addressId;
   final String province;
   final String district;
   final String ward;
   final String street;
-  final int locationId;
+  final int? locationId;
   final double latitude;
   final double longitude;
 
