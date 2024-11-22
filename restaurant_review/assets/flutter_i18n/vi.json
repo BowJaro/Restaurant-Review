@@ -41,7 +41,8 @@
     "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ",
     "missing_image": "Vui lòng chọn ảnh!",
     "please_fill_all_required_fields": "Vui lòng nhập đủ các thông tin bắt buộc.",
-    "please_sign_in_first": "Vui lòng đăng nhập lại!"
+    "please_sign_in_first": "Vui lòng đăng nhập lại!",
+    "no_data": "Không có dữ liệu"
   },
   "location": {
     "invalid_coordinates": "Nhập đúng tọa độ! Vui lòng nhập latitude,longitude",
@@ -117,6 +118,14 @@
     "feedback": "Phản hồi",
     "rate_app": "Đánh giá",
     "sign_out": "Đăng xuất",
-    "support": "Hỗ trợ"
+    "support": "Hỗ trợ",
+    "change_password": "Thay đổi mật khẩu",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "confirm_password": "Xác nhận mật khẩu",
+    "forgot_password": "Quên mật khẩu",
+    "phone": "Số điện thoại",
+    "full_name": "Họ tên",
+    "user_name": "Tên người dùng"
   }
 }

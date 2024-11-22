@@ -13,11 +13,16 @@ class SplashView extends GetView<SplashController> {
       body: Container(
         color: AppColors.white, // Background color
         child: Center(
-          child: Image.asset(
-            'assets/logo/tahu-high-resolution-logo.png',
-            width: 200, // Adjust size as needed
-            height: 200,
-            fit: BoxFit.contain, // Keeps image aspect ratio
+          child: Column(
+            children: [
+              Image.asset(
+                'assets/logo/tahu-high-resolution-logo.png',
+                width: 200, // Adjust size as needed
+                height: 200,
+                fit: BoxFit.contain, // Keeps image aspect ratio
+              ),
+              const Text("tesh plash screen")
+            ],
           ),
         ),
       ),

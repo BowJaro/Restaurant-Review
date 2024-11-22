@@ -3,6 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/avatar_selector.dart';
+import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
 
 import '../controller/account_controller.dart';
 
@@ -24,7 +25,8 @@ class AccountView extends GetView<AccountController> {
         appBar: AppBar(
           backgroundColor: AppColors.primary,
           elevation: 0,
-          title: Text(FlutterI18n.translate(context, "account_page.account")),
+          title: Text(FlutterI18n.translate(context, "account_page.account"),
+              style: const TextStyle(color: AppColors.white)),
           actions: [
             TextButton.icon(
               onPressed: () {
@@ -81,7 +83,9 @@ class AccountView extends GetView<AccountController> {
                         context,
                         Icons.star,
                         FlutterI18n.translate(
-                            context, "account_page.change_profile")),
+                            context, "account_page.change_profile"), onTap: () {
+                      Get.to(() => const ChangeProfileView());
+                    }),
                     _buildButton(
                         context,
                         Icons.person,
@@ -138,8 +142,12 @@ class AccountView extends GetView<AccountController> {
     });
   }
 
-  // Button Builder for Second Layout
-  Widget _buildButton(BuildContext context, IconData icon, String title) {
+  Widget _buildButton(
+    BuildContext context,
+    IconData icon,
+    String title, {
+    VoidCallback? onTap, // Make it nullable
+  }) {
     return Column(
       children: [
         ListTile(
@@ -150,9 +158,8 @@ class AccountView extends GetView<AccountController> {
           ),
           trailing:
               const Icon(Icons.arrow_forward_ios, color: Color(0xFFC0C0C2)),
-          onTap: () {
-            // Handle button tap
-          },
+          onTap:
+              onTap ?? () {}, // Provide default empty action if onTap is null
         ),
         const Divider(color: Color(0xFFEEEEF0), height: 1),
       ],

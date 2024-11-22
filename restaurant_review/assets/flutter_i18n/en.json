@@ -43,7 +43,8 @@
     "select_valid_option": "Please select a valid option",
     "missing_image": "Please select an image!",
     "please_fill_all_required_fields": "Please fill all required fields.",
-    "please_sign_in_first": "Please sign in first"
+    "please_sign_in_first": "Please sign in first",
+    "no_data": "No data"
   },
   "location": {
     "invalid_coordinates": "Invalid coordinates! Use latitude,longitude",
@@ -119,6 +120,14 @@
     "feedback": "Feedback",
     "rate_app": "Rate App",
     "sign_out": "Sign Out",
-    "support": "Support"
+    "support": "Support",
+    "change_password": "Change Password",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "forgot_password": "Forgot Password?",
+    "phone": "Phone Number",
+    "full_name": "Full Name",
+    "user_name": "Username"
   }
 }
