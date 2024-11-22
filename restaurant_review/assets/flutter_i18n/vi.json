@@ -122,10 +122,13 @@
     "change_password": "Thay đổi mật khẩu",
     "email": "Email",
     "password": "Mật khẩu",
-    "confirm_password": "Xác nhận mật khẩu",
     "forgot_password": "Quên mật khẩu",
     "phone": "Số điện thoại",
     "full_name": "Họ tên",
-    "user_name": "Tên người dùng"
+    "user_name": "Tên người dùng",
+    "current_password": "Mật khẩu hiện tại",
+    "new_password": "Mật khẩu mới",
+    "confirm_password": "Xác nhận mật khẩu",
+    "update_password": "Cập nhật mật khẩu"
   }
 }

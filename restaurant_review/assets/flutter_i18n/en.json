@@ -124,10 +124,13 @@
     "change_password": "Change Password",
     "email": "Email",
     "password": "Password",
-    "confirm_password": "Confirm Password",
     "forgot_password": "Forgot Password?",
     "phone": "Phone Number",
     "full_name": "Full Name",
-    "user_name": "Username"
+    "user_name": "Username",
+    "current_password": "Current Password",
+    "new_password": "New Password",
+    "confirm_password": "Confirm Password",
+    "update_password": "Update Password"
   }
 }

@@ -51,9 +51,36 @@ class AccountView extends GetView<AccountController> {
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    AvatarSelectorWidget(
-                      controller: controller.avatarSelectorController,
-                      size: 150,
+                    ClipOval(
+                      child: Image.network(
+                        controller
+                            .avatarUrl, // Replace with the URL from your controller
+                        width: 150, // Set the size of the avatar
+                        height: 150,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            width: 150,
+                            height: 150,
+                            color: Colors.grey[300],
+                            child: const Icon(
+                              Icons.person,
+                              size: 60,
+                              color: Colors.grey,
+                            ),
+                          );
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return const SizedBox(
+                            width: 150,
+                            height: 150,
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Text(

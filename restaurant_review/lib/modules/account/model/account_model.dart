@@ -25,7 +25,7 @@ class AccountModel {
       email: json['email'],
       phone: json['phone'],
       image: ImageItem(
-        url: json['url'] ?? 'images/account/default.png',
+        url: json['url'] ?? "",
       ),
     );
   }

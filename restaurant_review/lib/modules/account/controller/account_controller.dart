@@ -25,7 +25,11 @@ class AccountController extends GetxController {
   var phoneController = TextEditingController();
   var fullNameController = TextEditingController();
   var userNameController = TextEditingController();
-  var passwordController = TextEditingController();
+  var currentPasswordController = TextEditingController();
+  var newPasswordController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
+
+  String avatarUrl = "";
 
   @override
   void onInit() async {
@@ -49,6 +53,7 @@ class AccountController extends GetxController {
 
     if (response != null) {
       final accountModel = AccountModel.fromMap(response);
+      avatarUrl = accountModel.image.path;
       email = accountModel.email ?? "";
       emailController.text = accountModel.email ??
           FlutterI18n.translate(Get.context!, "error.no_data");
@@ -75,5 +80,9 @@ class AccountController extends GetxController {
 
   String? validateEmail(String? value) {
     return ValidatorUtils.validateEmail(value);
+  }
+
+  String? validatePassword(String? value) {
+    return ValidatorUtils.validatePassword(value);
   }
 }

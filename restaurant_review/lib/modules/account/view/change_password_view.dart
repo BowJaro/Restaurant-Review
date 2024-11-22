@@ -5,12 +5,11 @@ import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/buttons/full_width_button.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/avatar_selector.dart';
 import 'package:restaurant_review/global_widgets/input_fields/input_field.dart';
-import 'package:restaurant_review/modules/account/view/change_password_view.dart';
 
 import '../controller/account_controller.dart';
 
-class ChangeProfileView extends GetView<AccountController> {
-  const ChangeProfileView({super.key});
+class ChangePasswordView extends GetView<AccountController> {
+  const ChangePasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class ChangeProfileView extends GetView<AccountController> {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         title: Text(
-            FlutterI18n.translate(context, "account_page.change_profile"),
+            FlutterI18n.translate(context, "account_page.change_password"),
             style: const TextStyle(color: AppColors.white)),
       ),
       body: SingleChildScrollView(
@@ -39,45 +38,34 @@ class ChangeProfileView extends GetView<AccountController> {
               Column(
                 children: [
                   MyInputField(
-                    label: FlutterI18n.translate(context, "account_page.email"),
-                    textController: controller.emailController,
-                    validator: controller.validateEmail,
-                    readOnly: true,
-                  ),
-                  const SizedBox(height: 10),
-                  MyInputField(
-                    label: FlutterI18n.translate(context, "account_page.phone"),
-                    textController: controller.phoneController,
-                    validator: controller.validatePhoneNumber,
+                    label: FlutterI18n.translate(
+                        context, "account_page.current_password"),
+                    textController: controller.currentPasswordController,
+                    validator: controller.validatePassword,
+                    isPassword: true,
                   ),
                   const SizedBox(height: 10),
                   MyInputField(
                     label: FlutterI18n.translate(
-                        context, "account_page.full_name"),
-                    textController: controller.fullNameController,
+                        context, "account_page.new_password"),
+                    textController: controller.newPasswordController,
+                    validator: controller.validatePassword,
+                    isPassword: true,
                   ),
                   const SizedBox(height: 10),
                   MyInputField(
                     label: FlutterI18n.translate(
-                        context, "account_page.user_name"),
-                    textController: controller.userNameController,
+                        context, "account_page.confirm_password"),
+                    textController: controller.confirmPasswordController,
+                    validator: controller.validatePassword,
+                    isPassword: true,
                   ),
                   const SizedBox(height: 10),
                   FullWidthButton(
                     title: FlutterI18n.translate(
-                        context, "account_page.change_profile"),
+                        context, "account_page.update_password"),
                     onPressed: () {},
                   ),
-                  const SizedBox(height: 10),
-                  TextButton(
-                    onPressed: () {
-                      Get.to(() => const ChangePasswordView());
-                    },
-                    child: Text(
-                      FlutterI18n.translate(
-                          context, "account_page.change_password"),
-                    ),
-                  )
                 ],
               ),
             ],
