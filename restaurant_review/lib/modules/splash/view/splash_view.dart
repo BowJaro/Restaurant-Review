@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../constants/colors.dart';
 import '../controller/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
@@ -7,9 +8,19 @@ class SplashView extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
-    controller;
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
+    controller; // Ensures the controller is initialized
+    return Scaffold(
+      body: Container(
+        color: AppColors.white, // Background color
+        child: Center(
+          child: Image.asset(
+            'assets/logo/tahu-high-resolution-logo.png',
+            width: 200, // Adjust size as needed
+            height: 200,
+            fit: BoxFit.contain, // Keeps image aspect ratio
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,112 +1,115 @@
 {
-    "hello": "Xin Chào",
-    "welcome": "Chào mừng bạn đến với Flutter",
-    "change_language": "Thay đổi ngôn ngữ",
-    "language": "Tiếng Việt",
-    "home": {
-        "explore": "Khám phá",
-        "notifications": "Thông báo",
-        "bookmarks": "Đã lưu",
-        "account": "Tài khoản",
-        "more": "Mở rộng",
-        "feed": "Bản tin"
-    },
-    "authentication": {
-        "sign_in": "Đăng nhập",
-        "sign_up": "Đăng kí",
-        "email": "Email",
-        "password": "Mật khẩu",
-        "confirm_password": "Xác nhận mật khẩu",
-        "forgot_password": "Quên mật khẩu?",
-        "require_email": "Email còn trống",
-        "require_password": "Mật khẩu còn trống",
-        "require_confirm_password": "Mật khẩu xác nhận còn trống",
-        "required_phone": "Số điện thoại còn trống",
-        "invalid_email": "Email không hợp lệ",
-        "invalid_password": "Mật khẩu phải ít nhất 8 kí tự, bao gồm số và kí tự đặc biệt",
-        "invalid_confirm_password": "Mật khẩu xác nhận không hợp lệ",
-        "invalid_phone": "Số điện thoại không hợp lệ",
-        "dont_have_account": "Chưa có tài khoản?",
-        "already_have_account": "Đã có tài khoản?",
-        "sign_in_failed": "Đăng nhập thất bại",
-        "sign_up_failed": "Đăng kí tài khoản thất bại"
-    },
-    "languages": {
-        "en": "English",
-        "vi": "Tiếng Việt"
-    },
-    "error": {
-        "error": "Lỗi",
-        "unknown": "Lỗi không xác định!",
-        "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ",
-        "missing_image": "Vui lòng chọn ảnh!",
-        "please_fill_all_required_fields": "Vui lòng nhập đủ các thông tin bắt buộc.",
-        "please_sign_in_first": "Vui lòng đăng nhập lại!"
-    },
-    "location": {
-        "invalid_coordinates": "Nhập đúng tọa độ! Vui lòng nhập latitude,longitude",
-        "could_not_launch": "Không thể mở trang",
-        "missing_location": "Vui lòng nhập tọa độ",
-        "location": "Vị trí",
-        "select_address": "Chọn địa chỉ",
-        "province": "Tỉnh / Thành phố",
-        "district": "Quận / Huyện",
-        "ward": "Phường / Xã",
-        "street": "Đường"
-    },
-    "post_detail": {
-        "create_post": "Viết bài",
-        "edit_post": "Sửa bài viết",
-        "post": "Đăng bài",
-        "name": "Tiêu đề",
-        "topic": "Chủ đề",
-        "restaurant": "Nhà hàng",
-        "description": "Viết đánh giá...",
-        "new": "Thêm mới",
-        "hashtags": "Hash tags",
-        "rate": "Đánh giá",
-        "taste": "Hương vị",
-        "service": "Dịch vụ",
-        "price": "Giá cả",
-        "ambiance": "Không gian",
-        "cleanliness": "Vệ sinh",
-        "add": "Thêm",
-        "enter_new_hash_tags": "Nhập hashtag mới"
-    },
-    "brand_detail": {
-        "create_brand": "Tạo thương hiệu",
-        "edit_brand": "Sửa thương hiệu",
-        "name": "Tên thương hiệu",
-        "description": "Mô tả",
-        "add": "Thêm",
-        "success": "Thành công!"
-    },
-    "restaurant_detail": {
-        "create_restaurant": "Tạo quán",
-        "edit_restaurant": "Sửa thông tin",
-        "name": "Tên quán",
-        "description": "Mô tả",
-        "category": "Loại quán",
-        "add": "Thêm",
-        "save": "Lưu",
-        "edit": "Sửa",
-        "new": "Tạo mới",
-        "brand": "Thương hiệu",
-        "features": "Đặc điểm",
-        "address": "Địa chỉ",
-        "location": "Vị trí",
-        "success": "Thành công!"
-    },
-    "rich_text_editor": {
-        "save": "Lưu",
-        "discard_title": "Loại bỏ nội dung?",
-        "discard_content": "Bạn có chắc muốn loại bỏ toàn bộ nội dung vừa nhập hay không?",
-        "discard": "Loại bỏ"
-    },
-    "modal": {
-        "yes": "Đồng ý",
-        "cancel": "Hủy",
-        "camera": "Máy ảnh",
-        "gallery": "Thư viện"
-    }
+  "hello": "Xin Chào",
+  "welcome": "Chào mừng bạn đến với Flutter",
+  "change_language": "Thay đổi ngôn ngữ",
+  "language": "Tiếng Việt",
+  "home": {
+    "explore": "Khám phá",
+    "notifications": "Thông báo",
+    "bookmarks": "Đã lưu",
+    "account": "Tài khoản",
+    "more": "Mở rộng",
+    "feed": "Bản tin"
+  },
+  "authentication": {
+    "sign_in": "Đăng nhập",
+    "sign_up": "Đăng kí",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "confirm_password": "Xác nhận mật khẩu",
+    "forgot_password": "Quên mật khẩu?",
+    "require_email": "Email còn trống",
+    "require_password": "Mật khẩu còn trống",
+    "require_confirm_password": "Mật khẩu xác nhận còn trống",
+    "required_phone": "Số điện thoại còn trống",
+    "invalid_email": "Email không hợp lệ",
+    "invalid_password": "Mật khẩu phải ít nhất 8 kí tự, bao gồm số và kí tự đặc biệt",
+    "invalid_confirm_password": "Mật khẩu xác nhận không hợp lệ",
+    "invalid_phone": "Số điện thoại không hợp lệ",
+    "dont_have_account": "Chưa có tài khoản?",
+    "already_have_account": "Đã có tài khoản?",
+    "sign_in_failed": "Đăng nhập thất bại",
+    "sign_up_failed": "Đăng kí tài khoản thất bại"
+  },
+  "languages": {
+    "en": "English",
+    "vi": "Tiếng Việt"
+  },
+  "error": {
+    "error": "Lỗi",
+    "unknown": "Lỗi không xác định!",
+    "select_valid_option": "Vui lòng chọn 1 giá trị hợp lệ",
+    "missing_image": "Vui lòng chọn ảnh!",
+    "please_fill_all_required_fields": "Vui lòng nhập đủ các thông tin bắt buộc.",
+    "please_sign_in_first": "Vui lòng đăng nhập lại!"
+  },
+  "location": {
+    "invalid_coordinates": "Nhập đúng tọa độ! Vui lòng nhập latitude,longitude",
+    "could_not_launch": "Không thể mở trang",
+    "missing_location": "Vui lòng nhập tọa độ",
+    "location": "Vị trí",
+    "select_address": "Chọn địa chỉ",
+    "province": "Tỉnh / Thành phố",
+    "district": "Quận / Huyện",
+    "ward": "Phường / Xã",
+    "street": "Đường"
+  },
+  "post_detail": {
+    "create_post": "Viết bài",
+    "edit_post": "Sửa bài viết",
+    "post": "Đăng bài",
+    "name": "Tiêu đề",
+    "topic": "Chủ đề",
+    "restaurant": "Nhà hàng",
+    "description": "Viết đánh giá...",
+    "new": "Thêm mới",
+    "hashtags": "Hash tags",
+    "rate": "Đánh giá",
+    "taste": "Hương vị",
+    "service": "Dịch vụ",
+    "price": "Giá cả",
+    "ambiance": "Không gian",
+    "cleanliness": "Vệ sinh",
+    "add": "Thêm",
+    "enter_new_hash_tags": "Nhập hashtag mới"
+  },
+  "brand_detail": {
+    "create_brand": "Tạo thương hiệu",
+    "edit_brand": "Sửa thương hiệu",
+    "name": "Tên thương hiệu",
+    "description": "Mô tả",
+    "add": "Thêm",
+    "success": "Thành công!"
+  },
+  "restaurant_detail": {
+    "create_restaurant": "Tạo quán",
+    "edit_restaurant": "Sửa thông tin",
+    "name": "Tên quán",
+    "description": "Mô tả",
+    "category": "Loại quán",
+    "add": "Thêm",
+    "save": "Lưu",
+    "edit": "Sửa",
+    "new": "Tạo mới",
+    "brand": "Thương hiệu",
+    "features": "Đặc điểm",
+    "address": "Địa chỉ",
+    "location": "Vị trí",
+    "success": "Thành công!"
+  },
+  "rich_text_editor": {
+    "save": "Lưu",
+    "discard_title": "Loại bỏ nội dung?",
+    "discard_content": "Bạn có chắc muốn loại bỏ toàn bộ nội dung vừa nhập hay không?",
+    "discard": "Loại bỏ"
+  },
+  "modal": {
+    "yes": "Đồng ý",
+    "cancel": "Hủy",
+    "camera": "Máy ảnh",
+    "gallery": "Thư viện"
+  },
+  "account_page": {
+    "account": "Tài khoản"
+  }
 }

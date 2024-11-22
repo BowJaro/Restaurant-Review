@@ -2,10 +2,10 @@ import 'package:restaurant_review/global_classes/image_item.dart';
 
 class AccountModel {
   String? id;
-  String userName;
-  String fullName;
-  String email;
-  String phone;
+  String? userName;
+  String? fullName;
+  String? email;
+  String? phone;
   ImageItem image;
 
   AccountModel({
@@ -25,7 +25,7 @@ class AccountModel {
       email: json['email'],
       phone: json['phone'],
       image: ImageItem(
-        url: json['url'],
+        url: json['url'] ?? 'images/account/default.png',
       ),
     );
   }
