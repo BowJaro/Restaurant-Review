@@ -92,17 +92,20 @@ class AvatarSelectorWidget extends StatelessWidget {
                             width: size,
                             height: size,
                           )
-                        : Image.network(
-                            baseImageUrl + imageItem.path,
-                            fit: BoxFit.cover,
-                            width: size,
-                            height: size,
-                          ))
+                        : imageItem.url != ""
+                            ? Image.network(
+                                baseImageUrl + imageItem.path,
+                                fit: BoxFit.cover,
+                                width: size,
+                                height: size,
+                              )
+                            : (Icon(Icons.person,
+                                size: size * 0.8, color: AppColors.black)))
                     : Icon(Icons.person,
                         size: size * 0.8, color: AppColors.black),
               ),
             ),
-            if (imageItem != null)
+            if (imageItem != null && imageItem.url != "")
               Positioned(
                 top: 4,
                 right: 4,

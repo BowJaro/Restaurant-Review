@@ -28,6 +28,7 @@ class MyInputField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
   final bool isPassword;
+  final bool readOnly; // New parameter
 
   const MyInputField({
     super.key,
@@ -36,6 +37,7 @@ class MyInputField extends StatelessWidget {
     this.validator,
     this.keyboardType = TextInputType.text,
     this.isPassword = false,
+    this.readOnly = false, // Default value
   });
 
   @override
@@ -65,7 +67,7 @@ class MyInputField extends StatelessWidget {
                     ),
                     onPressed: controller.toggleIsPassword,
                   )
-                : controller.isTextNotEmpty
+                : controller.isTextNotEmpty && readOnly == false
                     ? IconButton(
                         icon: const Icon(Icons.clear),
                         onPressed: () => controller.clearText(textController),
@@ -75,6 +77,7 @@ class MyInputField extends StatelessWidget {
           validator: validator,
           keyboardType: keyboardType,
           obscureText: isPassword && !controller.isPasswordVisible,
+          readOnly: readOnly, // Pass the parameter to TextFormField
         );
       },
     );

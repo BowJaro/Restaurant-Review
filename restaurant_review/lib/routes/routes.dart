@@ -14,6 +14,9 @@ import 'package:restaurant_review/modules/sign_up/view/sign_up_view.dart';
 import 'package:restaurant_review/modules/splash/binding/splash_binding.dart';
 import 'package:restaurant_review/modules/splash/view/splash_view.dart';
 
+import '../modules/account/binding/account_binding.dart';
+import '../modules/account/view/account_view.dart';
+
 abstract class Routes {
   static const String splash = '/';
   static const String home = '/home';
@@ -23,6 +26,7 @@ abstract class Routes {
   static const String postDetail = '/post_detail';
   static const String brandDetail = '/brand_detail';
   static const String restaurantDetail = '/restaurant_detail';
+  static const String account = '/account';
 }
 
 class AppPages {
@@ -62,6 +66,11 @@ class AppPages {
       name: Routes.restaurantDetail,
       page: () => const RestaurantDetailView(),
       binding: RestaurantDetailBinding(),
+    ),
+    GetPage(
+      name: Routes.account,
+      page: () => const AccountView(),
+      binding: AccountBinding(),
     ),
   ];
 }
