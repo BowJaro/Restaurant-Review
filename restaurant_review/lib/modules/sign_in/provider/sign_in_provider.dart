@@ -19,4 +19,18 @@ class SignInProvider {
       return error.toString();
     }
   }
+
+  Future<String?> getSessionId() async {
+    try {
+      final session = _supabase.auth.currentSession;
+
+      if (session != null) {
+        return session.user.id;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
 }

@@ -29,4 +29,8 @@ class SignInRepository {
       return BaseResponse(isSuccess: false, message: e.toString());
     }
   }
+
+  Future<String?> getSessionId() async {
+    return await authProvider.getSessionId();
+  }
 }

@@ -12,7 +12,7 @@ class SplashController extends GetxController {
   }
 
   Future<void> _redirect() async {
-    await Future.delayed(Duration.zero);
+    await Future.delayed(const Duration(seconds: 1));
     final session = supabase.auth.currentSession;
 
     final prefs = await SharedPreferences.getInstance();

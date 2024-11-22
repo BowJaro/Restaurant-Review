@@ -18,9 +18,6 @@ class HomeController extends GetxController {
 
     if (session != null) {
       await prefs.setString('sessionId', session.user.id);
-      print("test plash");
-      print(
-          "this is sessionId in splash: ${(await SharedPreferences.getInstance()).getString('sessionId')}");
     } else {
       await prefs.remove('sessionId');
     }
