@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/avatar_selector.dart';
 
 import '../controller/account_controller.dart';
@@ -20,22 +22,18 @@ class AccountView extends GetView<AccountController> {
       return Scaffold(
         backgroundColor: const Color(0xFFF3F2F7), // Page background
         appBar: AppBar(
-          backgroundColor: const Color(0xFFEF4F5F),
+          backgroundColor: AppColors.primary,
           elevation: 0,
-          title: const Text(
-            'Account',
-            style: TextStyle(color: Colors.white),
-          ),
+          title: Text(FlutterI18n.translate(context, "account_page.account")),
           actions: [
             TextButton.icon(
               onPressed: () {
                 // Handle Support action
               },
-              icon: const Icon(Icons.support_agent, color: Colors.white),
-              label: const Text(
-                'Support',
-                style: TextStyle(color: Colors.white),
-              ),
+              icon: const Icon(Icons.support_agent, color: AppColors.white),
+              label: Text(
+                  FlutterI18n.translate(context, "account_page.support"),
+                  style: const TextStyle(color: AppColors.white)),
             ),
           ],
         ),
@@ -46,7 +44,7 @@ class AccountView extends GetView<AccountController> {
               // First Layout
               Container(
                 // width: double.infinity,
-                color: Colors.white,
+                color: AppColors.white,
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
@@ -76,14 +74,31 @@ class AccountView extends GetView<AccountController> {
 
               // Second Layout
               Container(
-                color: Colors.white,
+                color: AppColors.white,
                 child: Column(
                   children: [
-                    _buildButton(context, Icons.person, "Change Profile"),
-                    _buildButton(context, Icons.info, "About Us"),
-                    _buildButton(context, Icons.policy, "Policy"),
-                    _buildButton(context, Icons.feedback, "Feedback"),
-                    _buildButton(context, Icons.star, "Rate App"),
+                    _buildButton(
+                        context,
+                        Icons.star,
+                        FlutterI18n.translate(
+                            context, "account_page.change_profile")),
+                    _buildButton(
+                        context,
+                        Icons.person,
+                        FlutterI18n.translate(
+                            context, "account_page.about_us")),
+                    _buildButton(context, Icons.info,
+                        FlutterI18n.translate(context, "account_page.policy")),
+                    _buildButton(
+                        context,
+                        Icons.policy,
+                        FlutterI18n.translate(
+                            context, "account_page.feedback")),
+                    _buildButton(
+                        context,
+                        Icons.feedback,
+                        FlutterI18n.translate(
+                            context, "account_page.rate_app")),
                   ],
                 ),
               ),
@@ -99,18 +114,18 @@ class AccountView extends GetView<AccountController> {
                     // Handle sign out
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
+                    backgroundColor: AppColors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    side: const BorderSide(color: Color(0xFFED5D5D)),
+                    side: const BorderSide(color: AppColors.textRed),
                   ),
-                  child: const Text(
-                    "Sign Out",
-                    style: TextStyle(
+                  child: Text(
+                    FlutterI18n.translate(context, "account_page.sign_out"),
+                    style: const TextStyle(
                       fontSize: 15,
-                      color: Color(0xFFED5D5D),
+                      color: AppColors.textRed,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

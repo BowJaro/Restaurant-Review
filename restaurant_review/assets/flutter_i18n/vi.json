@@ -110,6 +110,13 @@
     "gallery": "Thư viện"
   },
   "account_page": {
-    "account": "Tài khoản"
+    "account": "Tài khoản",
+    "change_profile": "Thay đổi thông tin",
+    "about_us": "Về chúng tôi",
+    "policy": "Chính sách",
+    "feedback": "Phản hồi",
+    "rate_app": "Đánh giá",
+    "sign_out": "Đăng xuất",
+    "support": "Hỗ trợ"
   }
 }

@@ -112,6 +112,13 @@
     "gallery": "Gallery"
   },
   "account_page": {
-    "account": "Account"
+    "account": "Account",
+    "change_profile": "Change Profile",
+    "about_us": "About Us",
+    "policy": "Policy",
+    "feedback": "Feedback",
+    "rate_app": "Rate App",
+    "sign_out": "Sign Out",
+    "support": "Support"
   }
 }
