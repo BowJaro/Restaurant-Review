@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/modules/account/model/account_model.dart';
@@ -9,6 +10,7 @@ import '../../../global_widgets/modals/modals.dart';
 import '../repository/account_repository.dart';
 
 class AccountController extends GetxController {
+  final baseImageUrl = dotenv.env['BASE_IMAGE_URL']!;
   final AccountRepository repository;
 
   AccountController(this.repository);
@@ -34,9 +36,6 @@ class AccountController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    print(
-        "this is sessionId: ${(await SharedPreferences.getInstance()).getString('sessionId')}");
-
     sessionId = (await SharedPreferences.getInstance()).getString('sessionId')!;
     fetchAccount();
   }

@@ -3,7 +3,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/buttons/full_width_button.dart';
-import 'package:restaurant_review/global_widgets/image_widgets/avatar_selector.dart';
 import 'package:restaurant_review/global_widgets/input_fields/input_field.dart';
 
 import '../controller/account_controller.dart';
@@ -26,47 +25,35 @@ class ChangePasswordView extends GetView<AccountController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  AvatarSelectorWidget(
-                    controller: controller.avatarSelectorController,
-                    size: 150,
-                  ),
-                ],
+              const SizedBox(height: 10),
+              MyInputField(
+                label: FlutterI18n.translate(
+                    context, "account_page.current_password"),
+                textController: controller.currentPasswordController,
+                validator: controller.validatePassword,
+                isPassword: true,
               ),
               const SizedBox(height: 10),
-              Column(
-                children: [
-                  MyInputField(
-                    label: FlutterI18n.translate(
-                        context, "account_page.current_password"),
-                    textController: controller.currentPasswordController,
-                    validator: controller.validatePassword,
-                    isPassword: true,
-                  ),
-                  const SizedBox(height: 10),
-                  MyInputField(
-                    label: FlutterI18n.translate(
-                        context, "account_page.new_password"),
-                    textController: controller.newPasswordController,
-                    validator: controller.validatePassword,
-                    isPassword: true,
-                  ),
-                  const SizedBox(height: 10),
-                  MyInputField(
-                    label: FlutterI18n.translate(
-                        context, "account_page.confirm_password"),
-                    textController: controller.confirmPasswordController,
-                    validator: controller.validatePassword,
-                    isPassword: true,
-                  ),
-                  const SizedBox(height: 10),
-                  FullWidthButton(
-                    title: FlutterI18n.translate(
-                        context, "account_page.update_password"),
-                    onPressed: () {},
-                  ),
-                ],
+              MyInputField(
+                label:
+                    FlutterI18n.translate(context, "account_page.new_password"),
+                textController: controller.newPasswordController,
+                validator: controller.validatePassword,
+                isPassword: true,
+              ),
+              const SizedBox(height: 10),
+              MyInputField(
+                label: FlutterI18n.translate(
+                    context, "account_page.confirm_password"),
+                textController: controller.confirmPasswordController,
+                validator: controller.validatePassword,
+                isPassword: true,
+              ),
+              const SizedBox(height: 10),
+              FullWidthButton(
+                title: FlutterI18n.translate(
+                    context, "account_page.update_password"),
+                onPressed: () {},
               ),
             ],
           ),

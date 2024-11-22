@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
-import 'package:restaurant_review/global_widgets/image_widgets/avatar_selector.dart';
 import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
 
 import '../controller/account_controller.dart';
@@ -51,15 +50,8 @@ class AccountView extends GetView<AccountController> {
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ClipOval(
-                      child: Image.network(
-                        controller
-                            .avatarUrl, // Replace with the URL from your controller
-                        width: 150, // Set the size of the avatar
-                        height: 150,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
+                    controller.avatarUrl == ""
+                        ? Container(
                             width: 150,
                             height: 150,
                             color: Colors.grey[300],
@@ -68,20 +60,38 @@ class AccountView extends GetView<AccountController> {
                               size: 60,
                               color: Colors.grey,
                             ),
-                          );
-                        },
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return const SizedBox(
-                            width: 150,
-                            height: 150,
-                            child: const Center(
-                              child: CircularProgressIndicator(),
+                          )
+                        : ClipOval(
+                            child: Image.network(
+                              controller.baseImageUrl + controller.avatarUrl,
+                              width: 150, // Set the size of the avatar
+                              height: 150,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  width: 150,
+                                  height: 150,
+                                  color: Colors.grey[300],
+                                  child: const Icon(
+                                    Icons.person,
+                                    size: 60,
+                                    color: Colors.grey,
+                                  ),
+                                );
+                              },
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return const SizedBox(
+                                  width: 150,
+                                  height: 150,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                    ),
+                          ),
                     const SizedBox(height: 16),
                     Text(
                       controller.fullName,
