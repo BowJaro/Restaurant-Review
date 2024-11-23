@@ -50,7 +50,7 @@ class HomeView extends GetView<HomeController> {
           TextButton(
               onPressed: () {
                 Get.toNamed(Routes.brandDetail,
-                    arguments: {'isNew': false, 'id': 6});
+                    arguments: {'isNew': false, 'id': 11});
               },
               child: const Text("Go to Brand Detail page to edit")),
           TextButton(
