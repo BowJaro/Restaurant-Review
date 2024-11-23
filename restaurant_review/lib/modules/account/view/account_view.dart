@@ -51,14 +51,16 @@ class AccountView extends GetView<AccountController> {
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     controller.avatarUrl == ""
-                        ? Container(
-                            width: 150,
-                            height: 150,
-                            color: Colors.grey[300],
-                            child: const Icon(
-                              Icons.person,
-                              size: 60,
-                              color: Colors.grey,
+                        ? ClipOval(
+                            child: Container(
+                              width: 150,
+                              height: 150,
+                              color: Colors.grey[300],
+                              child: const Icon(
+                                Icons.person,
+                                size: 60,
+                                color: Colors.grey,
+                              ),
                             ),
                           )
                         : ClipOval(

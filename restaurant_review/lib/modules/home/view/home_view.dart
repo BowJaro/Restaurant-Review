@@ -19,7 +19,7 @@ class HomeView extends GetView<HomeController> {
           TextButton(
             onPressed: () {
               Get.toNamed(Routes.postDetail,
-                  arguments: {'isNew': false, 'id': 4});
+                  arguments: {'isNew': false, 'id': 5});
             },
             child: const Text("Go to post detail to edit"),
           ),
@@ -50,7 +50,7 @@ class HomeView extends GetView<HomeController> {
           TextButton(
               onPressed: () {
                 Get.toNamed(Routes.brandDetail,
-                    arguments: {'isNew': false, 'id': 6});
+                    arguments: {'isNew': false, 'id': 11});
               },
               child: const Text("Go to Brand Detail page to edit")),
           TextButton(
