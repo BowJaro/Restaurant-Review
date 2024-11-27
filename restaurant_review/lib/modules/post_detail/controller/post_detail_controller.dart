@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/global_classes/rate.dart';
+import 'package:restaurant_review/global_mixins/session_manager_mixin.dart';
 import 'package:restaurant_review/global_widgets/hashtag/hashtag_selector.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/image_selector.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
@@ -9,12 +10,11 @@ import 'package:restaurant_review/modules/post_detail/model/get_data_for_post_mo
 import 'package:restaurant_review/modules/post_detail/model/post_upsert_model.dart';
 import 'package:restaurant_review/modules/post_detail/model/post_with_rate_upsert_model.dart';
 import 'package:restaurant_review/routes/routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/data_for_new_post_model.dart';
 import '../repository/post_detail_repository.dart';
 
-class PostDetailController extends GetxController {
+class PostDetailController extends GetxController with SessionManagerMixin {
   var isLoading = true.obs;
   late bool isNew;
   int? id;
@@ -180,10 +180,5 @@ class PostDetailController extends GetxController {
         Get.back();
       }
     }
-  }
-
-  Future<String?> getSessionId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('sessionId');
   }
 }
