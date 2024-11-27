@@ -157,6 +157,5 @@ CREATE TABLE post (
     status VARCHAR(50) DEFAULT 'published',
     view_count INT DEFAULT 0,
     profile_id UUID REFERENCES profiles(id),
-    restaurant_id INT REFERENCES restaurant(id) ON DELETE SET NULL,
     rate_id INT REFERENCES rate(id) ON DELETE SET NULL
 );
