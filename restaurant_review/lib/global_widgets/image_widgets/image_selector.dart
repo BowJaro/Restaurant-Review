@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:restaurant_review/constants/colors.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_classes/image_item.dart';
 
 class ImageSelectorController extends GetxController {
@@ -90,7 +90,6 @@ class ImageSelectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final baseImageUrl = dotenv.env['BASE_IMAGE_URL']!;
     return Row(
       children: [
         GestureDetector(

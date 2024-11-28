@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 
 class FullImageView extends StatelessWidget {
   final String url;
@@ -10,6 +11,7 @@ class FullImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String fullUrl = baseImageUrl + url;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.black,
@@ -26,11 +28,11 @@ class FullImageView extends StatelessWidget {
           child: CachedNetworkImage(
             memCacheHeight: 600,
             memCacheWidth: 600,
-            imageUrl: url,
+            imageUrl: fullUrl,
             fit: BoxFit.contain,
-            placeholder: (context, url) =>
+            placeholder: (context, fullUrl) =>
                 const Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) =>
+            errorWidget: (context, fullUrl, error) =>
                 const Icon(Icons.error, color: AppColors.errorRed),
           ),
         ),
