@@ -1,7 +1,7 @@
 // splash_controller.dart
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/routes/routes.dart';
-import 'package:restaurant_review/services/supabase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashController extends GetxController {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_classes/rate.dart';
 import 'package:restaurant_review/global_mixins/session_manager_mixin.dart';
 import 'package:restaurant_review/global_widgets/hashtag/hashtag_selector.dart';
@@ -26,7 +27,6 @@ class PostDetailController extends GetxController with SessionManagerMixin {
       Get.put(ImageSelectorController());
   final HashtagSelectorController hashtagSelectorController =
       Get.put(HashtagSelectorController());
-  late final String? userId;
 
   var description =
       "[{\"insert\":\"${FlutterI18n.translate(Get.context!, "post_detail.description")}\\n\"}]"
@@ -50,7 +50,6 @@ class PostDetailController extends GetxController with SessionManagerMixin {
     final arguments = Get.arguments;
     isNew = arguments['isNew'] ?? true;
     id = arguments['id'];
-    userId = await getSessionId();
 
     if (!isNew && id != null) {
       await fetchDataForPostEdit();

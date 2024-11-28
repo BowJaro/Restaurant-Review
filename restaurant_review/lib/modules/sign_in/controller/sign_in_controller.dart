@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
 import 'package:restaurant_review/modules/sign_in/repository/sign_in_repository.dart';
 import 'package:restaurant_review/routes/routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/validators.dart';
 
 class SignInController extends GetxController {
@@ -39,16 +39,7 @@ class SignInController extends GetxController {
       if (response.isSuccess) {
         Get.offAllNamed(Routes.home);
 
-        final prefs = await SharedPreferences.getInstance();
-        final sessionId = await signInRepository.getSessionId();
-
-        if (sessionId != null) {
-          await prefs.setString('sessionId', sessionId);
-        } else {
-          await prefs.remove('sessionId');
-        }
-
-        print('sessionId $sessionId');
+        userId = await signInRepository.getSessionId();
       } else {
         ModalUtils.showMessageWithTitleModal(
             FlutterI18n.translate(

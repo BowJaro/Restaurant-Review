@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/modules/account/model/account_model.dart';
 import 'package:restaurant_review/utils/validators.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../global_widgets/image_widgets/avatar_selector.dart';
 import '../../../global_widgets/modals/modals.dart';
 import '../repository/account_repository.dart';
@@ -21,7 +21,6 @@ class AccountController extends GetxController {
 
   late final String email;
   late final String fullName;
-  late final String sessionId;
 
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
@@ -36,7 +35,7 @@ class AccountController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    sessionId = (await SharedPreferences.getInstance()).getString('sessionId')!;
+
     fetchAccount();
   }
 
@@ -48,7 +47,7 @@ class AccountController extends GetxController {
 
   Future<void> fetchAccount() async {
     isLoading.value = true;
-    final response = await repository.fetchAccount(sessionId);
+    final response = await repository.fetchAccount(userId!);
 
     if (response != null) {
       final accountModel = AccountModel.fromMap(response);

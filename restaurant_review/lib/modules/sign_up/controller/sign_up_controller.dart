@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
 import 'package:restaurant_review/routes/routes.dart';
 import 'package:restaurant_review/utils/validators.dart';
@@ -37,6 +38,8 @@ class SignUpController extends GetxController {
 
       if (response.isSuccess) {
         Get.offAllNamed(Routes.home);
+
+        userId = await signUpRepository.getSessionId();
       } else {
         ModalUtils.showMessageWithTitleModal(
             FlutterI18n.translate(
