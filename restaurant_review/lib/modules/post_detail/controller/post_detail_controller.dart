@@ -3,7 +3,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_classes/rate.dart';
-import 'package:restaurant_review/global_mixins/session_manager_mixin.dart';
 import 'package:restaurant_review/global_widgets/hashtag/hashtag_selector.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/image_selector.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
@@ -15,7 +14,7 @@ import 'package:restaurant_review/routes/routes.dart';
 import '../model/data_for_new_post_model.dart';
 import '../repository/post_detail_repository.dart';
 
-class PostDetailController extends GetxController with SessionManagerMixin {
+class PostDetailController extends GetxController {
   var isLoading = true.obs;
   late bool isNew;
   int? id;
