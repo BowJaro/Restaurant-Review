@@ -201,3 +201,158 @@ BEGIN
     );
 END;
 $$ LANGUAGE plpgsql;
+
+
+
+CREATE OR REPLACE FUNCTION get_comments_and_replies(
+    p_post_id INT,
+    p_user_id UUID
+)
+RETURNS TABLE (
+    comment_id INT,
+    profile_id UUID,
+    content TEXT,
+    created_at TIMESTAMPTZ,
+    avatar_url TEXT,
+    full_name TEXT,
+    my_reaction JSONB,
+    replies JSONB,
+    reaction_list JSONB
+) AS $$
+BEGIN
+    RETURN QUERY WITH RECURSIVE comment_tree AS (
+        -- Select the top-level comments for the post
+        SELECT
+            c.id AS tree_comment_id,
+            c.profile_id AS tree_profile_id,
+            c.content AS tree_content,
+            c.created_at AS tree_created_at,
+            i.url AS tree_avatar_url,
+            p.full_name AS tree_full_name,
+            r.id AS tree_reaction_id,
+            r.content AS tree_reaction_content,
+            NULL::JSONB AS tree_replies
+        FROM comment c
+        LEFT JOIN profiles p ON c.profile_id = p.id
+        LEFT JOIN image i ON p.image_id = i.id
+        LEFT JOIN reaction r ON r.profile_id = p_user_id AND r.source = c.id AND r.type = 'comment'
+        WHERE c.source = p_post_id AND c.type = 'post' -- Filter for top-level comments only
+
+        UNION ALL
+
+        -- Recursively get the replies to the comments
+        SELECT
+            c.id AS tree_comment_id,
+            c.profile_id AS tree_profile_id,
+            c.content AS tree_content,
+            c.created_at AS tree_created_at,
+            i.url AS tree_avatar_url,
+            p.full_name AS tree_full_name,
+            r.id AS tree_reaction_id,
+            r.content AS tree_reaction_content,
+            NULL::JSONB AS tree_replies
+        FROM comment c
+        JOIN comment_tree ct ON c.source = ct.tree_comment_id AND c.type = 'comment'
+        LEFT JOIN profiles p ON c.profile_id = p.id
+        LEFT JOIN image i ON p.image_id = i.id
+        LEFT JOIN reaction r ON r.profile_id = p_user_id AND r.source = c.id AND r.type = 'comment'
+    ),
+    reaction_counts AS (
+        -- Compute the reaction counts for each comment
+        SELECT 
+            source AS reaction_source,
+            jsonb_agg(
+                jsonb_build_object(
+                    'name', subquery.content,
+                    'number', count
+                )
+            ) AS reaction_list
+        FROM (
+            SELECT 
+                rr.source,
+                rr.content,
+                COUNT(*) AS count
+            FROM reaction rr
+            WHERE type = 'comment'
+            GROUP BY rr.source, rr.content
+        ) AS subquery
+        GROUP BY source
+    ),
+    -- Aggregate replies into JSONB arrays
+    aggregated_comments AS (
+        SELECT
+            ct.tree_comment_id AS agg_comment_id,
+            ct.tree_profile_id AS agg_profile_id,
+            ct.tree_content AS agg_content,
+            ct.tree_created_at AS agg_created_at,
+            ct.tree_avatar_url AS agg_avatar_url,
+            ct.tree_full_name AS agg_full_name,
+            CASE
+                WHEN ct.tree_reaction_id IS NULL THEN NULL
+                ELSE jsonb_build_object(
+                    'reaction_id', ct.tree_reaction_id,
+                    'content', ct.tree_reaction_content
+                )
+            END AS agg_my_reaction,
+            COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'comment_id', replies.tree_comment_id,
+                        'profile_id', replies.tree_profile_id,
+                        'content', replies.tree_content,
+                        'created_at', replies.tree_created_at,
+                        'avatar_url', replies.tree_avatar_url,
+                        'full_name', replies.tree_full_name,
+                        'my_reaction', CASE
+                            WHEN replies.tree_reaction_id IS NULL THEN NULL
+                            ELSE jsonb_build_object(
+                                'reaction_id', replies.tree_reaction_id,
+                                'content', replies.tree_reaction_content
+                            )
+                        END,
+                        'reaction_list', replies.reaction_list -- FIXED: Use the correct alias here
+                    )
+                ) FILTER (WHERE replies.tree_comment_id IS NOT NULL),
+                '[]'
+            ) AS agg_replies,
+            rc.reaction_list AS agg_reaction_list
+        FROM comment_tree ct
+        LEFT JOIN LATERAL (
+            SELECT
+                c.id AS tree_comment_id,
+                c.profile_id AS tree_profile_id,
+                c.content AS tree_content,
+                c.created_at AS tree_created_at,
+                i.url AS tree_avatar_url,
+                p.full_name AS tree_full_name,
+                r.id AS tree_reaction_id,
+                r.content AS tree_reaction_content,
+                rc.reaction_list -- FIXED: Use `reaction_counts` for reactions on replies
+            FROM comment c
+            LEFT JOIN profiles p ON c.profile_id = p.id
+            LEFT JOIN image i ON p.image_id = i.id
+            LEFT JOIN reaction r ON r.profile_id = p_user_id AND r.source = c.id AND r.type = 'comment'
+            LEFT JOIN reaction_counts rc ON c.id = rc.reaction_source
+            WHERE c.source = ct.tree_comment_id AND c.type = 'comment'
+        ) replies ON TRUE
+        LEFT JOIN reaction_counts rc ON ct.tree_comment_id = rc.reaction_source
+        GROUP BY ct.tree_comment_id, ct.tree_profile_id, ct.tree_content, ct.tree_created_at, ct.tree_avatar_url, ct.tree_full_name, ct.tree_reaction_id, ct.tree_reaction_content, rc.reaction_list
+    )
+    SELECT
+        agg_comment_id AS comment_id,
+        agg_profile_id AS profile_id,
+        agg_content AS content,
+        agg_created_at AS created_at,
+        agg_avatar_url AS avatar_url,
+        agg_full_name AS full_name,
+        agg_my_reaction AS my_reaction,
+        agg_replies AS replies,
+        agg_reaction_list AS reaction_list
+    FROM aggregated_comments
+    WHERE NOT EXISTS ( -- Ensure only top-level comments
+        SELECT 1
+        FROM comment c
+        WHERE c.id = aggregated_comments.agg_comment_id AND c.type != 'post'
+    );
+END;
+$$ LANGUAGE plpgsql;

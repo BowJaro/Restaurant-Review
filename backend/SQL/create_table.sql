@@ -15,7 +15,6 @@ CREATE TABLE profiles (
     address TEXT DEFAULT '',
     biography TEXT DEFAULT '',
     rank TEXT DEFAULT '',
-    avatar_url TEXT,
     website TEXT,
     join_date TIMESTAMPTZ DEFAULT NOW(),
     quota INTEGER DEFAULT 100,
@@ -159,3 +158,23 @@ CREATE TABLE post (
     profile_id UUID REFERENCES profiles(id),
     rate_id INT REFERENCES rate(id) ON DELETE SET NULL
 );
+
+-- Create Reaction Table
+CREATE TABLE reaction (
+    id SERIAL PRIMARY KEY,
+    profile_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
+    content VARCHAR(255) NOT NULL,
+    source INT NOT NULL,
+    type VARCHAR(255) NOT NULL
+);
+
+-- Create Comment Table
+CREATE TABLE comment (
+    id SERIAL PRIMARY KEY,
+    profile_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
+    content TEXT DEFAULT '',
+    source INT NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT now()
+);
+

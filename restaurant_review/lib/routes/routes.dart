@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:restaurant_review/modules/brand_detail/binding/brand_detail_binding.dart';
 import 'package:restaurant_review/modules/brand_detail/view/brand_detail_view.dart';
+import 'package:restaurant_review/modules/comment/binding/comment_binding.dart';
+import 'package:restaurant_review/modules/comment/view/comment_view.dart';
 import 'package:restaurant_review/modules/home/binding/home_binding.dart';
 import 'package:restaurant_review/modules/home/view/home_view.dart';
 import 'package:restaurant_review/modules/post_detail/binding/post_detail_binding.dart';
@@ -27,6 +29,7 @@ abstract class Routes {
   static const String brandDetail = '/brand_detail';
   static const String restaurantDetail = '/restaurant_detail';
   static const String account = '/account';
+  static const String comment = '/comment';
 }
 
 class AppPages {
@@ -71,6 +74,11 @@ class AppPages {
       name: Routes.account,
       page: () => const AccountView(),
       binding: AccountBinding(),
+    ),
+    GetPage(
+      name: Routes.comment,
+      page: () => const CommentView(),
+      binding: CommentBinding(),
     ),
   ];
 }

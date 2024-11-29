@@ -130,5 +130,15 @@
     "new_password": "Mật khẩu mới",
     "confirm_password": "Xác nhận mật khẩu",
     "update_password": "Cập nhật mật khẩu"
+  },
+  "comment": {
+    "comments": "Bình luận",
+    "write_comment": "Viết bình luận...",
+    "unknown": "Không tên",
+    "reply_to": "Trả lời",
+    "remove": "Xóa",
+    "report": "Tố cáo",
+    "remove_comment": "Xóa bình luận",
+    "confirm_remove": "Bạn có chắc muốn xóa bình luận này?"
   }
 }

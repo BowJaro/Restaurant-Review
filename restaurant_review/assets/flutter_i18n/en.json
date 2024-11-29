@@ -132,5 +132,15 @@
     "new_password": "New Password",
     "confirm_password": "Confirm Password",
     "update_password": "Update Password"
+  },
+  "comment": {
+    "comments": "Comments",
+    "write_comment": "Write a comment...",
+    "unknown": "Unknown",
+    "reply_to": "Reply to",
+    "remove": "Remove",
+    "report": "Report",
+    "remove_comment": "Remove comment",
+    "confirm_remove": "Are you sure you want to remove this comment?"
   }
 }
