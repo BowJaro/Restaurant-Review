@@ -112,7 +112,11 @@
   },
   "account_page": {
     "account": "Tài khoản",
+    "reviews": "Bài đánhg giá",
+    "followers": "Người theo dõi",
+    "following": "Người đang theo dõi",
     "change_profile": "Thay đổi thông tin",
+    "upgrade_to_reviewer": "Nâng cấp lên reviewer",
     "about_us": "Về chúng tôi",
     "policy": "Chính sách",
     "feedback": "Phản hồi",
@@ -129,6 +133,16 @@
     "current_password": "Mật khẩu hiện tại",
     "new_password": "Mật khẩu mới",
     "confirm_password": "Xác nhận mật khẩu",
-    "update_password": "Cập nhật mật khẩu"
+    "update_password": "Cập nhật mật khẩu",
+    "update_email": "Cập nhật email",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "update_acc_success": "Cập nhật tài khoản thành công",
+    "update_acc_fail": "Cập nhật tài khoản thất bại",
+    "wrong_password": "Nhập sai mật khẩu hiện tại. Vui lòng kiểm tra lại"
+  },
+  "snackbar": {
+    "success": "Thành công",
+    "error": "Lỗi"
   }
 }

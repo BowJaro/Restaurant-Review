@@ -98,7 +98,7 @@ class ModalUtils {
   static void showSnackbar({
     required String title,
     String? message,
-    Color backgroundColor = AppColors.errorRed,
+    Color backgroundColor = Colors.redAccent,
     Color textColor = AppColors.white,
     SnackPosition snackPosition = SnackPosition.TOP,
     Duration duration = const Duration(seconds: 3),

@@ -3,7 +3,9 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
+import 'package:restaurant_review/routes/routes.dart';
 
+import '../../../services/supabase.dart';
 import '../controller/account_controller.dart';
 
 class AccountView extends GetView<AccountController> {
@@ -12,7 +14,7 @@ class AccountView extends GetView<AccountController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (controller.isLoading.value) {
+      if (controller.isLoadingAccountPage.value) {
         return Scaffold(
           appBar: AppBar(),
           body: const Center(child: CircularProgressIndicator()),
@@ -107,6 +109,62 @@ class AccountView extends GetView<AccountController> {
                       controller.email,
                       style: const TextStyle(fontSize: 14),
                     ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        //Reviews
+                        Column(
+                          children: [
+                            Text(
+                              controller.reviews.toString(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                                FlutterI18n.translate(
+                                    context, "account_page.reviews"),
+                                style: const TextStyle(fontSize: 14)),
+                          ],
+                        ),
+
+                        //Followers
+                        Column(
+                          children: [
+                            Text(
+                              controller.followers.toString(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                                FlutterI18n.translate(
+                                    context, "account_page.followers"),
+                                style: const TextStyle(fontSize: 14)),
+                          ],
+                        ),
+
+                        //Following
+                        Column(
+                          children: [
+                            Text(
+                              controller.following.toString(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                                FlutterI18n.translate(
+                                    context, "account_page.following"),
+                                style: const TextStyle(fontSize: 14)),
+                          ],
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -118,6 +176,14 @@ class AccountView extends GetView<AccountController> {
                 color: AppColors.white,
                 child: Column(
                   children: [
+                    _buildButton(
+                        context,
+                        Icons.reviews,
+                        FlutterI18n.translate(
+                            context, "account_page.upgrade_to_reviewer"),
+                        onTap: () {
+                      // Get.to(() => const ChangeProfileView());
+                    }),
                     _buildButton(
                         context,
                         Icons.star,
@@ -153,16 +219,18 @@ class AccountView extends GetView<AccountController> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Handle sign out
+                  // Handle sign out
+                  onPressed: () async {
+                    await supabase.auth.signOut();
+                    Get.offAllNamed(Routes.splash);
                   },
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    side: const BorderSide(color: AppColors.textRed),
                   ),
                   child: Text(
                     FlutterI18n.translate(context, "account_page.sign_out"),
