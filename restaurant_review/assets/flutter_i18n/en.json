@@ -74,7 +74,8 @@
     "ambiance": "Ambiance",
     "cleanliness": "Cleanliness",
     "add": "Add",
-    "enter_new_hash_tags": "Enter new hashtag"
+    "enter_new_hash_tags": "Enter new hashtag",
+    "success": "Successfully!"
   },
   "brand_detail": {
     "create_brand": "Create brand",
