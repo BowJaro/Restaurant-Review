@@ -178,6 +178,9 @@ class PostDetailController extends GetxController {
         }
 
         Get.back();
+        Get.back();
+        ModalUtils.showMessageModal(
+            FlutterI18n.translate(Get.context!, "post_detail.success"));
       }
     }
   }

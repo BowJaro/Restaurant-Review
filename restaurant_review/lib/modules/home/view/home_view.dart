@@ -19,7 +19,7 @@ class HomeView extends GetView<HomeController> {
           TextButton(
             onPressed: () {
               Get.toNamed(Routes.postDetail,
-                  arguments: {'isNew': false, 'id': 4});
+                  arguments: {'isNew': false, 'id': 5});
             },
             child: const Text("Go to post detail to edit"),
           ),
