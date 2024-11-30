@@ -4,9 +4,9 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/modules/account/model/account_model.dart';
 import 'package:restaurant_review/modules/account/model/account_update_model.dart';
-import 'package:restaurant_review/modules/account/view/email_update_modal_view.dart';
+import 'package:restaurant_review/routes/routes.dart';
 import 'package:restaurant_review/utils/validators.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../constants/singleton_variables.dart';
 import '../../../global_widgets/image_widgets/avatar_selector.dart';
 import '../../../global_widgets/modals/modals.dart';
 import '../repository/account_repository.dart';
@@ -25,7 +25,6 @@ class AccountController extends GetxController {
 
   late final String email;
   late final String fullName;
-  late final String sessionId;
 
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
@@ -46,7 +45,9 @@ class AccountController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    sessionId = (await SharedPreferences.getInstance()).getString('sessionId')!;
+    if (userId == null) {
+      Get.offAllNamed(Routes.signIn);
+    }
     fetchAccount();
   }
 
@@ -65,7 +66,7 @@ class AccountController extends GetxController {
 
   Future<void> fetchAccount() async {
     isLoadingAccountPage.value = true;
-    final response = await repository.fetchAccount(sessionId);
+    final response = await repository.fetchAccount(userId!);
 
     reviews.value = 25;
     followers.value = 150;
@@ -96,7 +97,7 @@ class AccountController extends GetxController {
   Future<void> updateAccount() async {
     isLoadingChangeProfile.value = true;
     AccountUpdateModel accountUpdateModel = AccountUpdateModel(
-        userId: sessionId,
+        userId: userId!,
         userName: userNameController.text,
         fullName: fullNameController.text,
         phone: phoneController.text,
@@ -125,9 +126,7 @@ class AccountController extends GetxController {
 
   // Function to save the updated email
   Future<void> updateEmail() async {
-    final success =
-        await repository.updateEmail(emailController.text, sessionId);
-    print("emailController ${emailController.text}");
+    final success = await repository.updateEmail(emailController.text, userId!);
     if (success != null) {
       ModalUtils.showSnackbar(
         title: FlutterI18n.translate(Get.context!, "snackbar.success"),
@@ -148,7 +147,7 @@ class AccountController extends GetxController {
     isLoadingChangePassword.value = true;
     //  check current password
     final response = await repository.verifyPassword(
-        currentPasswordController.text, sessionId);
+        currentPasswordController.text, userId!);
 
     if (response == true) {
       // check confirm password

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/full_image_view.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/image_grid.dart';
 
@@ -66,7 +67,7 @@ class ImageGallery extends StatelessWidget {
                             child: CachedNetworkImage(
                               memCacheHeight: imageSize.toInt(),
                               memCacheWidth: imageSize.toInt(),
-                              imageUrl: urls[index],
+                              imageUrl: baseImageUrl + urls[index],
                               fit: BoxFit.cover,
                               height: imageSize,
                               width: imageSize,

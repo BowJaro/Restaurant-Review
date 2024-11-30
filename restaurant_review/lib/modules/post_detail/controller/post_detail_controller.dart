@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_classes/rate.dart';
 import 'package:restaurant_review/global_widgets/hashtag/hashtag_selector.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/image_selector.dart';
@@ -9,7 +10,6 @@ import 'package:restaurant_review/modules/post_detail/model/get_data_for_post_mo
 import 'package:restaurant_review/modules/post_detail/model/post_upsert_model.dart';
 import 'package:restaurant_review/modules/post_detail/model/post_with_rate_upsert_model.dart';
 import 'package:restaurant_review/routes/routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/data_for_new_post_model.dart';
 import '../repository/post_detail_repository.dart';
@@ -26,7 +26,6 @@ class PostDetailController extends GetxController {
       Get.put(ImageSelectorController());
   final HashtagSelectorController hashtagSelectorController =
       Get.put(HashtagSelectorController());
-  late final String? userId;
 
   var description =
       "[{\"insert\":\"${FlutterI18n.translate(Get.context!, "post_detail.description")}\\n\"}]"
@@ -50,7 +49,6 @@ class PostDetailController extends GetxController {
     final arguments = Get.arguments;
     isNew = arguments['isNew'] ?? true;
     id = arguments['id'];
-    userId = await getSessionId();
 
     if (!isNew && id != null) {
       await fetchDataForPostEdit();
@@ -183,10 +181,5 @@ class PostDetailController extends GetxController {
             FlutterI18n.translate(Get.context!, "post_detail.success"));
       }
     }
-  }
-
-  Future<String?> getSessionId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('sessionId');
   }
 }

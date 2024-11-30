@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
-import 'package:restaurant_review/services/supabase.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ImageService extends GetxService {

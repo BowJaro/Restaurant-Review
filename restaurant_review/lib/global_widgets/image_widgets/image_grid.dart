@@ -31,14 +31,15 @@ class FullImageGrid extends StatelessWidget {
         ),
         itemCount: urls.length,
         itemBuilder: (context, index) {
+          final String fullUrl = urls[index];
           return GestureDetector(
             onTap: () {
-              Get.to(() => FullImageView(url: urls[index]));
+              Get.to(() => FullImageView(url: fullUrl));
             },
             child: Hero(
               tag: 'imageHero_$index',
               child: CachedNetworkImage(
-                imageUrl: urls[index],
+                imageUrl: fullUrl,
                 fit: BoxFit.cover,
                 placeholder: (context, url) =>
                     const Center(child: CircularProgressIndicator()),

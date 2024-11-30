@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/modules/account/view/account_view.dart';
 import 'package:restaurant_review/modules/language/widget/language_radio_button.dart';
 import 'package:restaurant_review/routes/routes.dart';
-import 'package:restaurant_review/services/supabase.dart';
 
 import '../controller/home_controller.dart';
 
@@ -18,41 +18,53 @@ class HomeView extends GetView<HomeController> {
           const Text('Explore'),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.postDetail,
-                  arguments: {'isNew': false, 'id': 5});
+              Get.toNamed(Routes.comment, arguments: {'post_id': 8});
             },
-            child: const Text("Go to post detail to edit"),
+            child: const Text("Go to Comment page"),
           ),
           TextButton(
             onPressed: () {
-              Get.toNamed(Routes.postDetail, arguments: {'isNew': true});
+              Get.toNamed(Routes.brandPage, arguments: {'brandId': 6});
             },
-            child: const Text("Go to post detail"),
+            child: const Text("Go to Brand Page"),
           ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.restaurantDetail, arguments: {'isNew': true});
-            },
-            child: const Text("Go to add new restaurant"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.restaurantDetail,
-                  arguments: {'isNew': false, 'id': 1});
-            },
-            child: const Text("Go to restaurant detail"),
-          ),
-          TextButton(
-              onPressed: () {
-                Get.toNamed(Routes.brandDetail, arguments: {'isNew': true});
-              },
-              child: const Text("Go to Brand Detail page to add new")),
-          TextButton(
-              onPressed: () {
-                Get.toNamed(Routes.brandDetail,
-                    arguments: {'isNew': false, 'id': 11});
-              },
-              child: const Text("Go to Brand Detail page to edit")),
+          // TextButton(
+          //   onPressed: () {
+          //     Get.toNamed(Routes.postDetail,
+          //         arguments: {'isNew': false, 'id': 4});
+          //   },
+          //   child: const Text("Go to post detail to edit"),
+          // ),
+          // TextButton(
+          //   onPressed: () {
+          //     Get.toNamed(Routes.postDetail, arguments: {'isNew': true});
+          //   },
+          //   child: const Text("Go to post detail"),
+          // ),
+          // TextButton(
+          //   onPressed: () {
+          //     Get.toNamed(Routes.restaurantDetail, arguments: {'isNew': true});
+          //   },
+          //   child: const Text("Go to add new restaurant"),
+          // ),
+          // TextButton(
+          //   onPressed: () {
+          //     Get.toNamed(Routes.restaurantDetail,
+          //         arguments: {'isNew': false, 'id': 1});
+          //   },
+          //   child: const Text("Go to restaurant detail"),
+          // ),
+          // TextButton(
+          //     onPressed: () {
+          //       Get.toNamed(Routes.brandDetail, arguments: {'isNew': true});
+          //     },
+          //     child: const Text("Go to Brand Detail page to add new")),
+          // TextButton(
+          //     onPressed: () {
+          //       Get.toNamed(Routes.brandDetail,
+          //           arguments: {'isNew': false, 'id': 6});
+          //     },
+          //     child: const Text("Go to Brand Detail page to edit")),
           TextButton(
               onPressed: () async {
                 await supabase.auth.signOut();

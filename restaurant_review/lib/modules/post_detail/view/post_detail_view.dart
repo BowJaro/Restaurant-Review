@@ -141,14 +141,12 @@ class PostDetailView extends GetView<PostDetailController> {
       padding: EdgeInsets.zero,
       itemCount: controller.rateList.length,
       itemBuilder: (context, index) {
-        return getRowRating(
-            rate: controller.rateList[index], isReadOnly: false);
+        return getRowRating(rate: controller.rateList[index]);
       },
     );
   }
 
-  Widget getRowRating(
-      {required RateModel rate, bool isReadOnly = false, double size = 23}) {
+  Widget getRowRating({required RateModel rate, double size = 23}) {
     double width = Get.size.width;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -165,10 +163,6 @@ class PostDetailView extends GetView<PostDetailController> {
           child: Obx(() {
             return StarRating(
               value: rate.value.value,
-              onPressed: (value) {
-                rate.value.value = value * 1.0;
-              },
-              isReadOnly: isReadOnly,
               size: size,
             );
           }),

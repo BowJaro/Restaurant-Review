@@ -147,5 +147,19 @@
   "snackbar": {
     "success": "Success",
     "error": "Error"
+  },
+  "comment": {
+    "comments": "Comments",
+    "write_comment": "Write a comment...",
+    "unknown": "Unknown",
+    "reply_to": "Reply to",
+    "remove": "Remove",
+    "report": "Report",
+    "remove_comment": "Remove comment",
+    "confirm_remove": "Are you sure you want to remove this comment?"
+  },
+  "brand_page": {
+    "brand": "Brand",
+    "restaurant_list": "Restaurant list"
   }
 }
