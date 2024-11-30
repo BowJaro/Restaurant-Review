@@ -188,6 +188,9 @@ class RestaurantDetailController extends GetxController {
 
       await repository.upsertRestaurant(restaurantModel);
       Get.back();
+      Get.back();
+      ModalUtils.showMessageModal(
+          FlutterI18n.translate(Get.context!, "restaurant_detail.success"));
     }
   }
 

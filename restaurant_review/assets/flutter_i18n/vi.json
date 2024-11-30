@@ -72,7 +72,8 @@
     "ambiance": "Không gian",
     "cleanliness": "Vệ sinh",
     "add": "Thêm",
-    "enter_new_hash_tags": "Nhập hashtag mới"
+    "enter_new_hash_tags": "Nhập hashtag mới",
+    "success": "Thành công!"
   },
   "brand_detail": {
     "create_brand": "Tạo thương hiệu",
