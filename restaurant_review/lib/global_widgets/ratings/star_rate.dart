@@ -3,15 +3,13 @@ import 'package:restaurant_review/constants/colors.dart';
 
 class StarRating extends StatelessWidget {
   final double value;
-  final bool isReadOnly;
-  final void Function(int) onPressed;
+  final void Function(int)? onPressed;
   final double size;
 
   const StarRating({
     super.key,
     required this.value,
-    this.isReadOnly = true,
-    required this.onPressed,
+    this.onPressed,
     this.size = 24,
   });
 
@@ -21,7 +19,7 @@ class StarRating extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(5, (index) {
         return GestureDetector(
-          onTap: isReadOnly ? null : () => onPressed(index + 1),
+          onTap: onPressed != null ? () => onPressed!(index + 1) : null,
           child: Icon(
             Icons.star,
             color: index < value ? AppColors.rateYellow : AppColors.rateGray,
