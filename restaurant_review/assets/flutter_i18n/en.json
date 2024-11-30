@@ -115,7 +115,11 @@
   },
   "account_page": {
     "account": "Account",
+    "reviews": "Reviews",
+    "followers": "Followers",
+    "following": "Following",
     "change_profile": "Change Profile",
+    "upgrade_to_reviewer": "Upgrade To Reviewer",
     "about_us": "About Us",
     "policy": "Policy",
     "feedback": "Feedback",
@@ -132,7 +136,17 @@
     "current_password": "Current Password",
     "new_password": "New Password",
     "confirm_password": "Confirm Password",
-    "update_password": "Update Password"
+    "update_password": "Update Password",
+    "update_email": "Update email",
+    "cancel": "Cancel",
+    "save": "Save",
+    "update_acc_success": "Account updated successfully",
+    "update_acc_fail": "Failed to update account",
+    "wrong_password": "Incorrect current password. Please check again"
+  },
+  "snackbar": {
+    "success": "Success",
+    "error": "Error"
   },
   "comment": {
     "comments": "Comments",

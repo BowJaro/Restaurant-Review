@@ -49,6 +49,8 @@ dependencies:
   http: ^1.2.2
   flutter_dotenv: ^5.2.1
   url_launcher: ^6.3.1
+  flutter_native_splash: ^2.4.3
+  flutter_launcher_icons: "^0.14.1"
 
 dev_dependencies:
   flutter_test:
@@ -107,3 +109,30 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# flutter_launcher_icons:
+#   android: "launcher_icon"
+#   ios: true
+#   image_path: "assets/logo/logoTahu.png"
+#   min_sdk_android: 21
+#   web:
+#     generate: true
+#     image_path: "assets/logo/logoTahu.png"
+#     background_color: "#FF2F44"
+#     theme_color: "#FF2F44"
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo/logo1024.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/logo/logo1024.png"
+  min_sdk_android: 21
+
+flutter_native_splash:
+  color: "#FF2F44"
+  image: "assets/logo/logoTahu.png"
+
+  android_12:
+    image: "assets/logo/logoTahu.png"
+    color: "#FF2F44"
