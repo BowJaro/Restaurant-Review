@@ -5,7 +5,7 @@ import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
-import '../../../services/supabase.dart';
+import '../../../constants/singleton_variables.dart';
 import '../controller/account_controller.dart';
 
 class AccountView extends GetView<AccountController> {
