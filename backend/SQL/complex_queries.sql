@@ -356,3 +356,50 @@ BEGIN
     );
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_brand_page(p_brand_id INT, p_profile_id UUID)
+RETURNS JSON AS $$
+BEGIN
+    RETURN (
+        SELECT json_build_object(
+            'name', b.name,
+            'description', b.description,
+            'image_url', i.url,
+            'restaurant_list', (
+                SELECT json_agg(
+                    json_build_object(
+                        'id', r.id,
+                        'province_id', a.province,
+                        'district_id', a.district,
+                        'ward_id', a.ward,
+                        'street', a.street,
+                        'rate_average', r.rate_total / NULLIF(r.rate_quantity, 0),
+                        'name', r.name,
+                        'image_url', (SELECT i2.url FROM image i2 WHERE i2.id = m.image_list[1]),
+                        'hashtag_list', (
+                            SELECT array_agg(h.name)
+                            FROM hashtag h
+                            WHERE h.id = ANY(r.hashtag_list)
+                        ),
+                        'is_followed', EXISTS(
+                            SELECT 1
+                            FROM following f
+                            WHERE f.profile_id = p_profile_id
+                              AND f.source = r.id
+                              AND f.type = 'restaurant'
+                        )
+                    )
+                )
+                FROM restaurant r
+                JOIN address a ON a.id = r.address_id
+                JOIN metadata m ON m.id = r.metadata_id
+                LEFT JOIN image i2 ON i2.id = m.image_list[1]
+                WHERE r.brand_id = p_brand_id
+            )
+        )
+        FROM brand b
+        LEFT JOIN image i ON i.id = b.image_id
+        WHERE b.id = p_brand_id
+    );
+END;
+$$ LANGUAGE plpgsql;

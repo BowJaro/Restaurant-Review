@@ -140,5 +140,9 @@
     "report": "Tố cáo",
     "remove_comment": "Xóa bình luận",
     "confirm_remove": "Bạn có chắc muốn xóa bình luận này?"
+  },
+  "brand_page": {
+    "brand": "Thương hiệu",
+    "restaurant_list": "Danh sách nhà hàng"
   }
 }
