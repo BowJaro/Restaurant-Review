@@ -13,6 +13,7 @@ class MiniPostCard extends StatelessWidget {
   final String subtitle;
   final int viewCount;
   final String topic;
+  final VoidCallback? onTap;
 
   const MiniPostCard({
     super.key,
@@ -22,14 +23,16 @@ class MiniPostCard extends StatelessWidget {
     required this.subtitle,
     required this.viewCount,
     required this.topic,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.toNamed(Routes.postPage, arguments: {'postId': id});
-      },
+      onTap: onTap ??
+          () {
+            Get.toNamed(Routes.postPage, arguments: {'postId': id});
+          },
       child: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(

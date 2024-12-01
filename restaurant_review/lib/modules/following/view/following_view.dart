@@ -61,7 +61,7 @@ class FollowingView extends GetView<FollowingController> {
                     id: item.id,
                     name: item.name,
                     imageUrl: item.imageUrl,
-                    author: item.author ??
+                    subtitle: item.author ??
                         FlutterI18n.translate(context, "following.unknown"),
                     viewCount: item.viewCount,
                     topic: item.topic,

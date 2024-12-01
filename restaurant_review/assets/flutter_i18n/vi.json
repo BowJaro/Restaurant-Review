@@ -140,7 +140,8 @@
     "save": "Lưu",
     "update_acc_success": "Cập nhật tài khoản thành công",
     "update_acc_fail": "Cập nhật tài khoản thất bại",
-    "wrong_password": "Nhập sai mật khẩu hiện tại. Vui lòng kiểm tra lại"
+    "wrong_password": "Nhập sai mật khẩu hiện tại. Vui lòng kiểm tra lại",
+    "my_post": "Bài viết của tôi"
   },
   "snackbar": {
     "success": "Thành công",
@@ -173,5 +174,8 @@
     "confirm_unfollow_restaurant": "Bạn có chắc muốn bỏ theo dõi nhà hàng này không?",
     "confirm_unfollow_post": "Bạn có chắc muốn xóa bài viết khỏi danh sách xem sau không?",
     "confirm_unfollow_user": "Bạn có chắc muốn bỏ theo dõi người dùng này không?"
+  },
+  "my_post": {
+    "my_post": "Bài viết của tôi"
   }
 }

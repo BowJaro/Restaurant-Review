@@ -3,6 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
+import 'package:restaurant_review/modules/my_post/view/my_post_view.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
 import '../../../constants/singleton_variables.dart';
@@ -183,6 +184,11 @@ class AccountView extends GetView<AccountController> {
                             context, "account_page.upgrade_to_reviewer"),
                         onTap: () {
                       // Get.to(() => const ChangeProfileView());
+                    }),
+                    _buildButton(context, Icons.article,
+                        FlutterI18n.translate(context, "account_page.my_post"),
+                        onTap: () {
+                      Get.toNamed(Routes.myPost);
                     }),
                     _buildButton(
                         context,

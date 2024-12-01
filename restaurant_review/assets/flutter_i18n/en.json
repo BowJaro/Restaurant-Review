@@ -142,7 +142,8 @@
     "save": "Save",
     "update_acc_success": "Account updated successfully",
     "update_acc_fail": "Failed to update account",
-    "wrong_password": "Incorrect current password. Please check again"
+    "wrong_password": "Incorrect current password. Please check again",
+    "my_post": "My Posts"
   },
   "snackbar": {
     "success": "Success",
@@ -175,5 +176,8 @@
     "confirm_unfollow_restaurant": "Are you sure you want to unfollow this restaurant?",
     "confirm_unfollow_post": "Are you sure you want to remove this bookmark?",
     "confirm_unfollow_user": "Are you sure you want to unfollow this user?"
+  },
+  "my_post": {
+    "my_post": "My posts"
   }
 }

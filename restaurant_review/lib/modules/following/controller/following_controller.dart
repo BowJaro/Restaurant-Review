@@ -16,7 +16,7 @@ class FollowingController extends GetxController {
   onInit() async {
     super.onInit();
     if (userId == null) {
-      Get.offAllNamed(Routes.signIn);
+      Get.offAllNamed(Routes.splash);
       return;
     }
     await getFollowing();
