@@ -27,7 +27,7 @@ class BrandPageController extends GetxController {
     brandId = Get.arguments['brandId'];
 
     if (userId == null) {
-      Get.offAllNamed(Routes.signIn);
+      Get.offAllNamed(Routes.splash);
     } else {
       await getData();
     }

@@ -5,8 +5,12 @@ import 'package:restaurant_review/modules/brand_page/binding/brand_page_binding.
 import 'package:restaurant_review/modules/brand_page/view/brand_page_view.dart';
 import 'package:restaurant_review/modules/comment/binding/comment_binding.dart';
 import 'package:restaurant_review/modules/comment/view/comment_view.dart';
+import 'package:restaurant_review/modules/following/binding/following_binding.dart';
+import 'package:restaurant_review/modules/following/view/following_view.dart';
 import 'package:restaurant_review/modules/home/binding/home_binding.dart';
 import 'package:restaurant_review/modules/home/view/home_view.dart';
+import 'package:restaurant_review/modules/my_post/binding/my_post_binding.dart';
+import 'package:restaurant_review/modules/my_post/view/my_post_view.dart';
 import 'package:restaurant_review/modules/post_detail/binding/post_detail_binding.dart';
 import 'package:restaurant_review/modules/post_detail/view/post_detail_view.dart';
 import 'package:restaurant_review/modules/restaurant_detail/binding/restaurant_detail_binding.dart';
@@ -34,6 +38,10 @@ abstract class Routes {
   static const String comment = '/comment';
   static const String brandPage = '/brand_page';
   static const String restaurantPage = '/restaurant_page';
+  static const String userPage = '/user_page';
+  static const String postPage = '/post_page';
+  static const String following = '/following_page';
+  static const String myPost = '/my_post_page';
 }
 
 class AppPages {
@@ -88,6 +96,16 @@ class AppPages {
       name: Routes.brandPage,
       page: () => const BrandPageView(),
       binding: BrandPageBinding(),
+    ),
+    GetPage(
+      name: Routes.following,
+      page: () => const FollowingView(),
+      binding: FollowingBinding(),
+    ),
+    GetPage(
+      name: Routes.myPost,
+      page: () => const MyPostView(),
+      binding: MyPostBinding(),
     ),
   ];
 }

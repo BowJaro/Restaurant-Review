@@ -18,16 +18,22 @@ class HomeView extends GetView<HomeController> {
           const Text('Explore'),
           TextButton(
             onPressed: () {
+              Get.toNamed(Routes.following);
+            },
+            child: const Text("Go to Following Page"),
+          ),
+          TextButton(
+            onPressed: () {
               Get.toNamed(Routes.comment, arguments: {'post_id': 8});
             },
             child: const Text("Go to Comment page"),
           ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.brandPage, arguments: {'brandId': 6});
-            },
-            child: const Text("Go to Brand Page"),
-          ),
+          // TextButton(
+          //   onPressed: () {
+          //     Get.toNamed(Routes.brandPage, arguments: {'brandId': 6});
+          //   },
+          //   child: const Text("Go to Brand Page"),
+          // ),
           // TextButton(
           //   onPressed: () {
           //     Get.toNamed(Routes.postDetail,

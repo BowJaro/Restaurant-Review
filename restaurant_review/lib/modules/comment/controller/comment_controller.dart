@@ -35,7 +35,7 @@ class CommentController extends GetxController {
     postId = arguments?['post_id'];
 
     if (userId == null || postId == null) {
-      Get.offAllNamed(Routes.signIn);
+      Get.offAllNamed(Routes.splash);
       return;
     }
     await getData();

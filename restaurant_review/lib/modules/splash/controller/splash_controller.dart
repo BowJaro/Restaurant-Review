@@ -11,7 +11,7 @@ class SplashController extends GetxController {
   }
 
   Future<void> _redirect() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(Duration.zero);
     final session = supabase.auth.currentSession;
     userId = session?.user.id;
 
