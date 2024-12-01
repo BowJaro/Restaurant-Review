@@ -357,6 +357,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 CREATE OR REPLACE FUNCTION get_brand_page(p_brand_id INT, p_profile_id UUID)
 RETURNS JSON AS $$
 BEGIN
@@ -385,7 +386,7 @@ BEGIN
                             SELECT 1
                             FROM following f
                             WHERE f.profile_id = p_profile_id
-                              AND f.source = r.id
+                              AND f.source::text = r.id::text
                               AND f.type = 'restaurant'
                         )
                     )
@@ -400,6 +401,71 @@ BEGIN
         FROM brand b
         LEFT JOIN image i ON i.id = b.image_id
         WHERE b.id = p_brand_id
+    );
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION get_following(p_profile_id UUID)
+RETURNS JSON AS $$
+BEGIN
+    RETURN (
+        SELECT json_build_object(
+            'restaurants', (
+                SELECT json_agg(
+                    json_build_object(
+                        'id', f.source,
+                        'image_url', i.url,
+                        'name', r.name,
+                        'rate_average', r.rate_total / NULLIF(r.rate_quantity, 0),
+                        'province_id', a.province,
+                        'district_id', a.district,
+                        'ward_id', a.ward,
+                        'street', a.street,
+                        'category', rc.name
+                    )
+                )
+                FROM following f
+                JOIN restaurant r ON r.id = f.source::INT
+                JOIN address a ON a.id = r.address_id
+                JOIN image i ON i.id = r.image_id
+                JOIN restaurant_category rc ON rc.id = r.restaurant_category_id
+                WHERE f.profile_id = p_profile_id AND f.type = 'restaurant'
+            ),
+            'users', (
+                SELECT json_agg(
+                    json_build_object(
+                        'id', f.source,
+                        'image_url', i.url,
+                        'name', p.full_name,
+                        'username', p.username,
+                        'join_date', p.join_date
+                    )
+                )
+                FROM following f
+                JOIN profiles p ON p.id = f.source::UUID
+                LEFT JOIN image i ON i.id = p.image_id
+                WHERE f.profile_id = p_profile_id AND f.type = 'user'
+            ),
+            'posts', (
+                SELECT json_agg(
+                    json_build_object(
+                        'id', f.source,
+                        'name', p.name,
+                        'image_url', (SELECT i.url FROM image i WHERE i.id = m.image_list[1]),
+                        'author', prof.full_name,
+                        'view_count', p.view_count,
+                        'topic', t.name
+                    )
+                )
+                FROM following f
+                JOIN post p ON p.id = f.source::INT
+                JOIN metadata m ON m.id = p.metadata_id
+                JOIN profiles prof ON prof.id = p.profile_id
+                JOIN topic t ON t.id = p.topic_id
+                WHERE f.profile_id = p_profile_id AND f.type = 'post'
+            )
+        )
     );
 END;
 $$ LANGUAGE plpgsql;

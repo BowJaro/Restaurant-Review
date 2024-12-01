@@ -212,6 +212,6 @@ CREATE TABLE comment (
 CREATE TABLE following (
     id SERIAL PRIMARY KEY,
     profile_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
-    source INT NOT NULL,
+    source TEXT DEFAULT '',
     type VARCHAR(255) NOT NULL
 );

@@ -161,5 +161,19 @@
   "brand_page": {
     "brand": "Brand",
     "restaurant_list": "Restaurant list"
+  },
+  "following": {
+    "unknown": "No name",
+    "join_date": "Join date",
+    "views": "Views",
+    "following": "Following",
+    "restaurant": "Restaurant",
+    "user": "User",
+    "post": "Post",
+    "unfollow": "Unfollow",
+    "remove_following": "Remove following",
+    "confirm_unfollow_restaurant": "Are you sure you want to unfollow this restaurant?",
+    "confirm_unfollow_post": "Are you sure you want to remove this bookmark?",
+    "confirm_unfollow_user": "Are you sure you want to unfollow this user?"
   }
 }

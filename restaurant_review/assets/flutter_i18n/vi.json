@@ -159,5 +159,19 @@
   "brand_page": {
     "brand": "Thương hiệu",
     "restaurant_list": "Danh sách nhà hàng"
+  },
+  "following": {
+    "unknown": "Ẩn danh",
+    "join_date": "Ngày tham gia",
+    "views": "Lượt xem",
+    "following": "Theo dõi",
+    "restaurant": "Nhà hàng",
+    "user": "Người dùng",
+    "post": "Bài viết",
+    "unfollow": "Bỏ theo dõi",
+    "remove_following": "Bỏ theo dõi",
+    "confirm_unfollow_restaurant": "Bạn có chắc muốn bỏ theo dõi nhà hàng này không?",
+    "confirm_unfollow_post": "Bạn có chắc muốn xóa bài viết khỏi danh sách xem sau không?",
+    "confirm_unfollow_user": "Bạn có chắc muốn bỏ theo dõi người dùng này không?"
   }
 }

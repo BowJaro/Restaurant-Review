@@ -18,6 +18,12 @@ class HomeView extends GetView<HomeController> {
           const Text('Explore'),
           TextButton(
             onPressed: () {
+              Get.toNamed(Routes.following);
+            },
+            child: const Text("Go to Following Page"),
+          ),
+          TextButton(
+            onPressed: () {
               Get.toNamed(Routes.comment, arguments: {'post_id': 8});
             },
             child: const Text("Go to Comment page"),
