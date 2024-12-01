@@ -1,9 +1,7 @@
-import 'package:restaurant_review/services/image_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class BrandPageProvider {
   final SupabaseClient supabase;
-  final ImageService imageService = ImageService();
 
   BrandPageProvider(this.supabase);
 

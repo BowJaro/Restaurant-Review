@@ -10,7 +10,7 @@ class MiniPostCard extends StatelessWidget {
   final int id;
   final String name;
   final String? imageUrl;
-  final String author;
+  final String subtitle;
   final int viewCount;
   final String topic;
 
@@ -19,7 +19,7 @@ class MiniPostCard extends StatelessWidget {
     required this.id,
     required this.name,
     required this.imageUrl,
-    required this.author,
+    required this.subtitle,
     required this.viewCount,
     required this.topic,
   });
@@ -70,7 +70,7 @@ class MiniPostCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    author,
+                    subtitle,
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
