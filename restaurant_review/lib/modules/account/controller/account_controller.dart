@@ -7,8 +7,10 @@ import 'package:restaurant_review/modules/account/model/account_update_model.dar
 import 'package:restaurant_review/modules/account/view/email_update_modal_view.dart';
 import 'package:restaurant_review/utils/validators.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../global_widgets/image_widgets/avatar_selector.dart';
 import '../../../global_widgets/modals/modals.dart';
+import '../../../services/supabase.dart';
 import '../repository/account_repository.dart';
 
 class AccountController extends GetxController {
@@ -16,7 +18,7 @@ class AccountController extends GetxController {
   final AccountRepository repository;
 
   AccountController(this.repository);
-  var isLoadingAccountPage = true.obs;
+  var isLoadingAccountPage = false.obs;
   var isLoadingChangeProfile = false.obs;
   var isLoadingChangePassword = false.obs;
 
@@ -43,11 +45,15 @@ class AccountController extends GetxController {
 
   String avatarUrl = "";
 
+  dynamic channel;
+
   @override
   void onInit() async {
     super.onInit();
     sessionId = (await SharedPreferences.getInstance()).getString('sessionId')!;
-    fetchAccount();
+    await fetchAccount();
+
+    channel = await repository.subscribeAcccountData(fetchAccount);
   }
 
   @override
@@ -60,16 +66,17 @@ class AccountController extends GetxController {
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     avatarSelectorController.dispose();
+    repository.unsubscribeAcccountData(channel);
     super.onClose();
   }
 
   Future<void> fetchAccount() async {
     isLoadingAccountPage.value = true;
     final response = await repository.fetchAccount(sessionId);
-
     reviews.value = 25;
     followers.value = 150;
     following.value = 75;
+    print('response: ${response}');
     if (response != null) {
       final accountModel = AccountModel.fromMap(response);
       avatarUrl = accountModel.image.path;
@@ -84,12 +91,12 @@ class AccountController extends GetxController {
       phoneController.text = accountModel.phone ??
           FlutterI18n.translate(Get.context!, "error.no_data");
       avatarSelectorController.setImage(accountModel.image);
-      isLoadingAccountPage.value = false;
     } else {
       Get.back();
       ModalUtils.showMessageModal(
           FlutterI18n.translate(Get.context!, "error.unknown"));
     }
+    isLoadingAccountPage.value = false;
   }
 
   // Method to update the profile
@@ -100,8 +107,8 @@ class AccountController extends GetxController {
         userName: userNameController.text,
         fullName: fullNameController.text,
         phone: phoneController.text,
-        imageUrl: avatarSelectorController.avatar.value!.file ??
-            avatarSelectorController.avatar.value!.url);
+        imageUrl: avatarSelectorController.avatar.value?.file ??
+            avatarSelectorController.avatar.value?.url);
 
     final success = await repository.updateAccount(accountUpdateModel);
 

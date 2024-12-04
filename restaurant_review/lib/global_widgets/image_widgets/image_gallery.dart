@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/full_image_view.dart';
@@ -66,7 +67,8 @@ class ImageGallery extends StatelessWidget {
                             child: CachedNetworkImage(
                               memCacheHeight: imageSize.toInt(),
                               memCacheWidth: imageSize.toInt(),
-                              imageUrl: urls[index],
+                              imageUrl:
+                                  dotenv.env['BASE_IMAGE_URL']! + urls[index],
                               fit: BoxFit.cover,
                               height: imageSize,
                               width: imageSize,

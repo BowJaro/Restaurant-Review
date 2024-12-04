@@ -22,7 +22,7 @@ class AccountView extends GetView<AccountController> {
       }
 
       return Scaffold(
-        backgroundColor: const Color(0xFFF3F2F7), // Page background
+        backgroundColor: AppColors.pageBgGray, // Page background
         appBar: AppBar(
           backgroundColor: AppColors.primary,
           elevation: 0,
