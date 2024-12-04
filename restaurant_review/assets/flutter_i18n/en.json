@@ -179,5 +179,11 @@
   },
   "my_post": {
     "my_post": "My posts"
+  },
+  "report": {
+    "report": "Report",
+    "reason": "Reason",
+    "description": "Description",
+    "send": "Send"
   }
 }

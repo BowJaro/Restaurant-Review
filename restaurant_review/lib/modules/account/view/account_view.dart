@@ -3,7 +3,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
-import 'package:restaurant_review/modules/my_post/view/my_post_view.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
 import '../../../constants/singleton_variables.dart';
