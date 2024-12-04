@@ -5,7 +5,7 @@ import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
-import '../../../services/supabase.dart';
+import '../../../constants/singleton_variables.dart';
 import '../controller/account_controller.dart';
 
 class AccountView extends GetView<AccountController> {
@@ -184,6 +184,11 @@ class AccountView extends GetView<AccountController> {
                         onTap: () {
                       // Get.to(() => const ChangeProfileView());
                     }),
+                    _buildButton(context, Icons.article,
+                        FlutterI18n.translate(context, "account_page.my_post"),
+                        onTap: () {
+                      Get.toNamed(Routes.myPost);
+                    }),
                     _buildButton(
                         context,
                         Icons.star,
@@ -198,11 +203,11 @@ class AccountView extends GetView<AccountController> {
                             context, "account_page.about_us")),
                     _buildButton(context, Icons.info,
                         FlutterI18n.translate(context, "account_page.policy")),
-                    _buildButton(
-                        context,
-                        Icons.policy,
-                        FlutterI18n.translate(
-                            context, "account_page.feedback")),
+                    _buildButton(context, Icons.policy,
+                        FlutterI18n.translate(context, "account_page.feedback"),
+                        onTap: () {
+                      Get.toNamed(Routes.feedback);
+                    }),
                     _buildButton(
                         context,
                         Icons.feedback,

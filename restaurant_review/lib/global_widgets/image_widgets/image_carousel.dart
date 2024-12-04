@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/full_image_view.dart';
 
 class ImageCarouselController extends GetxController {
@@ -21,7 +22,7 @@ class ImageCarousel extends StatelessWidget {
   final List<String> imageUrls;
   final ImageCarouselController controller = Get.put(ImageCarouselController());
 
-  ImageCarousel({required this.imageUrls});
+  ImageCarousel({super.key, required this.imageUrls});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class ImageCarousel extends StatelessWidget {
               child: Hero(
                 tag: 'imageHero_$index',
                 child: Image.network(
-                  imageUrls[index],
+                  baseImageUrl + imageUrls[index],
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
@@ -74,7 +75,7 @@ class ImageCarousel extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: imageUrls.length,
             itemBuilder: (context, index) {
-              final url = imageUrls[index];
+              final url = baseImageUrl + imageUrls[index];
               return GestureDetector(
                 onTap: () {
                   controller.changePage(index);
@@ -85,8 +86,8 @@ class ImageCarousel extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: controller.currentIndex.value == index
-                            ? Colors.red
-                            : Colors.transparent,
+                            ? AppColors.primary
+                            : AppColors.transparent,
                       ),
                     ),
                     child: Image.network(

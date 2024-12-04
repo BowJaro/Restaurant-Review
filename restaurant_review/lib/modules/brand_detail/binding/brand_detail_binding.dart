@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:restaurant_review/services/supabase.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 
 import '../controller/brand_detail_controller.dart';
 import '../provider/brand_detail_provider.dart';

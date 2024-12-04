@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/modules/post_detail/controller/post_detail_controller.dart';
 import 'package:restaurant_review/modules/post_detail/provider/post_detail_provider.dart';
 import 'package:restaurant_review/modules/post_detail/repository/post_detail_repository.dart';
-import 'package:restaurant_review/services/supabase.dart';
 
 class PostDetailBinding extends Bindings {
   @override

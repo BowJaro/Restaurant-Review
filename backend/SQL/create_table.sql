@@ -15,7 +15,6 @@ CREATE TABLE profiles (
     address TEXT DEFAULT '',
     biography TEXT DEFAULT '',
     rank TEXT DEFAULT '',
-    avatar_url TEXT,
     website TEXT,
     join_date TIMESTAMPTZ DEFAULT NOW(),
     quota INTEGER DEFAULT 100,
@@ -146,6 +145,37 @@ CREATE TABLE rate_content (
     value INT CHECK (value >= 1 AND value <= 5) DEFAULT 5
 );
 
+CREATE OR REPLACE FUNCTION update_restaurant_rate()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Handle insert
+    IF TG_OP = 'INSERT' THEN
+        UPDATE restaurant
+        SET rate_quantity = rate_quantity + 1,
+            rate_total = rate_total + NEW.average
+        WHERE id = NEW.restaurant_id;
+    -- Handle delete
+    ELSIF TG_OP = 'DELETE' THEN
+        UPDATE restaurant
+        SET rate_quantity = GREATEST(rate_quantity - 1, 0),
+            rate_total = GREATEST(rate_total - OLD.average, 0)
+        WHERE id = OLD.restaurant_id;
+    -- Handle update
+    ELSIF TG_OP = 'UPDATE' THEN
+        UPDATE restaurant
+        SET rate_total = GREATEST(rate_total + NEW.average - OLD.average, 0)
+        WHERE id = NEW.restaurant_id;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER rate_changes
+AFTER INSERT OR DELETE OR UPDATE ON rate
+FOR EACH ROW EXECUTE FUNCTION update_restaurant_rate();
+
+
 -- Create Post
 CREATE TABLE post (
     id SERIAL PRIMARY KEY,
@@ -157,6 +187,47 @@ CREATE TABLE post (
     status VARCHAR(50) DEFAULT 'published',
     view_count INT DEFAULT 0,
     profile_id UUID REFERENCES profiles(id),
-    restaurant_id INT REFERENCES restaurant(id) ON DELETE SET NULL,
     rate_id INT REFERENCES rate(id) ON DELETE SET NULL
+);
+
+-- Create Reaction Table
+CREATE TABLE reaction (
+    id SERIAL PRIMARY KEY,
+    profile_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
+    content VARCHAR(255) NOT NULL,
+    source INT NOT NULL,
+    type VARCHAR(255) NOT NULL
+);
+
+-- Create Comment Table
+CREATE TABLE comment (
+    id SERIAL PRIMARY KEY,
+    profile_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
+    content TEXT DEFAULT '',
+    source INT NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE following (
+    id SERIAL PRIMARY KEY,
+    profile_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
+    source TEXT DEFAULT '',
+    type VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE report (
+    id SERIAL PRIMARY KEY,
+    source TEXT NOT NULL,
+    type TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT
+);
+
+
+CREATE TABLE feedback (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT
 );

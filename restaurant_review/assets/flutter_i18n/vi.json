@@ -141,7 +141,8 @@
     "save": "Lưu",
     "update_acc_success": "Cập nhật tài khoản thành công",
     "update_acc_fail": "Cập nhật tài khoản thất bại",
-    "wrong_password": "Nhập sai mật khẩu hiện tại. Vui lòng kiểm tra lại"
+    "wrong_password": "Nhập sai mật khẩu hiện tại. Vui lòng kiểm tra lại",
+    "my_post": "Bài viết của tôi"
   },
   "snackbar": {
     "success": "Thành công",
@@ -150,5 +151,48 @@
   "post_item": {
     "reviewed": "Đã đánh giá",
     "report": "Báo cáo đánh giá"
+  },
+  "comment": {
+    "comments": "Bình luận",
+    "write_comment": "Viết bình luận...",
+    "unknown": "Không tên",
+    "reply_to": "Trả lời",
+    "remove": "Xóa",
+    "report": "Tố cáo",
+    "remove_comment": "Xóa bình luận",
+    "confirm_remove": "Bạn có chắc muốn xóa bình luận này?"
+  },
+  "brand_page": {
+    "brand": "Thương hiệu",
+    "restaurant_list": "Danh sách nhà hàng"
+  },
+  "following": {
+    "unknown": "Ẩn danh",
+    "join_date": "Ngày tham gia",
+    "views": "Lượt xem",
+    "following": "Theo dõi",
+    "restaurant": "Nhà hàng",
+    "user": "Người dùng",
+    "post": "Bài viết",
+    "unfollow": "Bỏ theo dõi",
+    "remove_following": "Bỏ theo dõi",
+    "confirm_unfollow_restaurant": "Bạn có chắc muốn bỏ theo dõi nhà hàng này không?",
+    "confirm_unfollow_post": "Bạn có chắc muốn xóa bài viết khỏi danh sách xem sau không?",
+    "confirm_unfollow_user": "Bạn có chắc muốn bỏ theo dõi người dùng này không?"
+  },
+  "my_post": {
+    "my_post": "Bài viết của tôi"
+  },
+  "report": {
+    "report": "Tố cáo",
+    "reason": "Lí do",
+    "description": "Mô tả nội dung",
+    "send": "Gửi"
+  },
+  "feedback": {
+    "feedback": "Phản hồi",
+    "reason": "Nguyên nhân",
+    "description": "Mô tả chi tiết",
+    "send": "Gửi"
   }
 }
