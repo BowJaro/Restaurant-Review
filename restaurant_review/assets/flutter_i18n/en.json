@@ -9,7 +9,8 @@
     "bookmarks": "Bookmarks",
     "account": "Account",
     "more": "More",
-    "feed": "Feed"
+    "feed": "Feed",
+    "saved": "Saved"
   },
   "authentication": {
     "sign_in": "Sign In",
@@ -148,6 +149,10 @@
   "snackbar": {
     "success": "Success",
     "error": "Error"
+  },
+  "post_item": {
+    "reviewed": "Reviewed",
+    "report": "Report review"
   },
   "comment": {
     "comments": "Comments",

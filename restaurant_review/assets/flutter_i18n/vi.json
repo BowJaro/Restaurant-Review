@@ -9,7 +9,8 @@
     "bookmarks": "Đã lưu",
     "account": "Tài khoản",
     "more": "Mở rộng",
-    "feed": "Bản tin"
+    "feed": "Bản tin",
+    "saved": "Đã lưu"
   },
   "authentication": {
     "sign_in": "Đăng nhập",
@@ -146,6 +147,10 @@
   "snackbar": {
     "success": "Thành công",
     "error": "Lỗi"
+  },
+  "post_item": {
+    "reviewed": "Đã đánh giá",
+    "report": "Báo cáo đánh giá"
   },
   "comment": {
     "comments": "Bình luận",

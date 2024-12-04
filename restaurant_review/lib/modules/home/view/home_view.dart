@@ -3,7 +3,10 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/modules/account/view/account_view.dart';
+import 'package:restaurant_review/modules/explore/view/explore_view.dart';
+import 'package:restaurant_review/modules/feed/view/feed_view.dart';
 import 'package:restaurant_review/modules/language/widget/language_radio_button.dart';
+import 'package:restaurant_review/modules/saved/view/saved_view.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
 import '../controller/home_controller.dart';
@@ -80,16 +83,22 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
     ),
-    const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Notification'),
-          LanguageRadioButton(),
-        ],
-      ),
-    ),
-    const AccountView()
+    // const Center(
+    //   child: Column(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       Text('Notification'),
+    //       LanguageRadioButton(),
+    //     ],
+    //   ),
+    // ),
+    // const FeedView(),
+    // const ExploreView(),
+    // const SavedView(),
+    const FeedView(),
+    // const ExploreView(),
+    // const SavedView(),
+    const AccountView(),
   ];
 
   @override
@@ -102,11 +111,14 @@ class HomeView extends GetView<HomeController> {
           onTap: controller.changeIndex,
           items: [
             BottomNavigationBarItem(
-                icon: const Icon(Icons.explore),
-                label: FlutterI18n.translate(context, "home.explore")),
+                icon: const Icon(Icons.home_filled),
+                label: FlutterI18n.translate(context, "home.feed")),
             BottomNavigationBarItem(
-                icon: const Icon(Icons.notifications),
-                label: FlutterI18n.translate(context, "home.notifications")),
+                icon: const Icon(Icons.search),
+                label: FlutterI18n.translate(context, "home.explore")),
+            // BottomNavigationBarItem(
+            //     icon: const Icon(Icons.bookmark),
+            //     label: FlutterI18n.translate(context, "home.saved")),
             BottomNavigationBarItem(
                 icon: const Icon(Icons.account_circle),
                 label: FlutterI18n.translate(context, "home.account")),

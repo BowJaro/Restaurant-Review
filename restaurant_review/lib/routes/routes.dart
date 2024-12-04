@@ -39,6 +39,8 @@ abstract class Routes {
   static const String brandDetail = '/brand_detail';
   static const String restaurantDetail = '/restaurant_detail';
   static const String account = '/account';
+  static const String saved = '/saved';
+  static const String explore = '/explore';
   static const String comment = '/comment';
   static const String brandPage = '/brand_page';
   static const String restaurantPage = '/restaurant_page';

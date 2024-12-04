@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../model/account_update_model.dart';
 import '../provider/account_provider.dart';
 
@@ -24,5 +26,13 @@ class AccountRepository {
 
   Future<dynamic> updatePassword(String newPassword) async {
     return await provider.updatePassword(newPassword);
+  }
+
+  Future<dynamic> subscribeAcccountData(VoidCallback getData) async {
+    return await provider.subscribeAcccountData(getData);
+  }
+
+  Future<void> unsubscribeAcccountData(channel) async {
+    await provider.unsubscribeAcccountData(channel);
   }
 }

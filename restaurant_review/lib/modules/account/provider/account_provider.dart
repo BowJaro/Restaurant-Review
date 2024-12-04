@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:restaurant_review/modules/account/model/account_update_model.dart';
 import 'package:restaurant_review/services/image_service.dart';
@@ -25,10 +26,30 @@ class AccountProvider {
     }
   }
 
+  Future<dynamic> subscribeAcccountData(VoidCallback getData) async {
+    final channel = supabase
+        .channel('public:profiles')
+        .onPostgresChanges(
+          event: PostgresChangeEvent.all,
+          schema: 'public',
+          table: 'profiles',
+          callback: (payload) {
+            print('Change received: ${payload.toString()}');
+            // Call the passed function with the appropriate parameter
+            getData(); // Assuming `id` is in `newRecord`
+          },
+        )
+        .subscribe();
+
+    return channel;
+  }
+
+  Future<void> unsubscribeAcccountData(channel) async {
+    await supabase.removeChannel(channel);
+  }
+
   Future<bool> updateAccount(AccountUpdateModel accountUpdateModel) async {
     String updatedAvatarUrl = "";
-
-    print('accountUpdateModel ${accountUpdateModel.toMap()}');
 
     // Check if avatar is a file or a URL
     if (accountUpdateModel.imageUrl is XFile) {
@@ -45,7 +66,7 @@ class AccountProvider {
     }
 
     print('accountUpdateModel ${accountUpdateModel.toMap()}');
-
+    print('updatedAvatarUrl ${updatedAvatarUrl}');
     try {
       // Call the update_account function in Supabase
       await supabase.rpc('update_account', params: {
