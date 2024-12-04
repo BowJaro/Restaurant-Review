@@ -185,5 +185,11 @@
     "reason": "Reason",
     "description": "Description",
     "send": "Send"
+  },
+  "feedback": {
+    "feedback": "Feedback",
+    "reason": "Reason",
+    "description": "Description",
+    "send": "Send"
   }
 }

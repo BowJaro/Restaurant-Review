@@ -183,5 +183,11 @@
     "reason": "Lí do",
     "description": "Mô tả nội dung",
     "send": "Gửi"
+  },
+  "feedback": {
+    "feedback": "Phản hồi",
+    "reason": "Nguyên nhân",
+    "description": "Mô tả chi tiết",
+    "send": "Gửi"
   }
 }
