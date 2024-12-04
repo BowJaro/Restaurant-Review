@@ -13,6 +13,8 @@ import 'package:restaurant_review/modules/my_post/binding/my_post_binding.dart';
 import 'package:restaurant_review/modules/my_post/view/my_post_view.dart';
 import 'package:restaurant_review/modules/post_detail/binding/post_detail_binding.dart';
 import 'package:restaurant_review/modules/post_detail/view/post_detail_view.dart';
+import 'package:restaurant_review/modules/report/binding/report_binding.dart';
+import 'package:restaurant_review/modules/report/view/report_view.dart';
 import 'package:restaurant_review/modules/restaurant_detail/binding/restaurant_detail_binding.dart';
 import 'package:restaurant_review/modules/restaurant_detail/view/restaurant_detail_view.dart';
 import 'package:restaurant_review/modules/sign_in/binding/sign_in_binding.dart';
@@ -42,6 +44,7 @@ abstract class Routes {
   static const String postPage = '/post_page';
   static const String following = '/following_page';
   static const String myPost = '/my_post_page';
+  static const String report = '/report_page';
 }
 
 class AppPages {
@@ -106,6 +109,11 @@ class AppPages {
       name: Routes.myPost,
       page: () => const MyPostView(),
       binding: MyPostBinding(),
+    ),
+    GetPage(
+      name: Routes.report,
+      page: () => const ReportView(),
+      binding: ReportBinding(),
     ),
   ];
 }

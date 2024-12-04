@@ -67,6 +67,7 @@ class CommentTree extends StatelessWidget {
                       value: "report",
                       child: Text(
                           FlutterI18n.translate(context, "comment.report")),
+                      onTap: () => controller.reportComment(comment.id),
                     ),
                   );
                 }
@@ -116,6 +117,7 @@ class CommentTree extends StatelessWidget {
                           value: "report",
                           child: Text(
                               FlutterI18n.translate(context, "comment.report")),
+                          onTap: () => controller.reportComment(reply.id),
                         ),
                       );
                     }

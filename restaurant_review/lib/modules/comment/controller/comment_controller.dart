@@ -200,8 +200,8 @@ class CommentController extends GetxController {
   }
 
   void reportComment(int commentId) {
-    // Navigate to the reporting module (future implementation)
-    print("Reporting comment with ID: $commentId");
-    // TODO: Pass data to the report module
+    print("This is report comment function with commentId: $commentId");
+    Get.toNamed(Routes.report,
+        arguments: {"type": "comment", "source": commentId.toString()});
   }
 }

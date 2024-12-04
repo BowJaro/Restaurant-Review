@@ -177,5 +177,11 @@
   },
   "my_post": {
     "my_post": "Bài viết của tôi"
+  },
+  "report": {
+    "report": "Tố cáo",
+    "reason": "Lí do",
+    "description": "Mô tả nội dung",
+    "send": "Gửi"
   }
 }

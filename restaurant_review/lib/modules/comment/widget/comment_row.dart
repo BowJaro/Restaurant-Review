@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 
@@ -35,6 +36,7 @@ class CommentRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String fullAvatarUrl = baseImageUrl + avatarUrl;
+
     return Padding(
       padding: EdgeInsets.only(left: paddingLeft, bottom: 8.0),
       child: Row(
@@ -54,44 +56,49 @@ class CommentRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Comment content
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: AppColors.backgroundGray,
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Full name
-                            Text(
-                              fullName,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            // Comment content
-                            const SizedBox(height: 4),
-                            Text(content),
-                          ],
-                        ),
+                GestureDetector(
+                  onLongPressStart: (details) async {
+                    final value = await showMenu<String>(
+                      context: context,
+                      position: RelativeRect.fromLTRB(
+                        details.globalPosition.dx,
+                        details.globalPosition.dy,
+                        Get.size.width - details.globalPosition.dx,
+                        Get.size.height - details.globalPosition.dy,
                       ),
-                    ),
-                    // PopupMenuButton
-                    PopupMenuButton<String>(
-                      onSelected: (value) => menuOptions()
+                      items: menuOptions(),
+                    );
+                    if (value != null) {
+                      menuOptions()
                           .whereType<PopupMenuItem<String>>()
                           .firstWhere((item) => item.value == value)
-                          .value!,
-                      itemBuilder: (context) => menuOptions(),
+                          .onTap
+                          ?.call();
+                    }
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: AppColors.backgroundGray,
+                      borderRadius: BorderRadius.circular(16.0),
                     ),
-                  ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Full name
+                        Text(
+                          fullName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        // Comment content
+                        const SizedBox(height: 4),
+                        Text(content),
+                      ],
+                    ),
+                  ),
                 ),
                 // Footer row
                 const SizedBox(height: 8),
