@@ -203,11 +203,11 @@ class AccountView extends GetView<AccountController> {
                             context, "account_page.about_us")),
                     _buildButton(context, Icons.info,
                         FlutterI18n.translate(context, "account_page.policy")),
-                    _buildButton(
-                        context,
-                        Icons.policy,
-                        FlutterI18n.translate(
-                            context, "account_page.feedback")),
+                    _buildButton(context, Icons.policy,
+                        FlutterI18n.translate(context, "account_page.feedback"),
+                        onTap: () {
+                      Get.toNamed(Routes.feedback);
+                    }),
                     _buildButton(
                         context,
                         Icons.feedback,

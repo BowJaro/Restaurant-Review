@@ -215,3 +215,19 @@ CREATE TABLE following (
     source TEXT DEFAULT '',
     type VARCHAR(255) NOT NULL
 );
+
+
+CREATE TABLE report (
+    id SERIAL PRIMARY KEY,
+    source TEXT NOT NULL,
+    type TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT
+);
+
+
+CREATE TABLE feedback (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT
+);

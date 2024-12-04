@@ -359,3 +359,28 @@ $$ LANGUAGE plpgsql;
 
 
 
+CREATE OR REPLACE FUNCTION insert_report(
+    p_source TEXT,
+    p_type TEXT,
+    p_title TEXT,
+    p_description TEXT
+)
+RETURNS VOID AS $$
+BEGIN
+    INSERT INTO report (source, type, title, description)
+    VALUES (p_source, p_type, p_title, p_description);
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+CREATE OR REPLACE FUNCTION insert_feedback(
+    p_title TEXT,
+    p_description TEXT
+)
+RETURNS VOID AS $$
+BEGIN
+    INSERT INTO feedback (title, description)
+    VALUES (p_title, p_description);
+END;
+$$ LANGUAGE plpgsql;
