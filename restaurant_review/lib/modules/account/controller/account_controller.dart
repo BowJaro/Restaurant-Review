@@ -9,7 +9,6 @@ import 'package:restaurant_review/utils/validators.dart';
 import '../../../constants/singleton_variables.dart';
 import '../../../global_widgets/image_widgets/avatar_selector.dart';
 import '../../../global_widgets/modals/modals.dart';
-import '../../../services/supabase.dart';
 import '../repository/account_repository.dart';
 
 class AccountController extends GetxController {

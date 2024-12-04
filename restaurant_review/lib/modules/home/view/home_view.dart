@@ -3,10 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/modules/account/view/account_view.dart';
-import 'package:restaurant_review/modules/explore/view/explore_view.dart';
 import 'package:restaurant_review/modules/feed/view/feed_view.dart';
-import 'package:restaurant_review/modules/language/widget/language_radio_button.dart';
-import 'package:restaurant_review/modules/saved/view/saved_view.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
 import '../controller/home_controller.dart';

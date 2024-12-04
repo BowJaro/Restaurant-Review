@@ -1,9 +1,11 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_classes/rate.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
 import 'package:restaurant_review/modules/feed/model/post_detail_model.dart';
+import 'package:restaurant_review/routes/routes.dart';
 import '../repository/feed_repository.dart';
 
 class FeedController extends GetxController {
@@ -50,7 +52,10 @@ class FeedController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    fetchPostList();
+    if (userId == null) {
+      Get.offAllNamed(Routes.splash);
+    }
+    await fetchFollowingPostList();
   }
 
   @override
@@ -58,16 +63,14 @@ class FeedController extends GetxController {
     super.onClose();
   }
 
-  Future<void> fetchPostList() async {
+  Future<void> fetchFollowingPostList() async {
     isLoadingAccountPage.value = true;
-    final response = await repository.fetchPostDetail(1);
+    final response = await repository.getListFollowingPost(userId!, 5);
     if (response != null) {
       print('response: ${response}');
-      postList.add(PostDetail.fromMap(response as Map<String, dynamic>));
-
-      // (response as List<dynamic>)
-      //     .map((item) => {PostDetail.fromMap(item as Map<String, dynamic>)})
-      //     .toList();
+      postList.addAll((response as List<dynamic>)
+          .map((item) => PostDetail.fromMap(item as Map<String, dynamic>))
+          .toList());
     } else {
       Get.back();
       ModalUtils.showMessageModal(
