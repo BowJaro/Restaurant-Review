@@ -5,7 +5,7 @@ class FeedRepository {
 
   FeedRepository(this.provider);
 
-  Future<dynamic> fetchPostDetail(int id) async {
-    return await provider.fetchPostDetail(id);
+  Future<dynamic> getListFollowingPost(String userId, int limit) async {
+    return await provider.getListFollowingPost(userId, limit);
   }
 }

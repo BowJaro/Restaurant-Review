@@ -49,7 +49,7 @@ class FeedView extends GetView<FeedController> {
               username: post.username ?? "Unknown User",
               restaurantAvatar: post.restaurantImage ?? "",
               restaurantName: post.restaurantName ?? "Unknown Restaurant",
-              date: post.createdAt.toString(),
+              date: post.createdAt,
               title: post.title,
               topic: post.topic,
               content: post.metadataText,

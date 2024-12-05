@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/constants/font_sizes.dart';
 import 'package:restaurant_review/global_classes/rate.dart';
@@ -47,11 +45,6 @@ class PostItem extends StatelessWidget {
     required this.content,
     required this.hashtags,
     required this.rateList,
-    // required this.tasteRating,
-    // required this.serviceRating,
-    // required this.priceRating,
-    // required this.ambianceRating,
-    // required this.cleanlinessRating,
     required this.mediaUrls,
     required this.reactCount,
     required this.commentCount,
@@ -115,7 +108,8 @@ class PostItem extends StatelessWidget {
                     ),
                     PopupMenuButton(
                       color: Colors.white,
-                      icon: Icon(Icons.more_vert, color: AppColors.textGray1),
+                      icon: const Icon(Icons.more_vert,
+                          color: AppColors.textGray1),
                       onSelected: (value) {
                         if (value ==
                             FlutterI18n.translate(
@@ -164,22 +158,6 @@ class PostItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8), // Space between title and symbol
-                    const Text(
-                      '-', // Adding the hyphen symbol between title and topic
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(
-                        width: 8), // Space between the symbol and topic
-                    Expanded(
-                      child: Text(
-                        topic,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -210,14 +188,7 @@ class PostItem extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // _buildRatingRow('Taste', tasteRating),
-                // _buildRatingRow('Service', serviceRating),
-                // _buildRatingRow('Price', priceRating),
-                // _buildRatingRow('Ambiance', ambianceRating),
-                // _buildRatingRow('Cleanliness', cleanlinessRating),
-                getRatingSection()
-              ],
+              children: [getRatingSection()],
             ),
           ),
 
@@ -225,21 +196,6 @@ class PostItem extends StatelessWidget {
           if (mediaUrls.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 8),
-              // child: ListView.builder(
-              //   scrollDirection: Axis.horizontal,
-              //   itemCount: mediaUrls.length,
-              //   shrinkWrap: true,
-              //   itemBuilder: (context, index) {
-              //     return Padding(
-              //       padding: const EdgeInsets.symmetric(horizontal: 8),
-              //       child: Image.network(
-              //         mediaUrls[index],
-              //         fit: BoxFit.cover,
-              //         width: 200,
-              //       ),
-              //     );
-              //   },
-              // ),
               child: ImageGallery(urls: mediaUrls),
             ),
 
@@ -260,10 +216,10 @@ class PostItem extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: onReact,
-                          child: Text('$reactCount'),
                           style: TextButton.styleFrom(
                             foregroundColor: AppColors.textGray1, // Text color
                           ),
+                          child: Text('$reactCount'),
                         ),
                       ],
                     ),
@@ -277,10 +233,10 @@ class PostItem extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: onComment,
-                          child: Text('$commentCount'),
                           style: TextButton.styleFrom(
                             foregroundColor: AppColors.textGray1, // Text color
                           ),
+                          child: Text('$commentCount'),
                         ),
                       ],
                     ),
@@ -299,25 +255,6 @@ class PostItem extends StatelessWidget {
           const Divider(
             height: 1,
             color: AppColors.dividerGray,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRatingRow(String label, double rating) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            '$label:',
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-          ),
-          Text(
-            rating.toStringAsFixed(1),
-            style: const TextStyle(fontSize: 14),
           ),
         ],
       ),
@@ -354,10 +291,6 @@ class PostItem extends StatelessWidget {
           child: Obx(() {
             return StarRating(
               value: rate.value.value,
-              onPressed: (value) {
-                rate.value.value = value * 1.0;
-              },
-              isReadOnly: isReadOnly,
               size: size,
             );
           }),

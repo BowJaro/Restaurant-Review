@@ -5,16 +5,18 @@ class FeedProvider {
 
   FeedProvider(this.supabase);
 
-  Future<dynamic> fetchPostDetail(int id) async {
+  Future<dynamic> getListFollowingPost(String userId, int limit) async {
     try {
-      final response =
-          await supabase.rpc("get_post_detail", params: {"post_id": id});
+      final response = await supabase.rpc("get_all_following_post_details",
+          params: {"p_user_id": userId, "p_quality_post_per_user": limit});
       return response;
     } on PostgrestException catch (error) {
-      print('=========Error fetching post: ${error.message}=========');
+      print(
+          '=========Error fetching following post details: ${error.message}=========');
       return null;
     } catch (error) {
-      print('=========Unknown error fetching post: $error=========');
+      print(
+          '=========Unknown error fetching following post details: $error=========');
       return null;
     }
   }

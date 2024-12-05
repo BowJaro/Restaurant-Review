@@ -5,7 +5,7 @@ class PostDetail {
   final String? avatarUrl;
   final String? restaurantName;
   final String? restaurantImage;
-  final DateTime createdAt;
+  final String createdAt;
   final String title;
   final String topic;
   final String metadataText;
@@ -35,9 +35,7 @@ class PostDetail {
       avatarUrl: map['avatar_url'],
       restaurantName: map['restaurant_name'],
       restaurantImage: map['restaurant_image'],
-      createdAt: map['created_at'] != null
-          ? DateTime.parse(map['created_at'])
-          : DateTime.now(),
+      createdAt: map['created_at'],
       title: map['title'],
       topic: map['topic'],
       metadataText: map['metadata_text'],
