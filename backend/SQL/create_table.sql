@@ -231,3 +231,16 @@ CREATE TABLE feedback (
     title TEXT NOT NULL,
     description TEXT
 );
+
+
+CREATE TABLE permission_request (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    address_id INT REFERENCES address(id) ON DELETE SET NULL,
+    profile_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
+    image_list INT[] DEFAULT '{}',
+    permission TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT now(),
+    status TEXT DEFAULT 'pending'
+);

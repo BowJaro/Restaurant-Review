@@ -196,5 +196,28 @@
     "reason": "Reason",
     "description": "Description",
     "send": "Send"
+  },
+  "permission_request": {
+    "id": "ID",
+    "permission_request": "Permission request",
+    "add_permission_request": "Request permission",
+    "address": "Address",
+    "street": "Street",
+    "name": "Full Name",
+    "phone": "Phone Number",
+    "proofs": "Proofs of identity",
+    "status": "Status",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "send": "Send",
+    "permission": "Permission",
+    "restaurant_permission": "Restaurant permission",
+    "user_permission": "User permission",
+    "reviewer_permission": "Reviewer permission",
+    "created_at": "Created at",
+    "current_permission_is": "Current permission is",
+    "your_permission_is_highest_level": "Your permission is the highest level!",
+    "permission_request_detail": "Permission request detail"
   }
 }
