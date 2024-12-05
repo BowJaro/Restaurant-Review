@@ -189,5 +189,28 @@
     "reason": "Nguyên nhân",
     "description": "Mô tả chi tiết",
     "send": "Gửi"
+  },
+  "permission_request": {
+    "id": "ID",
+    "permission_request": "Yêu cầu quyền",
+    "add_permission_request": "Tạo yêu cầu cấp quyền",
+    "address": "Địa chỉ",
+    "street": "Đường",
+    "name": "Họ và tên",
+    "phone": "Số điện thoại",
+    "proofs": "Các giấy tờ chứng minh thông tin",
+    "pending": "Đang xử lí",
+    "status": "Trạng thái",
+    "approved": "Đã chấp thuận",
+    "rejected": "Bị từ chối",
+    "send": "Gửi",
+    "permission": "Quyền",
+    "restaurant_permission": "Quyền nhà hàng",
+    "user_permission": "Quyền người dùng",
+    "reviewer_permission": "Quyền reviewer",
+    "created_at": "Tạo lúc",
+    "current_permission_is": "Quyền hiện tại là",
+    "your_permission_is_highest_level": "Quyền hiện tại của bạn đã là cao nhất!",
+    "permission_request_detail": "Chi tiết yêu cầu cấp quyền"
   }
 }
