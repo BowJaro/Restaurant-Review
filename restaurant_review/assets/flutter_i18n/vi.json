@@ -194,5 +194,9 @@
     "reason": "Nguyên nhân",
     "description": "Mô tả chi tiết",
     "send": "Gửi"
+  },
+  "feed": {
+    "global": "Tất cả",
+    "following": "Theo dõi"
   }
 }

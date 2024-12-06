@@ -196,5 +196,9 @@
     "reason": "Reason",
     "description": "Description",
     "send": "Send"
+  },
+  "feed": {
+    "global": "Global",
+    "following": "Following"
   }
 }
