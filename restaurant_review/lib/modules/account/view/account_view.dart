@@ -182,7 +182,7 @@ class AccountView extends GetView<AccountController> {
                         FlutterI18n.translate(
                             context, "account_page.upgrade_to_reviewer"),
                         onTap: () {
-                      // Get.to(() => const ChangeProfileView());
+                      Get.toNamed(Routes.permissionRequest);
                     }),
                     _buildButton(context, Icons.article,
                         FlutterI18n.translate(context, "account_page.my_post"),

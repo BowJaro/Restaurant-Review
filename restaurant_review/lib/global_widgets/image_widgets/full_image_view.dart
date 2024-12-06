@@ -26,8 +26,6 @@ class FullImageView extends StatelessWidget {
         child: Hero(
           tag: 'imageHero_${url.hashCode}',
           child: CachedNetworkImage(
-            memCacheHeight: 600,
-            memCacheWidth: 600,
             imageUrl: fullUrl,
             fit: BoxFit.contain,
             placeholder: (context, fullUrl) =>

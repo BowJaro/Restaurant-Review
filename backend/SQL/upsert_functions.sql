@@ -384,3 +384,40 @@ BEGIN
     VALUES (p_title, p_description);
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION insert_permission_request(
+    p_name TEXT,
+    p_province TEXT,
+    p_district TEXT,
+    p_ward TEXT,
+    p_street TEXT,
+    p_phone TEXT,
+    p_permission TEXT,
+    p_image_list TEXT[],
+    p_profile_id UUID
+)
+RETURNS VOID AS $$
+DECLARE
+    v_address_id INT;
+    v_image_ids INT[] := '{}';
+    v_image_id INT;
+    v_url TEXT;
+BEGIN
+    -- Insert address first
+    INSERT INTO address (province, district, ward, street)
+    VALUES (p_province, p_district, p_ward, p_street)
+    RETURNING id INTO v_address_id;
+
+    -- Insert images and collect their IDs
+    FOREACH v_url IN ARRAY p_image_list
+    LOOP
+        INSERT INTO image (url) VALUES (v_url) RETURNING id INTO v_image_id;
+        v_image_ids := array_append(v_image_ids, v_image_id);
+    END LOOP;
+
+    -- Insert into permission_request
+    INSERT INTO permission_request (name, phone, address_id, profile_id, image_list, permission)
+    VALUES (p_name, p_phone, v_address_id, p_profile_id, v_image_ids, p_permission);
+END;
+$$ LANGUAGE plpgsql;
