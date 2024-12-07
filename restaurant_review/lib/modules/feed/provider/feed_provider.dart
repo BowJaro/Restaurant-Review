@@ -20,4 +20,23 @@ class FeedProvider {
       return null;
     }
   }
+
+  Future<dynamic> getNewestPost(int limit, String userId) async {
+    try {
+      final response = await supabase.rpc("get_newest_post_details",
+          params: {"p_quantity": limit, "p_user_id": userId});
+
+      print('this is response: ${response}');
+
+      return response;
+    } on PostgrestException catch (error) {
+      print(
+          '=========Error fetching newest post details: ${error.message}=========');
+      return null;
+    } catch (error) {
+      print(
+          '=========Unknown error fetching newest post details: $error=========');
+      return null;
+    }
+  }
 }
