@@ -195,6 +195,10 @@
     "description": "Mô tả chi tiết",
     "send": "Gửi"
   },
+  "feed": {
+    "global": "Tất cả",
+    "following": "Theo dõi"
+  },
   "permission_request": {
     "id": "ID",
     "permission_request": "Yêu cầu quyền",

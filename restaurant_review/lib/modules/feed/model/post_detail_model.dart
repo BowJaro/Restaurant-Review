@@ -13,6 +13,11 @@ class PostDetail {
   final List<String>? hashtags;
   final double? rateAverage;
   final List<RateModel>? rateList;
+  final bool isSaved;
+  final bool? isLike;
+  final int likeCount;
+  final int dislikeCount;
+  final int commentCount;
 
   PostDetail({
     required this.username,
@@ -27,6 +32,11 @@ class PostDetail {
     required this.hashtags,
     required this.rateAverage,
     required this.rateList,
+    required this.isSaved,
+    required this.isLike,
+    required this.likeCount,
+    required this.dislikeCount,
+    required this.commentCount,
   });
 
   factory PostDetail.fromMap(Map<String, dynamic> map) {
@@ -41,9 +51,14 @@ class PostDetail {
       metadataText: map['metadata_text'],
       metadataImageList: List<String>.from(map['metadata_image_list']),
       hashtags: List<String>.from(map['hashtags']),
-      rateAverage: map['rate_average'] as double,
+      rateAverage: map['rate_average'],
       rateList: List<RateModel>.from(map['rate_list']
           .map((x) => RateModel.fromMap(x as Map<String, dynamic>))),
+      isSaved: map['is_saved'],
+      isLike: map['is_like'],
+      likeCount: map['like_count'],
+      dislikeCount: map['dislike_count'],
+      commentCount: map['comment_count'],
     );
   }
 }

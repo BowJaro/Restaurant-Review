@@ -197,6 +197,10 @@
     "description": "Description",
     "send": "Send"
   },
+  "feed": {
+    "global": "Global",
+    "following": "Following"
+  },
   "permission_request": {
     "id": "ID",
     "permission_request": "Permission request",
