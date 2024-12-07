@@ -5,6 +5,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/constants/font_sizes.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_classes/rate.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/image_gallery.dart';
 import 'package:restaurant_review/global_widgets/ratings/star_rate.dart';
@@ -72,7 +73,7 @@ class PostItem extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 20,
-                      backgroundImage: NetworkImage(userAvatar),
+                      backgroundImage: NetworkImage(baseImageUrl + userAvatar),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -93,13 +94,16 @@ class PostItem extends StatelessWidget {
                               const SizedBox(width: 4),
                               CircleAvatar(
                                 radius: 10,
-                                backgroundImage: NetworkImage(restaurantAvatar),
+                                backgroundImage: NetworkImage(
+                                    baseImageUrl + restaurantAvatar),
                               ),
                               const SizedBox(width: 4),
-                              Text(
-                                restaurantName,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                              Expanded(
+                                child: Text(
+                                  restaurantName,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),

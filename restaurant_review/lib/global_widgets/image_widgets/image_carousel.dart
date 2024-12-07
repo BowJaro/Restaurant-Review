@@ -37,7 +37,8 @@ class ImageCarousel extends StatelessWidget {
                 Get.to(() => FullImageView(url: imageUrls[index]));
               },
               child: Hero(
-                tag: 'imageHero_$index',
+                tag:
+                    'imageHero_${DateTime.now().millisecondsSinceEpoch}_$index',
                 child: Image.network(
                   baseImageUrl + imageUrls[index],
                   width: double.infinity,
