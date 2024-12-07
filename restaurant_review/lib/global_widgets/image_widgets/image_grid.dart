@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:restaurant_review/constants/colors.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/full_image_view.dart';
 
 class FullImageGrid extends StatelessWidget {
@@ -31,13 +32,13 @@ class FullImageGrid extends StatelessWidget {
         ),
         itemCount: urls.length,
         itemBuilder: (context, index) {
-          final String fullUrl = urls[index];
+          final String fullUrl = baseImageUrl + urls[index];
           return GestureDetector(
             onTap: () {
-              Get.to(() => FullImageView(url: fullUrl));
+              Get.to(() => FullImageView(url: urls[index]));
             },
             child: Hero(
-              tag: 'imageHero_$index',
+              tag: 'imageHero_${DateTime.now().millisecondsSinceEpoch}_$index',
               child: CachedNetworkImage(
                 imageUrl: fullUrl,
                 fit: BoxFit.cover,

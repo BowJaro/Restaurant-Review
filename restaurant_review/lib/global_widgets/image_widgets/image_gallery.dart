@@ -63,7 +63,8 @@ class ImageGallery extends StatelessWidget {
                             Get.to(() => FullImageView(url: urls[index]));
                           },
                           child: Hero(
-                            tag: 'imageHero_$index',
+                            tag:
+                                'imageHero_${DateTime.now().millisecondsSinceEpoch}_$index',
                             child: CachedNetworkImage(
                               memCacheHeight: imageSize.toInt(),
                               memCacheWidth: imageSize.toInt(),

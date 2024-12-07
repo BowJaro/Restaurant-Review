@@ -12,6 +12,7 @@ class FullImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String fullUrl = baseImageUrl + url;
+    print("this is full image url $fullUrl");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.black,
@@ -24,7 +25,7 @@ class FullImageView extends StatelessWidget {
       backgroundColor: AppColors.black,
       body: Center(
         child: Hero(
-          tag: 'imageHero_${url.hashCode}',
+          tag: 'imageHero_${DateTime.now().millisecondsSinceEpoch}_$url',
           child: CachedNetworkImage(
             imageUrl: fullUrl,
             fit: BoxFit.contain,
