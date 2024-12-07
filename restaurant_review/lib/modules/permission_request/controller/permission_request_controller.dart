@@ -52,6 +52,16 @@ class PermissionRequestController extends GetxController {
     }
   }
 
+  @override
+  void dispose() {
+    nameController.dispose();
+    phoneController.dispose();
+    streetController.dispose();
+    addressSelectorController.dispose();
+    imageSelectorController.dispose();
+    super.dispose();
+  }
+
   Future<void> getData() async {
     final futures = <Future<dynamic>>[
       repository.fetchPermissionRequests(userId!),
