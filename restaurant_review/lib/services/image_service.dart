@@ -55,4 +55,39 @@ class ImageService extends GetxService {
       return ""; // Handle any other types of exceptions
     }
   }
+
+  Future<List<String>> uploadImages(
+      List<dynamic> imageList, String folderName) async {
+    List<String> imageUrls = [];
+    List<Future<String?>> uploadFutures = [];
+
+    // Separate images that need to be uploaded from URLs
+    for (var image in imageList) {
+      if (image is XFile) {
+        uploadFutures.add(
+          uploadImage(
+            image,
+            'images',
+            '$folderName/${image.name}',
+          ),
+        );
+      } else if (image is String) {
+        // Directly add existing URL to the list
+        imageUrls.add(image);
+      } else {
+        print('=========Invalid image parameter=========');
+      }
+    }
+
+    // Perform parallel uploads and collect the results
+    List<String?> uploadedUrls = await Future.wait(uploadFutures);
+
+    // Filter out any null or empty results and add to imageUrls
+    for (var url in uploadedUrls) {
+      if (url != null && url.isNotEmpty) {
+        imageUrls.add(url);
+      }
+    }
+    return imageUrls;
+  }
 }
