@@ -18,18 +18,19 @@ class BrandDetailController extends GetxController {
   var description =
       "[{\"insert\":\"${FlutterI18n.translate(Get.context!, "brand_detail.description")}\\n\"}]"
           .obs;
-  final AvatarSelectorController avatarSelectorController =
-      Get.put(AvatarSelectorController());
+  late AvatarSelectorController avatarSelectorController;
 
   BrandDetailController(this.repository);
 
   @override
   void onInit() async {
     super.onInit();
+    Get.create(() => AvatarSelectorController());
+    avatarSelectorController = Get.find<AvatarSelectorController>();
+
     final arguments = Get.arguments;
     isNew = arguments['isNew'] ?? true;
     id = arguments['id'];
-
     if (!isNew && id != null) {
       await fetchBrand();
     }
