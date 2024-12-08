@@ -57,7 +57,9 @@ class PostDetail {
       metadataText: map['metadata_text'],
       metadataImageList: List<String>.from(map['metadata_image_list']),
       hashtags: List<String>.from(map['hashtags']),
-      rateAverage: map['rate_average'],
+      rateAverage: map['rate_average'] != null
+          ? double.parse(map['rate_average'].toString())
+          : 0.0,
       rateList: List<RateModel>.from((map['rate_list'] ?? [])
           .map((x) => RateModel.fromMap(x as Map<String, dynamic>))),
       isSaved: (map['is_saved'] as bool).obs,

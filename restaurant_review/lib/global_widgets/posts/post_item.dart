@@ -130,10 +130,12 @@ class PostItem extends StatelessWidget {
                                     : null,
                               ),
                               const SizedBox(width: 4),
-                              Text(
-                                restaurantName,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                              Expanded(
+                                child: Text(
+                                  restaurantName,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
