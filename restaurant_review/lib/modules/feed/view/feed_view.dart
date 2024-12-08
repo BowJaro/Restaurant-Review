@@ -143,6 +143,7 @@ class FeedView extends GetView<FeedController> {
                 itemBuilder: (context, index) {
                   final post = controller.globalPostList[index];
                   return PostItem(
+                    id: post.id,
                     userAvatar: post.avatarUrl ?? "",
                     username: post.username ?? "Unknown User",
                     restaurantAvatar: post.restaurantImage ?? "",
@@ -155,15 +156,22 @@ class FeedView extends GetView<FeedController> {
                     rateList: post.rateList ?? [],
                     mediaUrls: post.metadataImageList ?? [],
                     isLike: post.isLike,
+                    isDislike: post.isDislike,
                     isSaved: post.isSaved,
                     dislikeCount: post.dislikeCount,
                     likeCount:
                         post.likeCount, // Replace with actual react count
                     commentCount:
                         post.commentCount, // Replace with actual comment count
-                    onReact: () => print("React clicked on ${post.title}"),
+                    updateIsSavedInDatabase: (postId, isSaved) {
+                      controller.updateSavedPostInDatabase(postId, isSaved);
+                    },
                     onComment: () => print("Comment clicked on ${post.title}"),
-                    onSave: () => print("Save clicked on ${post.title}"),
+                    updateIsLikeInDatabase:
+                        (int postId, bool isLike, bool isDislike) {
+                      controller.updateReactionPostInDatabase(
+                          postId, isLike, isDislike);
+                    },
                   );
                 },
               ),
@@ -173,6 +181,7 @@ class FeedView extends GetView<FeedController> {
                 itemBuilder: (context, index) {
                   final post = controller.followingPostList[index];
                   return PostItem(
+                    id: post.id,
                     userAvatar: post.avatarUrl ?? "",
                     username: post.username ?? "Unknown User",
                     restaurantAvatar: post.restaurantImage ?? "",
@@ -185,15 +194,22 @@ class FeedView extends GetView<FeedController> {
                     rateList: post.rateList ?? [],
                     mediaUrls: post.metadataImageList ?? [],
                     isLike: post.isLike,
+                    isDislike: post.isDislike,
                     isSaved: post.isSaved,
                     dislikeCount: post.dislikeCount,
                     likeCount:
                         post.likeCount, // Replace with actual react count
                     commentCount:
                         post.commentCount, // Replace with actual comment count
-                    onReact: () => print("React clicked on ${post.title}"),
+                    updateIsSavedInDatabase: (postId, isSaved) {
+                      controller.updateSavedPostInDatabase(postId, isSaved);
+                    },
                     onComment: () => print("Comment clicked on ${post.title}"),
-                    onSave: () => print("Save clicked on ${post.title}"),
+                    updateIsLikeInDatabase:
+                        (int postId, bool isLike, bool isDislike) {
+                      controller.updateReactionPostInDatabase(
+                          postId, isLike, isDislike);
+                    },
                   );
                 },
               ),

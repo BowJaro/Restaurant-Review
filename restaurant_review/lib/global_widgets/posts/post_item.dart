@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -10,8 +11,31 @@ import 'package:restaurant_review/global_classes/rate.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/image_gallery.dart';
 import 'package:restaurant_review/global_widgets/ratings/star_rate.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
+import 'package:restaurant_review/routes/routes.dart';
+
+class PostItemController extends GetxController {
+  Timer? _reactionTimer;
+  Timer? _saveTimer;
+
+  @override
+  void onClose() {
+    _reactionTimer?.cancel();
+    _saveTimer?.cancel();
+    super.onClose();
+  }
+
+  void openReportPage(int postId) {
+    Get.toNamed(Routes.report,
+        arguments: {"type": "post", "source": postId.toString()});
+  }
+
+  void openCommentPage(int postId) {
+    Get.toNamed(Routes.comment, arguments: {"post_id": postId});
+  }
+}
 
 class PostItem extends StatelessWidget {
+  final int id;
   final String userAvatar;
   final String username;
   final String restaurantAvatar;
@@ -26,14 +50,18 @@ class PostItem extends StatelessWidget {
   final int likeCount;
   final int dislikeCount;
   final int commentCount;
-  final bool isSaved;
-  final bool? isLike;
-  final VoidCallback onReact;
+  final RxBool isSaved; // Accept RxBool
+  final RxBool isLike;
+  final RxBool isDislike;
   final VoidCallback onComment;
-  final VoidCallback onSave;
+  final void Function(int, bool) updateIsSavedInDatabase;
+  final void Function(int, bool, bool) updateIsLikeInDatabase;
 
-  const PostItem({
+  final PostItemController controller = Get.put(PostItemController());
+
+  PostItem({
     super.key,
+    required this.id,
     required this.userAvatar,
     required this.username,
     required this.restaurantAvatar,
@@ -50,9 +78,10 @@ class PostItem extends StatelessWidget {
     required this.commentCount,
     required this.isSaved,
     required this.isLike,
-    required this.onReact,
+    required this.isDislike,
     required this.onComment,
-    required this.onSave,
+    required this.updateIsLikeInDatabase,
+    required this.updateIsSavedInDatabase,
   });
 
   @override
@@ -95,8 +124,10 @@ class PostItem extends StatelessWidget {
                               const SizedBox(width: 4),
                               CircleAvatar(
                                 radius: 10,
-                                backgroundImage: NetworkImage(
-                                    baseImageUrl + restaurantAvatar),
+                                backgroundImage: restaurantAvatar.isNotEmpty
+                                    ? NetworkImage(
+                                        baseImageUrl + restaurantAvatar)
+                                    : null,
                               ),
                               const SizedBox(width: 4),
                               Text(
@@ -117,8 +148,7 @@ class PostItem extends StatelessWidget {
                         if (value ==
                             FlutterI18n.translate(
                                 context, "post_item.report")) {
-                          // Handle the report action
-                          print("Report button clicked");
+                          controller.openReportPage(id);
                         }
                       },
                       itemBuilder: (context) => [
@@ -210,77 +240,123 @@ class PostItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: onReact,
-                          icon: Icon(
-                            isLike == true
-                                ? Icons.thumb_up_alt
-                                : Icons
-                                    .thumb_up_off_alt, // Change icon based on state
-                          ),
-                          color: isLike == true
-                              ? Colors.blue // Highlighted color for 'like'
-                              : AppColors.textGray1, // Default color
-                        ),
-                        TextButton(
-                          onPressed: onReact,
+                    Obx(() => TextButton(
+                          onPressed: () {
+                            isLike.value = !isLike.value;
+                            if (isLike.value) {
+                              isDislike.value = false;
+                            }
+                            controller._reactionTimer
+                                ?.cancel(); // Cancel any existing timer
+                            controller._reactionTimer =
+                                Timer(const Duration(seconds: 3), () {
+                              updateIsLikeInDatabase(
+                                  id, isLike.value, isDislike.value);
+                            });
+                          },
                           style: TextButton.styleFrom(
-                            foregroundColor: AppColors.textGray1, // Text color
+                            splashFactory: NoSplash.splashFactory,
                           ),
-                          child: Text('$likeCount'),
-                        ),
-                      ],
-                    ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                isLike.value
+                                    ? Icons.thumb_up_alt
+                                    : Icons.thumb_up_off_alt,
+                                color: isLike.value
+                                    ? AppColors.primary
+                                    : AppColors.textGray1,
+                              ),
+                              const SizedBox(
+                                  width:
+                                      5), // Add some space between icon and text
+                              Text(
+                                '$likeCount',
+                                style: TextStyle(
+                                  color: isLike.value
+                                      ? AppColors.primary
+                                      : AppColors.textGray1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )),
                     const SizedBox(width: 16),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: onComment,
-                          icon: Icon(
-                            isLike == false
-                                ? Icons.thumb_down_alt
-                                : Icons
-                                    .thumb_down_off_alt, // Change icon based on state
+                    Obx(() => TextButton(
+                          onPressed: () {
+                            isDislike.value = !isDislike.value;
+                            if (isDislike.value) {
+                              isLike.value = false;
+                            }
+
+                            controller._reactionTimer
+                                ?.cancel(); // Cancel any existing timer
+                            controller._reactionTimer =
+                                Timer(const Duration(seconds: 3), () {
+                              updateIsLikeInDatabase(
+                                  id, isLike.value, isDislike.value);
+                            });
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                isDislike.value
+                                    ? Icons.thumb_down_alt
+                                    : Icons
+                                        .thumb_down_off_alt, // Change icon based on state
+                                color: isDislike.value
+                                    ? AppColors.primary
+                                    : AppColors.textGray1,
+                              ),
+                              const SizedBox(
+                                  width:
+                                      5), // Add some space between icon and text
+                              Text(
+                                '$dislikeCount',
+                                style: const TextStyle(
+                                  color: AppColors.textGray1,
+                                ),
+                              ),
+                            ],
                           ),
-                          color: isLike == false
-                              ? Colors.blue // Highlighted color for 'dislike'
-                              : AppColors.textGray1, // Default color
-                        ),
-                        TextButton(
-                          onPressed: onComment,
-                          style: TextButton.styleFrom(
-                            foregroundColor: AppColors.textGray1, // Text color
-                          ),
-                          child: Text('$dislikeCount'),
-                        ),
-                      ],
-                    ),
+                        )),
                     const SizedBox(width: 16),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: onComment,
-                          icon: const Icon(Icons.mode_comment_outlined),
-                          color: AppColors.textGray1,
-                        ),
-                        TextButton(
-                          onPressed: onComment,
-                          style: TextButton.styleFrom(
-                            foregroundColor: AppColors.textGray1, // Text color
-                          ),
-                          child: Text('$commentCount'),
-                        ),
-                      ],
-                    ),
+                    TextButton(
+                        onPressed: () {
+                          controller.openCommentPage(id);
+                        },
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.mode_comment_outlined,
+                              color: AppColors.textGray1,
+                            ),
+                            const SizedBox(width: 4),
+                            Text('$commentCount',
+                                style: const TextStyle(
+                                  color: AppColors.textGray1,
+                                )),
+                          ],
+                        )),
                   ],
                 ),
-                IconButton(
-                  onPressed: onSave,
-                  icon: Icon(
-                      isSaved == true ? Icons.bookmark : Icons.bookmark_border),
-                  color: isSaved == true ? Colors.blue : AppColors.textGray1,
+                Obx(
+                  () => IconButton(
+                    onPressed: () {
+                      isSaved.value = !isSaved.value;
+                      controller._saveTimer
+                          ?.cancel(); // Cancel any existing timer
+                      controller._saveTimer =
+                          Timer(const Duration(seconds: 3), () {
+                        updateIsSavedInDatabase(id, isSaved.value);
+                      });
+                    },
+                    icon: Icon(
+                      isSaved.value ? Icons.bookmark : Icons.bookmark_border,
+                    ),
+                    color:
+                        isSaved.value ? AppColors.primary : AppColors.textGray1,
+                  ),
                 ),
               ],
             ),
