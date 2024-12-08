@@ -12,8 +12,8 @@ class FeedController extends GetxController {
   final FeedRepository repository;
   var isLoadingAccountPage = false.obs;
 
-  final List<PostDetail> followingPostList = [];
-  final List<PostDetail> globalPostList = [];
+  var followingPostList = <PostDetail>[].obs;
+  var globalPostList = <PostDetail>[].obs;
   FeedController(this.repository);
 
   @override
@@ -51,7 +51,7 @@ class FeedController extends GetxController {
 
   Future<void> fetchNewestPostList() async {
     isLoadingAccountPage.value = true;
-    final response = await repository.getNewestPost(1, userId!);
+    final response = await repository.getNewestPost(5, userId!);
     if (response != null) {
       globalPostList.addAll((response as List<dynamic>)
           .map((item) => PostDetail.fromMap(item as Map<String, dynamic>))
@@ -63,5 +63,26 @@ class FeedController extends GetxController {
           FlutterI18n.translate(Get.context!, "error.unknown"));
     }
     isLoadingAccountPage.value = false;
+  }
+
+  void updateSavedPostInDatabase(int postId, bool isSaved) {
+    if (isSaved == true) {
+      repository.insertFollowingPost(userId!, postId.toString());
+    } else if (isSaved == false) {
+      repository.deleteFollowingPost(userId!, postId.toString());
+    }
+  }
+
+  void updateReactionPostInDatabase(int postId, bool isLike, bool isDislike) {
+    if (isLike == true && isDislike == false) {
+      repository.upsertReaction(userId!, 'like', postId);
+      print('like post inserted');
+    } else if (isLike == false && isDislike == true) {
+      repository.upsertReaction(userId!, 'dislike', postId);
+      print('dislike post inserted');
+    } else if (isLike == false && isDislike == false) {
+      repository.deleteReaction(userId!, postId);
+      print('delete post inserted');
+    }
   }
 }
