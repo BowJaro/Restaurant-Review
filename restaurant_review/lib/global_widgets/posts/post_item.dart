@@ -22,14 +22,12 @@ class PostItem extends StatelessWidget {
   final String content;
   final List<String> hashtags; // New
   final List<RateModel> rateList;
-  // final double tasteRating; // New
-  // final double serviceRating; // New
-  // final double priceRating; // New
-  // final double ambianceRating; // New
-  // final double cleanlinessRating; // New
   final List<String> mediaUrls;
-  final int reactCount;
+  final int likeCount;
+  final int dislikeCount;
   final int commentCount;
+  final bool isSaved;
+  final bool? isLike;
   final VoidCallback onReact;
   final VoidCallback onComment;
   final VoidCallback onSave;
@@ -47,8 +45,11 @@ class PostItem extends StatelessWidget {
     required this.hashtags,
     required this.rateList,
     required this.mediaUrls,
-    required this.reactCount,
+    required this.likeCount,
+    required this.dislikeCount,
     required this.commentCount,
+    required this.isSaved,
+    required this.isLike,
     required this.onReact,
     required this.onComment,
     required this.onSave,
@@ -215,15 +216,46 @@ class PostItem extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: onReact,
-                          icon: const Icon(Icons.favorite_border),
-                          color: AppColors.textGray1,
+                          icon: Icon(
+                            isLike == true
+                                ? Icons.thumb_up_alt
+                                : Icons
+                                    .thumb_up_off_alt, // Change icon based on state
+                          ),
+                          color: isLike == true
+                              ? Colors.blue // Highlighted color for 'like'
+                              : AppColors.textGray1, // Default color
                         ),
                         TextButton(
                           onPressed: onReact,
                           style: TextButton.styleFrom(
                             foregroundColor: AppColors.textGray1, // Text color
                           ),
-                          child: Text('$reactCount'),
+                          child: Text('$likeCount'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 16),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: onComment,
+                          icon: Icon(
+                            isLike == false
+                                ? Icons.thumb_down_alt
+                                : Icons
+                                    .thumb_down_off_alt, // Change icon based on state
+                          ),
+                          color: isLike == false
+                              ? Colors.blue // Highlighted color for 'dislike'
+                              : AppColors.textGray1, // Default color
+                        ),
+                        TextButton(
+                          onPressed: onComment,
+                          style: TextButton.styleFrom(
+                            foregroundColor: AppColors.textGray1, // Text color
+                          ),
+                          child: Text('$dislikeCount'),
                         ),
                       ],
                     ),
@@ -248,8 +280,9 @@ class PostItem extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: onSave,
-                  icon: const Icon(Icons.bookmark_border),
-                  color: AppColors.textGray1,
+                  icon: Icon(
+                      isSaved == true ? Icons.bookmark : Icons.bookmark_border),
+                  color: isSaved == true ? Colors.blue : AppColors.textGray1,
                 ),
               ],
             ),
