@@ -1,33 +1,34 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class BrandPageProvider {
+class UserProvider {
   final SupabaseClient supabase;
 
-  BrandPageProvider(this.supabase);
+  UserProvider(this.supabase);
 
-  /// Call the stored procedure to get brand page
-  Future<dynamic> getBrandPage(int brandId, String profileId) async {
+  Future<dynamic> getUserAndPosts(
+      String targetProfileId, String myProfileId) async {
     try {
-      return await supabase.rpc('get_brand_page', params: {
-        'p_brand_id': brandId,
-        'p_profile_id': profileId,
+      final response = await supabase.rpc('get_user_and_posts', params: {
+        'p_target_profile_id': targetProfileId,
+        'p_my_profile_id': myProfileId
       });
+      return response;
     } on PostgrestException catch (error) {
-      print('=========Error fetching brand page: ${error.message}=========');
+      print(
+          '=========Error fetching user and posts: ${error.message}=========');
       return null;
     } catch (error) {
-      print('=========Unknown error fetching brand page: $error=========');
+      print('=========Unknown error fetching user and posts: $error=========');
       return null;
     }
   }
 
-  /// Call the stored procedure to toggle following
   Future<void> toggleFollowing(
-      int source, String type, String profileId) async {
+      String source, String type, String profileId) async {
     try {
       await supabase.rpc('toggle_following', params: {
         'p_profile_id': profileId,
-        'p_source': source.toString(),
+        'p_source': source,
         'p_type': type,
       });
     } on PostgrestException catch (error) {
