@@ -43,6 +43,31 @@ class BrandDetailProvider {
     return true;
   }
 
+  Future<void> insertBrandWithOwner(
+      BrandDetailModel brandDetailModel, String userId) async {
+    String? imageUrl;
+
+    // Check if image is a file or a URL
+    imageUrl = await imageService.uploadImage(
+      brandDetailModel.image,
+      'images',
+      'brands/${brandDetailModel.image.name}',
+    );
+
+    if (imageUrl.isEmpty) {
+      print('=========Failed to upload image=========');
+      return;
+    }
+
+    // Call the upsert function
+    await supabase.rpc('insert_brand_with_owner', params: {
+      'p_name': brandDetailModel.name,
+      'p_description': brandDetailModel.description,
+      'p_image_url': imageUrl,
+      'p_profile_id': userId,
+    });
+  }
+
   Future<dynamic> fetchBrand(int id) async {
     try {
       final response =

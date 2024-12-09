@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_classes/image_item.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/avatar_selector.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
+import 'package:restaurant_review/routes/routes.dart';
 
 import '../model/brand_detail_model.dart';
 import '../repository/brand_detail_repository.dart';
@@ -12,6 +14,7 @@ class BrandDetailController extends GetxController {
   var isLoading = true.obs;
   late bool isNew;
   int? id;
+  late final bool isOwner;
 
   final BrandDetailRepository repository;
   final TextEditingController nameController = TextEditingController();
@@ -31,6 +34,10 @@ class BrandDetailController extends GetxController {
     final arguments = Get.arguments;
     isNew = arguments['isNew'] ?? true;
     id = arguments['id'];
+    isOwner = arguments['isOwner'] ?? false;
+    if (userId == null) {
+      Get.offAllNamed(Routes.splash);
+    }
     if (!isNew && id != null) {
       await fetchBrand();
     }
@@ -54,7 +61,11 @@ class BrandDetailController extends GetxController {
         image: avatarSelectorController.avatar.value!.file ??
             avatarSelectorController.avatar.value!.url,
       );
-      await repository.upsertBrand(brandDetailModel);
+      if (isOwner) {
+        await repository.insertBrandWithOwner(brandDetailModel, userId!);
+      } else {
+        await repository.upsertBrand(brandDetailModel);
+      }
 
       Get.back();
       Get.back();

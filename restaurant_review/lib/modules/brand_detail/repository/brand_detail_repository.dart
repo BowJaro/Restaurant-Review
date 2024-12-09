@@ -10,6 +10,11 @@ class BrandDetailRepository {
     return await provider.upsertBrand(brandDetailModel);
   }
 
+  Future<void> insertBrandWithOwner(
+      BrandDetailModel brandDetailModel, String userId) async {
+    return await provider.insertBrandWithOwner(brandDetailModel, userId);
+  }
+
   Future<dynamic> fetchBrand(int id) async {
     return await provider.fetchBrand(id);
   }

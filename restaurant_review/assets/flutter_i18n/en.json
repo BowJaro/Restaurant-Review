@@ -144,7 +144,8 @@
     "update_acc_success": "Account updated successfully",
     "update_acc_fail": "Failed to update account",
     "wrong_password": "Incorrect current password. Please check again",
-    "my_post": "My Posts"
+    "my_post": "My Posts",
+    "manage_restaurant": "Manage Restaurants"
   },
   "snackbar": {
     "success": "Success",
@@ -219,5 +220,12 @@
     "current_permission_is": "Current permission is",
     "your_permission_is_highest_level": "Your permission is the highest level!",
     "permission_request_detail": "Permission request detail"
+  },
+  "restaurant_management": {
+    "title": "Restaurant management",
+    "add_restaurant": "Add restaurant",
+    "remove_restaurant": "Remove restaurant",
+    "confirm_remove_restaurant": "Are you sure you want to remove this restaurant?",
+    "add_brand": "Add brand"
   }
 }

@@ -210,6 +210,14 @@ class AccountView extends GetView<AccountController> {
                     }),
                     _buildButton(
                         context,
+                        Icons.apps,
+                        FlutterI18n.translate(
+                            context, "account_page.manage_restaurant"),
+                        onTap: () {
+                      Get.toNamed(Routes.restaurantManagement);
+                    }),
+                    _buildButton(
+                        context,
                         Icons.feedback,
                         FlutterI18n.translate(
                             context, "account_page.rate_app")),
