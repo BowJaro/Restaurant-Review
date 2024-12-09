@@ -229,5 +229,11 @@
     "remove_restaurant": "Xóa này hàng",
     "confirm_remove_restaurant": "Bạn có chắc muốn xóa nhà hàng này không?",
     "add_brand": "Thêm chi nhánh"
+  },
+  "user": {
+    "title": "Thông tin người dùng",
+    "unknown_user": "Người dùng không tồn tại",
+    "post_list": "Danh sách bài viết",
+    "no_name": "Ẩn danh"
   }
 }

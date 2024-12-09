@@ -469,3 +469,66 @@ BEGIN
     );
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION get_user_and_posts(
+    p_target_profile_id UUID,
+    p_my_profile_id UUID
+)
+RETURNS JSON AS $$
+BEGIN
+    RETURN (
+        SELECT json_build_object(
+            'user', (
+                SELECT json_build_object(
+                    'id', p.id,
+                    'name', p.full_name,
+                    'username', p.username,
+                    'permission', p.permission,
+                    'avatar_url', i.url,
+                    'biography', p.biography,
+                    'join_date', p.join_date,
+                    'is_followed', EXISTS (
+                        SELECT 1
+                        FROM following f
+                        WHERE f.profile_id = p_my_profile_id
+                          AND f.source = p_target_profile_id::TEXT
+                    ),
+                    'followers', (
+                        SELECT COUNT(*)
+                        FROM following f
+                        WHERE f.source = p_target_profile_id::TEXT
+                    )
+                )
+                FROM profiles p
+                LEFT JOIN image i ON i.id = p.image_id
+                WHERE p.id = p_target_profile_id
+            ),
+            'post_list', (
+                SELECT json_agg(
+                    json_build_object(
+                        'id', post.id,
+                        'name', post.name,
+                        'created_at', post.created_at,
+                        'view_count', post.view_count,
+                        'image_url', (
+                            SELECT i.url
+                            FROM image i
+                            WHERE i.id = (
+                                SELECT unnest(m.image_list)
+                                FROM metadata m
+                                WHERE m.id = post.metadata_id
+                                LIMIT 1
+                            )
+                        ),
+                        'topic', t.name
+                    )
+                )
+                FROM post
+                JOIN topic t ON t.id = post.topic_id
+                WHERE post.profile_id = p_target_profile_id
+            )
+        )
+    );
+END;
+$$ LANGUAGE plpgsql;
