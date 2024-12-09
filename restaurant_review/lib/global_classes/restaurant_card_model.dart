@@ -22,8 +22,9 @@ class RestaurantCardModel {
     required this.name,
     required this.imageUrl,
     required this.hashtagList,
-    required this.isFollowed,
-  });
+    bool? isFollowed, // Optional parameter
+  }) : isFollowed =
+            (isFollowed ?? false).obs; // Default to false if not provided
 
   factory RestaurantCardModel.fromJson(Map<String, dynamic> json) {
     return RestaurantCardModel(
@@ -35,8 +36,10 @@ class RestaurantCardModel {
       rateAverage: json['rate_average']?.toDouble() ?? 0.0,
       name: json['name'],
       imageUrl: json['image_url'],
-      hashtagList: List<String>.from(json['hashtag_list']),
-      isFollowed: (json['is_followed'] as bool).obs,
+      hashtagList: json['hashtag_list'] == null
+          ? []
+          : List<String>.from(json['hashtag_list']),
+      isFollowed: json['is_followed'] as bool?, // Allow null values
     );
   }
 }

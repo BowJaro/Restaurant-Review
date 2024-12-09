@@ -20,8 +20,7 @@ class AccountController extends GetxController {
   var isLoadingChangeProfile = false.obs;
   var isLoadingChangePassword = false.obs;
 
-  final AvatarSelectorController avatarSelectorController =
-      Get.put(AvatarSelectorController());
+  late final AvatarSelectorController avatarSelectorController;
 
   late final String email;
   late final String fullName;
@@ -47,6 +46,8 @@ class AccountController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    Get.create(() => AvatarSelectorController());
+    avatarSelectorController = Get.find<AvatarSelectorController>();
 
     if (userId == null) {
       Get.offAllNamed(Routes.signIn);

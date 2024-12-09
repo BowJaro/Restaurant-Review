@@ -142,7 +142,8 @@
     "update_acc_success": "Cập nhật tài khoản thành công",
     "update_acc_fail": "Cập nhật tài khoản thất bại",
     "wrong_password": "Nhập sai mật khẩu hiện tại. Vui lòng kiểm tra lại",
-    "my_post": "Bài viết của tôi"
+    "my_post": "Bài viết của tôi",
+    "manage_restaurant": "Quản lí nhà hàng"
   },
   "snackbar": {
     "success": "Thành công",
@@ -221,5 +222,12 @@
     "current_permission_is": "Quyền hiện tại là",
     "your_permission_is_highest_level": "Quyền hiện tại của bạn đã là cao nhất!",
     "permission_request_detail": "Chi tiết yêu cầu cấp quyền"
+  },
+  "restaurant_management": {
+    "title": "Quản lí nhà hàng",
+    "add_restaurant": "Thêm nhà hàng",
+    "remove_restaurant": "Xóa này hàng",
+    "confirm_remove_restaurant": "Bạn có chắc muốn xóa nhà hàng này không?",
+    "add_brand": "Thêm chi nhánh"
   }
 }
