@@ -421,3 +421,31 @@ BEGIN
     VALUES (p_name, p_phone, v_address_id, p_profile_id, v_image_ids, p_permission);
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION toggle_following(
+    p_profile_id UUID,
+    p_source TEXT,
+    p_type VARCHAR(255)
+)
+RETURNS VOID AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM following
+        WHERE profile_id = p_profile_id
+          AND source = p_source
+          AND type = p_type
+    ) THEN
+        -- If a matching row exists, delete it (unfollow)
+        DELETE FROM following
+        WHERE profile_id = p_profile_id
+          AND source = p_source
+          AND type = p_type;
+    ELSE
+        -- If no matching row exists, insert a new one (follow)
+        INSERT INTO following (profile_id, source, type)
+        VALUES (p_profile_id, p_source, p_type);
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
