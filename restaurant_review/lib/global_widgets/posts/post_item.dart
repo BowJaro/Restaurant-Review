@@ -395,7 +395,8 @@ class PostItem extends StatelessWidget {
         SizedBox(
           width: width * 0.3,
           child: Text(
-            rate.name,
+            FlutterI18n.translate(
+                Get.context!, "post_detail.${rate.name.toLowerCase()}"),
             style: const TextStyle(fontSize: AppFontSizes.s7),
           ),
         ),
