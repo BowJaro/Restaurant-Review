@@ -12,21 +12,23 @@ class UserCard extends StatelessWidget {
   final String? name;
   final String? userName;
   final DateTime joinDate;
-  const UserCard({
-    super.key,
-    required this.userId,
-    required this.imageUrl,
-    required this.name,
-    required this.userName,
-    required this.joinDate,
-  });
+  final VoidCallback? onTap;
+  const UserCard(
+      {super.key,
+      required this.userId,
+      required this.imageUrl,
+      required this.name,
+      required this.userName,
+      required this.joinDate,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.toNamed(Routes.userPage, arguments: {'userId': userId});
-      },
+      onTap: onTap ??
+          () {
+            Get.toNamed(Routes.user, arguments: {'userId': userId});
+          },
       child: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(

@@ -231,5 +231,11 @@
     "remove_restaurant": "Remove restaurant",
     "confirm_remove_restaurant": "Are you sure you want to remove this restaurant?",
     "add_brand": "Add brand"
+  },
+  "user": {
+    "title": "User Detail",
+    "unknown_user": "Unknown user",
+    "post_list": "Post list",
+    "no_name": "No name"
   }
 }
