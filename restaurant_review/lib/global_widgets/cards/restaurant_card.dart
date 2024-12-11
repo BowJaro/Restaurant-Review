@@ -145,7 +145,7 @@ class RestaurantCard extends BaseRestaurantCard {
       children: [
         super.build(context),
         Positioned(
-          top: 8,
+          bottom: 8,
           right: 8,
           child: InkWell(
             onTap: onHeartTap,

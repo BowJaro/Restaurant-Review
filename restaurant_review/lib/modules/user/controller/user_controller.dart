@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
+import 'package:restaurant_review/global_classes/mini_post_card.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
