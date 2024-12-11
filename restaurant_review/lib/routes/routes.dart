@@ -23,6 +23,8 @@ import 'package:restaurant_review/modules/restaurant_detail/binding/restaurant_d
 import 'package:restaurant_review/modules/restaurant_detail/view/restaurant_detail_view.dart';
 import 'package:restaurant_review/modules/restaurant_management/binding/restaurant_management_binding.dart';
 import 'package:restaurant_review/modules/restaurant_management/view/restaurant_management_view.dart';
+import 'package:restaurant_review/modules/restaurant_page/binding/restaurant_page_binding.dart';
+import 'package:restaurant_review/modules/restaurant_page/view/restaurant_page_view.dart';
 import 'package:restaurant_review/modules/sign_in/binding/sign_in_binding.dart';
 import 'package:restaurant_review/modules/sign_in/view/sign_in_view.dart';
 import 'package:restaurant_review/modules/sign_up/binding/sign_up_binding.dart';
@@ -147,6 +149,11 @@ class AppPages {
       name: Routes.user,
       page: () => const UserView(),
       binding: UserBinding(),
+    ),
+    GetPage(
+      name: Routes.restaurantPage,
+      page: () => const RestaurantPageView(),
+      binding: RestaurantPageBinding(),
     ),
   ];
 }

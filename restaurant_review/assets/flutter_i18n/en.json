@@ -237,5 +237,14 @@
     "unknown_user": "Unknown user",
     "post_list": "Post list",
     "no_name": "No name"
+  },
+  "restaurant_page": {
+    "title": "Restaurant Detail",
+    "post_list": "Post list",
+    "unknown_restaurant": "Unknown restaurant",
+    "brand": "Brand",
+    "category": "Category",
+    "address": "Address",
+    "location": "Location"
   }
 }

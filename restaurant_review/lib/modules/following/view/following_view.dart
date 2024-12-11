@@ -35,71 +35,80 @@ class FollowingView extends GetView<FollowingController> {
 
             return TabBarView(
               children: [
-                Obx(() {
-                  return _buildList(
-                    context,
-                    controller.followingModel!.value.restaurants,
-                    (item) => RestaurantCard(
-                      restaurantId: item.id,
-                      imageUrl: item.imageUrl,
-                      name: item.name,
-                      rateAverage: item.rateAverage,
-                      street: item.street,
-                      provinceId: item.provinceId.toString(),
-                      districtId: item.districtId.toString(),
-                      wardId: item.wardId.toString(),
-                    ),
-                    (item) => controller.removeFollowing(
-                      item.id.toString(),
-                      TableNameStrings.restaurant,
-                    ),
+                _buildListWrapper(
+                  context,
+                  controller.followingModel!.value.restaurants,
+                  (item) => RestaurantCard(
+                    restaurantId: item.id,
+                    imageUrl: item.imageUrl,
+                    name: item.name,
+                    rateAverage: item.rateAverage,
+                    street: item.street,
+                    provinceId: item.provinceId.toString(),
+                    districtId: item.districtId.toString(),
+                    wardId: item.wardId.toString(),
+                  ),
+                  (item) => controller.removeFollowing(
+                    item.id.toString(),
                     TableNameStrings.restaurant,
-                  );
-                }),
-                Obx(() {
-                  return _buildList(
-                    context,
-                    controller.followingModel!.value.posts,
-                    (item) => MiniPostCard(
-                      id: item.id,
-                      name: item.name,
-                      imageUrl: item.imageUrl,
-                      subtitle: item.author ??
-                          FlutterI18n.translate(context, "following.unknown"),
-                      viewCount: item.viewCount,
-                      topic: item.topic,
-                    ),
-                    (item) => controller.removeFollowing(
-                      item.id.toString(),
-                      TableNameStrings.post,
-                    ),
+                  ),
+                  TableNameStrings.restaurant,
+                ),
+                _buildListWrapper(
+                  context,
+                  controller.followingModel!.value.posts,
+                  (item) => MiniPostCard(
+                    id: item.id,
+                    name: item.name,
+                    imageUrl: item.imageUrl,
+                    subtitle: item.author ??
+                        FlutterI18n.translate(context, "following.unknown"),
+                    viewCount: item.viewCount,
+                    topic: item.topic,
+                  ),
+                  (item) => controller.removeFollowing(
+                    item.id.toString(),
                     TableNameStrings.post,
-                  );
-                }),
-                Obx(() {
-                  return _buildList(
-                    context,
-                    controller.followingModel!.value.users,
-                    (item) => UserCard(
-                      userId: item.id,
-                      imageUrl: item.imageUrl,
-                      name: item.name,
-                      userName: item.username,
-                      joinDate: item.joinDate,
-                      onTap: () => controller.goToUserPage(item.id),
-                    ),
-                    (item) => controller.removeFollowing(
-                      item.id,
-                      TableNameStrings.user,
-                    ),
+                  ),
+                  TableNameStrings.post,
+                ),
+                _buildListWrapper(
+                  context,
+                  controller.followingModel!.value.users,
+                  (item) => UserCard(
+                    userId: item.id,
+                    imageUrl: item.imageUrl,
+                    name: item.name,
+                    userName: item.username,
+                    joinDate: item.joinDate,
+                    onTap: () => controller.goToUserPage(item.id),
+                  ),
+                  (item) => controller.removeFollowing(
+                    item.id,
                     TableNameStrings.user,
-                  );
-                }),
+                  ),
+                  TableNameStrings.user,
+                ),
               ],
             );
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildListWrapper<T>(
+    BuildContext context,
+    List<T> items,
+    Widget Function(T item) cardBuilder,
+    void Function(T item) removeCallback,
+    String type,
+  ) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        await controller.getFollowing();
+      },
+      child: _buildList(context, items, cardBuilder, removeCallback, type),
     );
   }
 

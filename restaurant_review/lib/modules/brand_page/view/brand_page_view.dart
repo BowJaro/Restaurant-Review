@@ -5,6 +5,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_widgets/cards/restaurant_card.dart';
+import 'package:restaurant_review/routes/routes.dart';
 import '../controller/brand_page_controller.dart';
 
 class BrandPageView extends GetView<BrandPageController> {
@@ -85,20 +86,26 @@ class BrandPageView extends GetView<BrandPageController> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Obx(() {
-                      return RestaurantCard(
-                        restaurantId: item.id,
-                        imageUrl: item.imageUrl,
-                        name: item.name,
-                        hashtagList: item.hashtagList,
-                        rateAverage: item.rateAverage,
-                        isFollowed: item.isFollowed.value,
-                        street: item.street,
-                        provinceId: item.provinceId,
-                        districtId: item.districtId,
-                        wardId: item.wardId,
-                        onHeartTap: () {
-                          controller.onHeartTap(item);
+                      return GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.restaurantPage,
+                              arguments: {"id": item.id});
                         },
+                        child: RestaurantCard(
+                          restaurantId: item.id,
+                          imageUrl: item.imageUrl,
+                          name: item.name,
+                          hashtagList: item.hashtagList,
+                          rateAverage: item.rateAverage,
+                          isFollowed: item.isFollowed.value,
+                          street: item.street,
+                          provinceId: item.provinceId,
+                          districtId: item.districtId,
+                          wardId: item.wardId,
+                          onHeartTap: () {
+                            controller.onHeartTap(item);
+                          },
+                        ),
                       );
                     }),
                   );
