@@ -532,3 +532,190 @@ BEGIN
     );
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION get_restaurant_and_posts(
+    p_restaurant_id INT,
+    p_profile_id UUID
+)
+RETURNS JSON AS $$
+BEGIN
+    RETURN (
+        SELECT json_build_object(
+            'restaurant', (
+                SELECT json_build_object(
+                    'id', r.id,
+                    'name', r.name,x
+                    'brand_id', r.brand_id,
+                    'brand_name', b.name,
+                    'restaurant_category_name', rc.name,
+                    'image_url', i.url,
+                    'province_id', a.province,
+                    'district_id', a.district,
+                    'ward_id', a.ward,
+                    'street', a.street,
+                    'hashtag_list', (
+                        SELECT array_agg(h.name)
+                        FROM hashtag h
+                        WHERE h.id = ANY(r.hashtag_list)
+                    ),
+                    'image_list', (
+                        SELECT array_agg(im.url)
+                        FROM image im
+                        WHERE im.id = ANY(m.image_list)
+                          AND m.id = r.metadata_id
+                    ),
+                    'average_rate', r.rate_total / NULLIF(r.rate_quantity, 0),
+                    'description', m.text,
+                    'is_followed', EXISTS (
+                        SELECT 1
+                        FROM following f
+                        WHERE f.profile_id = p_profile_id
+                          AND f.source::TEXT = r.id::TEXT
+                          AND f.type = 'restaurant'
+                    ),
+                    'longitude', l.longitude,
+                    'latitude', l.latitude
+                )
+                FROM restaurant r
+                JOIN brand b ON b.id = r.brand_id
+                JOIN restaurant_category rc ON rc.id = r.restaurant_category_id
+                JOIN address a ON a.id = r.address_id
+                LEFT JOIN image i ON i.id = r.image_id
+                LEFT JOIN metadata m ON m.id = r.metadata_id
+                LEFT JOIN location l ON l.id = r.location_id
+                WHERE r.id = p_restaurant_id
+            ),
+            'post_list', (
+                SELECT json_agg(
+                    json_build_object(
+                        'id', p.id,
+                        'name', p.name,
+                        'created_at', p.created_at,
+                        'view_count', p.view_count,
+                        'image_url', (
+                            SELECT im.url
+                            FROM image im
+                            WHERE im.id = (
+                                SELECT unnest(m.image_list)
+                                FROM metadata m
+                                WHERE m.id = p.metadata_id
+                                LIMIT 1
+                            )
+                        ),
+                        'topic', t.name
+                    )
+                )
+                FROM post p
+                JOIN topic t ON t.id = p.topic_id
+                WHERE p.restaurant_id = p_restaurant_id
+            )
+        )
+    );
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION get_post_page(
+    p_post_id INT,
+    p_profile_id UUID
+)
+RETURNS JSON AS $$
+BEGIN
+    RETURN (
+        SELECT json_build_object(
+            'id', p_post_id,
+            'user_avatar', i.url,
+            'username', pr.username,
+            'restaurant_avatar', r_img.url,
+            'restaurant_name', r.name,
+            'date', po.created_at,
+            'title', po.name,
+            'topic', t.name,
+            'content', m.text,
+            'hashtags', (
+                SELECT array_agg(h.name)
+                FROM hashtag h
+                WHERE h.id = ANY(po.hashtag_list)
+            ),
+            'rate_list', (
+                SELECT json_agg(
+                    json_build_object(
+                        'id', rc.id,
+                        'rate_type_id', rc.rate_type_id,
+                        'name', rt.name,
+                        'value', rc.value
+                    )
+                )
+                FROM rate_content rc
+                JOIN rate_type rt ON rt.id = rc.rate_type_id
+                WHERE rc.rate_id = po.rate_id
+            ),
+            'media_urls', (
+                SELECT array_agg(im.url)
+                FROM image im
+                JOIN metadata m ON m.id = po.metadata_id
+                WHERE im.id = ANY(m.image_list)
+            ),
+            'like_count', (
+                SELECT COUNT(*)
+                FROM reaction re
+                WHERE re.content = 'like'
+                  AND re.source = p_post_id
+                  AND re.type = 'post'
+            ),
+            'dislike_count', (
+                SELECT COUNT(*)
+                FROM reaction re
+                WHERE re.content = 'dislike'
+                  AND re.source = p_post_id
+                  AND re.type = 'post'
+            ),
+            'comment_count', (
+                WITH RECURSIVE comment_tree AS (
+                    SELECT id
+                    FROM comment
+                    WHERE source = p_post_id AND type = 'post'
+                    UNION ALL
+                    SELECT c.id
+                    FROM comment c
+                    JOIN comment_tree ct ON c.source = ct.id
+                    WHERE c.type = 'comment'
+                )
+                SELECT COUNT(*) FROM comment_tree
+            ),
+            'is_saved', EXISTS (
+                SELECT 1
+                FROM following f
+                WHERE f.profile_id = p_profile_id
+                  AND f.source = p_post_id::text
+                  AND f.type = 'post'
+            ),
+            'is_like', EXISTS (
+                SELECT 1
+                FROM reaction re
+                WHERE re.content = 'like'
+                  AND re.profile_id = p_profile_id
+                  AND re.source = p_post_id
+                  AND re.type = 'post'
+            ),
+            'is_dislike', EXISTS (
+                SELECT 1
+                FROM reaction re
+                WHERE re.content = 'dislike'
+                  AND re.profile_id = p_profile_id
+                  AND re.source = p_post_id
+                  AND re.type = 'post'
+            )
+        )
+        FROM post po
+        JOIN profiles pr ON pr.id = po.profile_id
+        LEFT JOIN image i ON i.id = pr.image_id
+        LEFT JOIN restaurant r ON r.id = po.restaurant_id
+        LEFT JOIN image r_img ON r_img.id = r.image_id
+        LEFT JOIN topic t ON t.id = po.topic_id
+        LEFT JOIN metadata m ON m.id = po.metadata_id
+        WHERE po.id = p_post_id
+    );
+END;
+$$ LANGUAGE plpgsql;
