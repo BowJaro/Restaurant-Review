@@ -119,10 +119,24 @@ class RestaurantPageView extends GetView<RestaurantPageController> {
                   )
                 ],
               ),
-              ElevatedButton(
-                onPressed: () => controller.goToGoogleMap(),
-                child: Text(
-                    FlutterI18n.translate(context, "restaurant_page.location")),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () => controller.goToGoogleMap(),
+                    child: Text(FlutterI18n.translate(
+                        context, "restaurant_page.location")),
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.toNamed(Routes.menuView, arguments: {
+                        "restaurantId": controller.restaurantModel.id
+                      });
+                    },
+                    child: Text(FlutterI18n.translate(
+                        context, "restaurant_page.menu_view")),
+                  )
+                ],
               ),
               FutureBuilder<Address?>(
                 future: getAddressName(

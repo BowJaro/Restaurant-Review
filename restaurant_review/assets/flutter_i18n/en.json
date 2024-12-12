@@ -245,6 +245,12 @@
     "brand": "Brand",
     "category": "Category",
     "address": "Address",
-    "location": "Location"
+    "location": "Location",
+    "menu_view": "Menu"
+  },
+  "menu_view": {
+    "not_exist": "Not exist",
+    "no_data": "No data",
+    "menu": "Menu"
   }
 }

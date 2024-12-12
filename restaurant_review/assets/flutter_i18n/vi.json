@@ -243,6 +243,12 @@
     "brand": "Chi nhánh",
     "category": "Danh mục",
     "address": "Địa chỉ",
-    "location": "Xem vị trí"
+    "location": "Xem vị trí",
+    "menu_view": "Menu"
+  },
+  "menu_view": {
+    "not_exist": "Không tồn tại",
+    "no_data": "Không có dữ liệu",
+    "menu": "Menu"
   }
 }
