@@ -244,3 +244,13 @@ CREATE TABLE permission_request (
     created_at TIMESTAMPTZ DEFAULT now(),
     status TEXT DEFAULT 'pending'
 );
+
+
+CREATE TABLE menu_item (
+    id SERIAL PRIMARY KEY,
+    restaurant_id INT REFERENCES restaurant(id) ON DELETE CASCADE,
+    name VARCHAR(255) NOT NULL DEFAULT '',
+    description TEXT,
+    price DECIMAL(10,2) DEFAULT 0,
+    image_id INT REFERENCES image(id) ON DELETE SET NULL DEFAULT NULL
+);
