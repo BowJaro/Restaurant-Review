@@ -15,6 +15,8 @@ import 'package:restaurant_review/modules/my_post/binding/my_post_binding.dart';
 import 'package:restaurant_review/modules/my_post/view/my_post_view.dart';
 import 'package:restaurant_review/modules/permission_request/binding/permission_request_binding.dart';
 import 'package:restaurant_review/modules/permission_request/view/permission_request_view.dart';
+import 'package:restaurant_review/modules/post/binding/post_binding.dart';
+import 'package:restaurant_review/modules/post/view/post_view.dart';
 import 'package:restaurant_review/modules/post_detail/binding/post_detail_binding.dart';
 import 'package:restaurant_review/modules/post_detail/view/post_detail_view.dart';
 import 'package:restaurant_review/modules/report/binding/report_binding.dart';
@@ -154,6 +156,11 @@ class AppPages {
       name: Routes.restaurantPage,
       page: () => const RestaurantPageView(),
       binding: RestaurantPageBinding(),
+    ),
+    GetPage(
+      name: Routes.postPage,
+      page: () => const PostView(),
+      binding: PostBinding(),
     ),
   ];
 }
