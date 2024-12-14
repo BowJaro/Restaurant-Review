@@ -11,6 +11,8 @@ import 'package:restaurant_review/modules/following/binding/following_binding.da
 import 'package:restaurant_review/modules/following/view/following_view.dart';
 import 'package:restaurant_review/modules/home/binding/home_binding.dart';
 import 'package:restaurant_review/modules/home/view/home_view.dart';
+import 'package:restaurant_review/modules/menu_creation/binding/menu_creation_binding.dart';
+import 'package:restaurant_review/modules/menu_creation/view/menu_creation_view.dart';
 import 'package:restaurant_review/modules/menu_view/binding/menu_view_binding.dart';
 import 'package:restaurant_review/modules/menu_view/view/menu_view_view.dart';
 import 'package:restaurant_review/modules/my_post/binding/my_post_binding.dart';
@@ -65,6 +67,7 @@ abstract class Routes {
   static const String restaurantManagement = '/restaurant_management_page';
   static const String user = '/user';
   static const String menuView = '/menu_view';
+  static const String menuCreation = '/menu_creation';
 }
 
 class AppPages {
@@ -169,6 +172,11 @@ class AppPages {
       name: Routes.menuView,
       page: () => const MenuViewView(),
       binding: MenuViewBinding(),
+    ),
+    GetPage(
+      name: Routes.menuCreation,
+      page: () => const MenuCreationView(),
+      binding: MenuCreationBinding(),
     ),
   ];
 }
