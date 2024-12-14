@@ -449,3 +449,46 @@ BEGIN
     END IF;
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION upsert_menu_items(
+    p_restaurant_id INT,
+    p_menu_items JSONB
+)
+RETURNS VOID AS $$
+DECLARE
+    item JSONB;
+    v_image_id INT;
+BEGIN
+    FOR item IN SELECT * FROM jsonb_array_elements(p_menu_items)
+    LOOP
+        -- Handle image insertion
+        IF item->>'image_url' IS NOT NULL THEN
+            INSERT INTO image (url) VALUES (item->>'image_url') RETURNING id INTO v_image_id;
+        ELSE
+            v_image_id := NULL;
+        END IF;
+
+        -- Upsert logic
+        IF item->>'id' IS NULL THEN
+            -- Insert new row
+            INSERT INTO menu_item (restaurant_id, name, description, price, image_id)
+            VALUES (
+                p_restaurant_id,
+                item->>'name',
+                item->>'description',
+                (item->>'price')::DECIMAL,
+                v_image_id
+            );
+        ELSE
+            -- Update existing row
+            UPDATE menu_item
+            SET name = item->>'name',
+                description = item->>'description',
+                price = (item->>'price')::DECIMAL,
+                image_id = v_image_id
+            WHERE id = (item->>'id')::INT;
+        END IF;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;

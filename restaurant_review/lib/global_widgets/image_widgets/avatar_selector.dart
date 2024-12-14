@@ -23,11 +23,13 @@ class AvatarSelectorWidget extends StatelessWidget {
   final AvatarSelectorController controller;
   final double size;
   final ImagePicker _picker = ImagePicker();
+  final IconData icon;
 
   AvatarSelectorWidget({
     super.key,
     required this.controller,
     this.size = 100,
+    this.icon = Icons.person,
   });
 
   Future<void> _onSelectImage() async {
@@ -100,8 +102,7 @@ class AvatarSelectorWidget extends StatelessWidget {
                               )
                             : (Icon(Icons.person,
                                 size: size * 0.8, color: AppColors.black)))
-                    : Icon(Icons.person,
-                        size: size * 0.8, color: AppColors.black),
+                    : Icon(icon, size: size * 0.8, color: AppColors.black),
               ),
             ),
             if (imageItem != null && imageItem.url != "")
