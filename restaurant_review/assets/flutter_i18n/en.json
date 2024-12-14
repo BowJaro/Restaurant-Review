@@ -100,7 +100,8 @@
     "features": "Features",
     "address": "Address",
     "location": "Location",
-    "success": "Successfully!"
+    "success": "Successfully!",
+    "add_menu": "Add menu"
   },
   "rich_text_editor": {
     "save": "Save",
@@ -252,5 +253,16 @@
     "not_exist": "Not exist",
     "no_data": "No data",
     "menu": "Menu"
+  },
+  "menu_creation": {
+    "not_exist": "Not exist",
+    "add": "Add",
+    "name": "Name",
+    "description": "Description",
+    "price": "Price",
+    "menu_item": "Menu item",
+    "save": "Save",
+    "success": "Success",
+    "update_menu": "Update menu"
   }
 }

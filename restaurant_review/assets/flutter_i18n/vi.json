@@ -98,7 +98,8 @@
     "features": "Đặc điểm",
     "address": "Địa chỉ",
     "location": "Vị trí",
-    "success": "Thành công!"
+    "success": "Thành công!",
+    "add_menu": "Tạo menu"
   },
   "rich_text_editor": {
     "save": "Lưu",
@@ -250,5 +251,16 @@
     "not_exist": "Không tồn tại",
     "no_data": "Không có dữ liệu",
     "menu": "Menu"
+  },
+  "menu_creation": {
+    "not_exist": "Không tồn tại",
+    "add": "Thêm",
+    "name": "Tên",
+    "description": "Mô tả",
+    "price": "Giá",
+    "menu_item": "Món",
+    "save": "Lưu",
+    "success": "Thành công",
+    "update_menu": "Cập nhật menu"
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
-import 'package:restaurant_review/modules/menu_view/model/menu_view_model.dart';
+import 'package:restaurant_review/global_classes/menu_view_model.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
 import '../repository/menu_view_repository.dart';
