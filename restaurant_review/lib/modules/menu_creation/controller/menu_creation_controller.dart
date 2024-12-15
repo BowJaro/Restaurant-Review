@@ -74,6 +74,7 @@ class MenuCreationController extends GetxController {
         repository.upsertMenuItems(restaurantId!, menuList),
         repository.removeMenuItems(removedMenuIdList),
       ]);
+      removedMenuIdList.clear();
       Get.back();
       Get.back();
       ModalUtils.showMessageModal(
