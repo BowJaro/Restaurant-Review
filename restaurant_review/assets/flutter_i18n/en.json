@@ -264,5 +264,13 @@
     "save": "Save",
     "success": "Success",
     "update_menu": "Update menu"
+  },
+  "notification": {
+    "new_post": "New post",
+    "posted": "posted",
+    "notification": "Notification",
+    "remove_notification": "Remove notification",
+    "confirm_remove_notification": "Are you sure you want to remove this notification?",
+    "created_at": "Created at"
   }
 }

@@ -262,5 +262,13 @@
     "save": "Lưu",
     "success": "Thành công",
     "update_menu": "Cập nhật menu"
+  },
+  "notification": {
+    "new_post": "Bài viết mới",
+    "posted": "đã đăng",
+    "notification": "Thông báo",
+    "remove_notification": "Xóa thông báo",
+    "confirm_remove_notification": "Bạn có chắc muốn xóa thông báo?",
+    "created_at": "Thời gian"
   }
 }
