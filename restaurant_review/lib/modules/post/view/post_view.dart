@@ -10,6 +10,7 @@ import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:restaurant_review/global_classes/rate.dart';
 import 'package:restaurant_review/global_widgets/image_widgets/image_gallery.dart';
 import 'package:restaurant_review/global_widgets/ratings/star_rate.dart';
+import 'package:restaurant_review/routes/routes.dart';
 
 import '../controller/post_controller.dart';
 
@@ -47,16 +48,23 @@ class PostView extends GetView<PostController> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CircleAvatar(
-                            radius: 20,
-                            backgroundImage:
-                                controller.postModel.avatarUrl != null
-                                    ? NetworkImage(baseImageUrl +
-                                        controller.postModel.avatarUrl!)
-                                    : null,
-                            child: controller.postModel.avatarUrl == null
-                                ? const Icon(Icons.person, size: 20)
-                                : null,
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.user, arguments: {
+                                "userId": controller.postModel.userId
+                              });
+                            },
+                            child: CircleAvatar(
+                              radius: 20,
+                              backgroundImage:
+                                  controller.postModel.avatarUrl != null
+                                      ? NetworkImage(baseImageUrl +
+                                          controller.postModel.avatarUrl!)
+                                      : null,
+                              child: controller.postModel.avatarUrl == null
+                                  ? const Icon(Icons.person, size: 20)
+                                  : null,
+                            ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
@@ -73,6 +81,8 @@ class PostView extends GetView<PostController> {
                                 controller.postModel.restaurantName == null
                                     ? const SizedBox()
                                     : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             FlutterI18n.translate(
@@ -83,50 +93,80 @@ class PostView extends GetView<PostController> {
                                                       .restaurantImage ==
                                                   null
                                               ? const SizedBox()
-                                              : CircleAvatar(
-                                                  radius: 10,
-                                                  backgroundImage: NetworkImage(
-                                                      baseImageUrl +
-                                                          controller.postModel
-                                                              .restaurantImage!),
+                                              : GestureDetector(
+                                                  onTap: () {
+                                                    Get.toNamed(
+                                                        Routes.restaurantPage,
+                                                        arguments: {
+                                                          "id": controller
+                                                              .postModel
+                                                              .restaurantId
+                                                        });
+                                                  },
+                                                  child: CircleAvatar(
+                                                    radius: 10,
+                                                    backgroundImage: NetworkImage(
+                                                        baseImageUrl +
+                                                            controller.postModel
+                                                                .restaurantImage!),
+                                                  ),
                                                 ),
                                           const SizedBox(width: 4),
-                                          Expanded(
-                                            child: Text(
-                                              controller
-                                                  .postModel.restaurantName!,
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                          controller.postModel.restaurantName ==
+                                                  null
+                                              ? const SizedBox()
+                                              : GestureDetector(
+                                                  onTap: () {
+                                                    Get.toNamed(
+                                                        Routes.restaurantPage,
+                                                        arguments: {
+                                                          "id": controller
+                                                              .postModel
+                                                              .restaurantId
+                                                        });
+                                                  },
+                                                  child: SizedBox(
+                                                    width: Get.size.width * 0.4,
+                                                    child: Text(
+                                                      controller.postModel
+                                                          .restaurantName!,
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                          PopupMenuButton(
+                                            color: Colors.white,
+                                            icon: const Icon(
+                                              Icons.more_vert,
+                                              color: AppColors.textGray1,
                                             ),
+                                            onSelected: (value) {
+                                              if (value ==
+                                                  FlutterI18n.translate(context,
+                                                      "post_item.report")) {
+                                                controller.openReportPage(
+                                                    controller.postModel.id);
+                                              }
+                                            },
+                                            itemBuilder: (context) => [
+                                              PopupMenuItem(
+                                                value: FlutterI18n.translate(
+                                                    context,
+                                                    "post_item.report"),
+                                                child: Text(
+                                                    FlutterI18n.translate(
+                                                        context,
+                                                        "post_item.report")),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
                               ],
                             ),
-                          ),
-                          PopupMenuButton(
-                            color: Colors.white,
-                            icon: const Icon(
-                              Icons.more_vert,
-                              color: AppColors.textGray1,
-                            ),
-                            onSelected: (value) {
-                              if (value ==
-                                  FlutterI18n.translate(
-                                      context, "post_item.report")) {
-                                controller
-                                    .openReportPage(controller.postModel.id);
-                              }
-                            },
-                            itemBuilder: (context) => [
-                              PopupMenuItem(
-                                value: FlutterI18n.translate(
-                                    context, "post_item.report"),
-                                child: Text(FlutterI18n.translate(
-                                    context, "post_item.report")),
-                              ),
-                            ],
                           ),
                         ],
                       ),

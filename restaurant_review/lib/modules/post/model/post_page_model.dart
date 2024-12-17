@@ -8,6 +8,7 @@ class PostPageModel {
   List<String> hashtags;
   String username;
   List<RateModel> rateList;
+  String userId;
   String? avatarUrl;
   DateTime createdAt;
   RxBool isSaved;
@@ -18,6 +19,7 @@ class PostPageModel {
   int commentCount;
   int dislikeCount;
   String content;
+  int? restaurantId;
   String? restaurantName;
   String? restaurantImage;
   List<String> mediaUrls;
@@ -31,6 +33,7 @@ class PostPageModel {
     required this.isSaved,
     required this.username,
     required this.rateList,
+    required this.userId,
     required this.avatarUrl,
     required this.createdAt,
     required this.isDislike,
@@ -39,6 +42,7 @@ class PostPageModel {
     required this.commentCount,
     required this.dislikeCount,
     required this.content,
+    required this.restaurantId,
     required this.restaurantName,
     required this.restaurantImage,
     required this.mediaUrls,
@@ -56,6 +60,7 @@ class PostPageModel {
           ? []
           : List<RateModel>.from(
               map['rate_list'].map((e) => RateModel.fromMap(e))),
+      userId: map['user_id'],
       avatarUrl: map['user_avatar'],
       createdAt:
           map['date'] != null ? DateTime.parse(map['date']) : DateTime.now(),
@@ -67,6 +72,7 @@ class PostPageModel {
       commentCount: map['comment_count'],
       dislikeCount: map['dislike_count'],
       content: map['content'],
+      restaurantId: map['restaurant_id'],
       restaurantName: map['restaurant_name'],
       restaurantImage: map['restaurant_avatar'],
       mediaUrls:
