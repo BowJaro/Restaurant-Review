@@ -144,7 +144,9 @@
     "update_acc_fail": "Cập nhật tài khoản thất bại",
     "wrong_password": "Nhập sai mật khẩu hiện tại. Vui lòng kiểm tra lại",
     "my_post": "Bài viết của tôi",
-    "manage_restaurant": "Quản lí nhà hàng"
+    "manage_restaurant": "Quản lí nhà hàng",
+    "about_us_content": "TaHu là một ứng dụng đơn giản và thân thiện với người dùng, được thiết kế để giúp bạn khám phá và tìm kiếm những nhà hàng ngon nhất trong khu vực của mình. Chúng tôi cung cấp một nền tảng cho người dùng chia sẻ những đánh giá, xếp hạng và hình ảnh chân thực và khách quan về trải nghiệm ẩm thực của họ. Với TaHu, bạn có thể dễ dàng tìm kiếm các nhà hàng phù hợp với sở thích của mình, đọc đánh giá từ thực khách khác và đưa ra quyết định sáng suốt về địa điểm ăn uống.",
+    "policy_content": "TaHu tôn trọng quyền riêng tư của bạn và cam kết bảo vệ thông tin cá nhân của bạn. Chính sách Riêng tư này giải thích cách chúng tôi thu thập, sử dụng và chia sẻ dữ liệu của bạn khi bạn sử dụng ứng dụng TaHu."
   },
   "snackbar": {
     "success": "Thành công",
