@@ -10,8 +10,9 @@ String? userId;
 String? _permission; // don't use this variable, use below function instead
 
 // Function to fetch and return the permission
-Future<String> getPermission() async {
-  if (_permission == null) {
+Future<String> getPermission({bool fetchNew = false}) async {
+  if (fetchNew) {
+    _permission = null;
     try {
       if (userId == null) {
         Get.offAllNamed(Routes.splash);
@@ -27,6 +28,25 @@ Future<String> getPermission() async {
     } catch (error) {
       print('Error fetching permission: $error');
       _permission = 'user'; // Default fallback
+    }
+  } else {
+    if (_permission == null) {
+      try {
+        if (userId == null) {
+          Get.offAllNamed(Routes.splash);
+        }
+
+        final response = await supabase
+            .from('profiles')
+            .select('permission')
+            .eq('id', userId!)
+            .single();
+
+        _permission = response['permission'];
+      } catch (error) {
+        print('Error fetching permission: $error');
+        _permission = 'user'; // Default fallback
+      }
     }
   }
 

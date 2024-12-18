@@ -79,7 +79,7 @@ class AccountController extends GetxController {
     reviews.value = 25;
     followers.value = 150;
     following.value = 75;
-    print('response: ${response}');
+
     if (response != null) {
       final accountModel = AccountModel.fromMap(response);
       avatarUrl = accountModel.image.path;
@@ -215,5 +215,11 @@ class AccountController extends GetxController {
     }
 
     return null; // Passwords match
+  }
+
+  void signOut() async {
+    await supabase.auth.signOut();
+    getPermission(fetchNew: true);
+    Get.offAllNamed(Routes.splash);
   }
 }

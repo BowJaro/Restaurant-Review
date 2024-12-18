@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
+import 'package:restaurant_review/modules/account/view/about_us.dart';
 import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
+import 'package:restaurant_review/modules/account/view/policy.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
 import '../../../constants/singleton_variables.dart';
@@ -196,13 +198,16 @@ class AccountView extends GetView<AccountController> {
                             context, "account_page.change_profile"), onTap: () {
                       Get.to(() => const ChangeProfileView());
                     }),
-                    _buildButton(
-                        context,
-                        Icons.person,
-                        FlutterI18n.translate(
-                            context, "account_page.about_us")),
+                    _buildButton(context, Icons.person,
+                        FlutterI18n.translate(context, "account_page.about_us"),
+                        onTap: () {
+                      Get.to(() => const AboutUs());
+                    }),
                     _buildButton(context, Icons.info,
-                        FlutterI18n.translate(context, "account_page.policy")),
+                        FlutterI18n.translate(context, "account_page.policy"),
+                        onTap: () {
+                      Get.to(() => const Policy());
+                    }),
                     _buildButton(context, Icons.policy,
                         FlutterI18n.translate(context, "account_page.feedback"),
                         onTap: () {
