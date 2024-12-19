@@ -78,7 +78,6 @@ class AccountController extends GetxController {
     reviews.value = 25;
     followers.value = 150;
     following.value = 75;
-    print('response: ${response}');
     if (response != null) {
       final accountModel = AccountModel.fromMap(response);
       avatarUrl = accountModel.image.path;

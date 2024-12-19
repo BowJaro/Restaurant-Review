@@ -223,5 +223,12 @@
     "current_permission_is": "Current permission is",
     "your_permission_is_highest_level": "Your permission is the highest level!",
     "permission_request_detail": "Permission request detail"
+  },
+  "explore": {
+    "popular_restaurants": "Popular Restaurants",
+    "top_reviewers": "Top Reviewers",
+    "nearby": "Nearby",
+    "top_rating": "Top rating",
+    "event": "Event"
   }
 }

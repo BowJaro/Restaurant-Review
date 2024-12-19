@@ -221,5 +221,12 @@
     "current_permission_is": "Quyền hiện tại là",
     "your_permission_is_highest_level": "Quyền hiện tại của bạn đã là cao nhất!",
     "permission_request_detail": "Chi tiết yêu cầu cấp quyền"
+  },
+  "explore": {
+    "popular_restaurants": "Nhà hàng phổ biến",
+    "top_reviewers": "Top reviewers",
+    "nearby": "Gần đây",
+    "top_rating": "Đánh giá cao",
+    "event": "Sự kiện"
   }
 }
