@@ -1,39 +1,35 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_classes/address.dart';
 import 'package:restaurant_review/global_widgets/ratings/star_rate.dart';
-import 'package:restaurant_review/routes/routes.dart';
 import 'package:restaurant_review/utils/address_lookup.dart';
 
-class RestaurantCard extends StatelessWidget {
+class BaseRestaurantCard extends StatelessWidget {
   final int restaurantId;
   final String imageUrl;
   final String name;
   final List<String> hashtagList;
   final double rateAverage;
-  final bool isFollowed;
   final String street;
   final String provinceId;
   final String districtId;
   final String wardId;
-  final VoidCallback onHeartTap;
+  final VoidCallback? onTap;
 
-  const RestaurantCard({
+  const BaseRestaurantCard({
     super.key,
     required this.restaurantId,
     required this.imageUrl,
     required this.name,
     required this.hashtagList,
     required this.rateAverage,
-    required this.isFollowed,
     required this.street,
     required this.provinceId,
     required this.districtId,
     required this.wardId,
-    required this.onHeartTap,
+    this.onTap,
   });
 
   @override
@@ -44,10 +40,7 @@ class RestaurantCard extends StatelessWidget {
         if (!snapshot.hasData) return const CircularProgressIndicator();
 
         return GestureDetector(
-          onTap: () {
-            Get.toNamed(Routes.brandPage,
-                arguments: {'restaurantId': restaurantId});
-          },
+          onTap: onTap,
           child: Container(
             padding: const EdgeInsets.only(bottom: 8.0),
             decoration: BoxDecoration(
@@ -102,16 +95,6 @@ class RestaurantCard extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(width: 8),
-                          InkWell(
-                            onTap: onHeartTap,
-                            child: isFollowed
-                                ? const Icon(
-                                    Icons.favorite,
-                                    color: AppColors.primary,
-                                  )
-                                : const Icon(Icons.favorite_border),
-                          ),
                         ],
                       ),
                       const SizedBox(height: 8),
@@ -133,4 +116,61 @@ class RestaurantCard extends StatelessWidget {
       },
     );
   }
+}
+
+class RestaurantCard extends BaseRestaurantCard {
+  final bool isFollowed;
+  final VoidCallback onHeartTap;
+
+  const RestaurantCard({
+    super.key,
+    required super.restaurantId,
+    required super.imageUrl,
+    required super.name,
+    required super.hashtagList,
+    required super.rateAverage,
+    required super.street,
+    required super.provinceId,
+    required super.districtId,
+    required super.wardId,
+    required this.isFollowed,
+    required this.onHeartTap,
+  }) : super(
+          onTap: null, // Pass null to override the onTap behavior
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        super.build(context),
+        Positioned(
+          bottom: 8,
+          right: 8,
+          child: InkWell(
+            onTap: onHeartTap,
+            child: isFollowed
+                ? const Icon(Icons.favorite, color: AppColors.primary)
+                : const Icon(Icons.favorite_border),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class RestaurantCardBasic extends BaseRestaurantCard {
+  const RestaurantCardBasic({
+    super.key,
+    required super.restaurantId,
+    required super.imageUrl,
+    required super.name,
+    required super.hashtagList,
+    required super.rateAverage,
+    required super.street,
+    required super.provinceId,
+    required super.districtId,
+    required super.wardId,
+    required VoidCallback super.onTap,
+  });
 }

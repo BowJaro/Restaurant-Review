@@ -43,7 +43,7 @@ class MyInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MyInputFieldController>(
-      init: MyInputFieldController(),
+      init: Get.put(MyInputFieldController()),
       builder: (controller) {
         textController.addListener(() {
           controller.updateIsTextNotEmpty(textController.text);

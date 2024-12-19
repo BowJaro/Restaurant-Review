@@ -9,6 +9,7 @@ import 'package:restaurant_review/global_widgets/input_fields/autocomplete_field
 import 'package:restaurant_review/global_widgets/input_fields/input_field.dart';
 import 'package:restaurant_review/global_widgets/input_fields/rich_text_display.dart';
 import 'package:restaurant_review/global_widgets/locations/address_selector.dart';
+import 'package:restaurant_review/routes/routes.dart';
 import 'package:restaurant_review/utils/validators.dart';
 
 import '../controller/restaurant_detail_controller.dart';
@@ -39,96 +40,105 @@ class RestaurantDetailView extends GetView<RestaurantDetailController> {
           },
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
-            child: Column(
-              children: [
-                MyInputField(
-                  label:
-                      FlutterI18n.translate(context, "restaurant_detail.name"),
-                  textController: controller.nameController,
-                ),
-                const SizedBox(height: 10.0),
-                MyAutocompleteField(
-                  label: FlutterI18n.translate(
-                      context, "restaurant_detail.category"),
-                  suggestions: controller.categorySuggestionList,
-                  onSelected: (value) {
-                    if (value == null) return;
-                    controller.restaurantCategoryId.value =
-                        int.tryParse(value) ?? 0;
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+          child: Column(
+            children: [
+              MyInputField(
+                label: FlutterI18n.translate(context, "restaurant_detail.name"),
+                textController: controller.nameController,
+              ),
+              const SizedBox(height: 10.0),
+              MyAutocompleteField(
+                label: FlutterI18n.translate(
+                    context, "restaurant_detail.category"),
+                suggestions: controller.categorySuggestionList,
+                onSelected: (value) {
+                  if (value == null) return;
+                  controller.restaurantCategoryId.value =
+                      int.tryParse(value) ?? 0;
+                },
+                defaultValue: controller.defaultCategoryId,
+              ),
+              const SizedBox(height: 10.0),
+              MyAutocompleteField(
+                label:
+                    FlutterI18n.translate(context, "restaurant_detail.brand"),
+                suggestions: controller.brandSuggestionList,
+                onSelected: (value) {
+                  if (value == null) return;
+                  controller.brandId.value = int.tryParse(value) ?? 0;
+                },
+                defaultValue: controller.defaultBrandId,
+              ),
+              const SizedBox(height: 10.0),
+              Obx(
+                () => RichTextDisplay(
+                  content: controller.description.value,
+                  onContentChanged: (newContent) {
+                    if (newContent != null) {
+                      controller.description.value = newContent;
+                    }
                   },
-                  defaultValue: controller.defaultCategoryId,
                 ),
-                const SizedBox(height: 10.0),
-                MyAutocompleteField(
-                  label:
-                      FlutterI18n.translate(context, "restaurant_detail.brand"),
-                  suggestions: controller.brandSuggestionList,
-                  onSelected: (value) {
-                    if (value == null) return;
-                    controller.brandId.value = int.tryParse(value) ?? 0;
-                  },
-                  defaultValue: controller.defaultBrandId,
-                ),
-                const SizedBox(height: 10.0),
-                Obx(
-                  () => RichTextDisplay(
-                    content: controller.description.value,
-                    onContentChanged: (newContent) {
-                      if (newContent != null) {
-                        controller.description.value = newContent;
-                      }
-                    },
+              ),
+              const SizedBox(height: 10.0),
+              HashtagSelector(controller: controller.hashtagController),
+              const SizedBox(height: 10.0),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 120,
+                    child: ElevatedButton(
+                      onPressed: controller.openGoogleMaps,
+                      child: Text(
+                          FlutterI18n.translate(context, "location.location")),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10.0),
-                HashtagSelector(controller: controller.hashtagController),
-                const SizedBox(height: 10.0),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 120,
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: TextFormField(
+                      controller: controller.locationController,
+                      decoration: InputDecoration(
+                        labelText: FlutterI18n.translate(
+                            context, "location.missing_location"),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                      ),
+                      validator: ValidatorUtils.validateCoordinates,
+                    ),
+                  ),
+                ],
+              ),
+              controller.id != null
+                  ? Align(
+                      alignment: Alignment.centerLeft,
                       child: ElevatedButton(
-                        onPressed: controller.openGoogleMaps,
+                        onPressed: () {
+                          Get.toNamed(Routes.menuCreation,
+                              arguments: {"restaurantId": controller.id});
+                        },
                         child: Text(FlutterI18n.translate(
-                            context, "location.location")),
+                            context, "restaurant_detail.add_menu")),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: TextFormField(
-                        controller: controller.locationController,
-                        decoration: InputDecoration(
-                          labelText: FlutterI18n.translate(
-                              context, "location.missing_location"),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
-                        ),
-                        validator: ValidatorUtils.validateCoordinates,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10.0),
-                AddressSelectorView(
-                    controller: controller.addressSelectorController),
-                const SizedBox(height: 10.0),
-                MyInputField(
-                  label: FlutterI18n.translate(context, "location.street"),
-                  textController: controller.streetController,
-                ),
-                const SizedBox(height: 10.0),
-                ImageSelectorWidget(
-                    controller: controller.imageSelectorController),
-                const SizedBox(height: 10.0),
-                AvatarSelectorWidget(
-                  controller: controller.avatarSelectorController,
-                  size: 150,
-                ),
-              ],
-            ),
+                    )
+                  : const SizedBox(),
+              const SizedBox(height: 10.0),
+              AddressSelectorView(
+                  controller: controller.addressSelectorController),
+              const SizedBox(height: 10.0),
+              MyInputField(
+                label: FlutterI18n.translate(context, "location.street"),
+                textController: controller.streetController,
+              ),
+              const SizedBox(height: 10.0),
+              ImageSelectorWidget(
+                  controller: controller.imageSelectorController),
+              const SizedBox(height: 10.0),
+              AvatarSelectorWidget(
+                controller: controller.avatarSelectorController,
+                size: 150,
+              ),
+            ],
           ),
         ),
       );

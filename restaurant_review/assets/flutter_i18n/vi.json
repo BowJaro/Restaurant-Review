@@ -98,7 +98,8 @@
     "features": "Đặc điểm",
     "address": "Địa chỉ",
     "location": "Vị trí",
-    "success": "Thành công!"
+    "success": "Thành công!",
+    "add_menu": "Tạo menu"
   },
   "rich_text_editor": {
     "save": "Lưu",
@@ -142,7 +143,10 @@
     "update_acc_success": "Cập nhật tài khoản thành công",
     "update_acc_fail": "Cập nhật tài khoản thất bại",
     "wrong_password": "Nhập sai mật khẩu hiện tại. Vui lòng kiểm tra lại",
-    "my_post": "Bài viết của tôi"
+    "my_post": "Bài viết của tôi",
+    "manage_restaurant": "Quản lí nhà hàng",
+    "about_us_content": "TaHu là một ứng dụng đơn giản và thân thiện với người dùng, được thiết kế để giúp bạn khám phá và tìm kiếm những nhà hàng ngon nhất trong khu vực của mình. Chúng tôi cung cấp một nền tảng cho người dùng chia sẻ những đánh giá, xếp hạng và hình ảnh chân thực và khách quan về trải nghiệm ẩm thực của họ. Với TaHu, bạn có thể dễ dàng tìm kiếm các nhà hàng phù hợp với sở thích của mình, đọc đánh giá từ thực khách khác và đưa ra quyết định sáng suốt về địa điểm ăn uống.",
+    "policy_content": "TaHu tôn trọng quyền riêng tư của bạn và cam kết bảo vệ thông tin cá nhân của bạn. Chính sách Riêng tư này giải thích cách chúng tôi thu thập, sử dụng và chia sẻ dữ liệu của bạn khi bạn sử dụng ứng dụng TaHu."
   },
   "snackbar": {
     "success": "Thành công",
@@ -228,5 +232,52 @@
     "nearby": "Gần đây",
     "top_rating": "Đánh giá cao",
     "event": "Sự kiện"
+   },
+  "restaurant_management": {
+    "title": "Quản lí nhà hàng",
+    "add_restaurant": "Thêm nhà hàng",
+    "remove_restaurant": "Xóa này hàng",
+    "confirm_remove_restaurant": "Bạn có chắc muốn xóa nhà hàng này không?",
+    "add_brand": "Thêm chi nhánh"
+  },
+  "user": {
+    "title": "Thông tin người dùng",
+    "unknown_user": "Người dùng không tồn tại",
+    "post_list": "Danh sách bài viết",
+    "no_name": "Ẩn danh"
+  },
+  "restaurant_page": {
+    "title": "Thông tin nhà hàng",
+    "post_list": "Danh sách bài đánh giá",
+    "unknown_restaurant": "Nhà hàng không tồn tại",
+    "brand": "Chi nhánh",
+    "category": "Danh mục",
+    "address": "Địa chỉ",
+    "location": "Xem vị trí",
+    "menu_view": "Menu"
+  },
+  "menu_view": {
+    "not_exist": "Không tồn tại",
+    "no_data": "Không có dữ liệu",
+    "menu": "Menu"
+  },
+  "menu_creation": {
+    "not_exist": "Không tồn tại",
+    "add": "Thêm",
+    "name": "Tên",
+    "description": "Mô tả",
+    "price": "Giá",
+    "menu_item": "Món",
+    "save": "Lưu",
+    "success": "Thành công",
+    "update_menu": "Cập nhật menu"
+  },
+  "notification": {
+    "new_post": "Bài viết mới",
+    "posted": "đã đăng",
+    "notification": "Thông báo",
+    "remove_notification": "Xóa thông báo",
+    "confirm_remove_notification": "Bạn có chắc muốn xóa thông báo?",
+    "created_at": "Thời gian"
   }
 }

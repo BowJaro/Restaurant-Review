@@ -30,8 +30,7 @@ class RestaurantDetailController extends GetxController {
       Get.put(ImageSelectorController());
   final AddressSelectorController addressSelectorController =
       Get.put(AddressSelectorController());
-  final AvatarSelectorController avatarSelectorController =
-      Get.put(AvatarSelectorController());
+  late final AvatarSelectorController avatarSelectorController;
   var description =
       "[{\"insert\":\"${FlutterI18n.translate(Get.context!, "restaurant_detail.description")}\\n\"}]"
           .obs;
@@ -65,6 +64,9 @@ class RestaurantDetailController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    Get.create(() => AvatarSelectorController());
+    avatarSelectorController = Get.find<AvatarSelectorController>();
+
     final arguments = Get.arguments;
     isNew = arguments['isNew'] ?? true;
     id = arguments['id'];

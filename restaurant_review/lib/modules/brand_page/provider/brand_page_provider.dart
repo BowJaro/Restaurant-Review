@@ -27,7 +27,7 @@ class BrandPageProvider {
     try {
       await supabase.rpc('toggle_following', params: {
         'p_profile_id': profileId,
-        'p_source': source,
+        'p_source': source.toString(),
         'p_type': type,
       });
     } on PostgrestException catch (error) {

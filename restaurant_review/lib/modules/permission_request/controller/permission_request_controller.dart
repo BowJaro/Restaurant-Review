@@ -48,7 +48,7 @@ class PermissionRequestController extends GetxController {
     if (permission == "restaurant") {
       Get.back();
       ModalUtils.showMessageModal(FlutterI18n.translate(
-          Get.context!, "permission.your_permission_is_highest_level"));
+          Get.context!, "permission_request.your_permission_is_highest_level"));
     }
   }
 

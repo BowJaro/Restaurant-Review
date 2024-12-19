@@ -100,7 +100,8 @@
     "features": "Features",
     "address": "Address",
     "location": "Location",
-    "success": "Successfully!"
+    "success": "Successfully!",
+    "add_menu": "Add menu"
   },
   "rich_text_editor": {
     "save": "Save",
@@ -144,7 +145,10 @@
     "update_acc_success": "Account updated successfully",
     "update_acc_fail": "Failed to update account",
     "wrong_password": "Incorrect current password. Please check again",
-    "my_post": "My Posts"
+    "my_post": "My Posts",
+    "manage_restaurant": "Manage Restaurants",
+    "about_us_content": "TaHu is a simple and user-friendly app designed to help you discover and explore the best restaurants in your area. We provide a platform for users to share their honest and unbiased reviews, ratings, and photos of their dining experiences. With TaHu, you can easily find restaurants that match your preferences, read reviews from other diners, and make informed decisions about where to eat.",
+    "policy_content": "TaHu respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and share your data when you use the TaHu app."
   },
   "snackbar": {
     "success": "Success",
@@ -230,5 +234,52 @@
     "nearby": "Nearby",
     "top_rating": "Top rating",
     "event": "Event"
+  },
+  "restaurant_management": {
+    "title": "Restaurant management",
+    "add_restaurant": "Add restaurant",
+    "remove_restaurant": "Remove restaurant",
+    "confirm_remove_restaurant": "Are you sure you want to remove this restaurant?",
+    "add_brand": "Add brand"
+  },
+  "user": {
+    "title": "User Detail",
+    "unknown_user": "Unknown user",
+    "post_list": "Post list",
+    "no_name": "No name"
+  },
+  "restaurant_page": {
+    "title": "Restaurant Detail",
+    "post_list": "Post list",
+    "unknown_restaurant": "Unknown restaurant",
+    "brand": "Brand",
+    "category": "Category",
+    "address": "Address",
+    "location": "Location",
+    "menu_view": "Menu"
+  },
+  "menu_view": {
+    "not_exist": "Not exist",
+    "no_data": "No data",
+    "menu": "Menu"
+  },
+  "menu_creation": {
+    "not_exist": "Not exist",
+    "add": "Add",
+    "name": "Name",
+    "description": "Description",
+    "price": "Price",
+    "menu_item": "Menu item",
+    "save": "Save",
+    "success": "Success",
+    "update_menu": "Update menu"
+  },
+  "notification": {
+    "new_post": "New post",
+    "posted": "posted",
+    "notification": "Notification",
+    "remove_notification": "Remove notification",
+    "confirm_remove_notification": "Are you sure you want to remove this notification?",
+    "created_at": "Created at"
   }
 }

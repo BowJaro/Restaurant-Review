@@ -74,6 +74,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/posts/post_item.dart';
+import 'package:restaurant_review/routes/routes.dart';
 import '../controller/feed_controller.dart';
 
 class FeedView extends GetView<FeedController> {
@@ -128,8 +129,7 @@ class FeedView extends GetView<FeedController> {
                   icon: const Icon(Icons.notifications_none,
                       color: AppColors.black),
                   onPressed: () {
-                    // Handle Notification action
-                    print("Notification icon clicked");
+                    Get.toNamed(Routes.notification);
                   },
                 ),
               ],

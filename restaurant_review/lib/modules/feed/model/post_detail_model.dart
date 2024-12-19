@@ -55,11 +55,8 @@ class PostDetail {
       title: map['title'],
       topic: map['topic'],
       metadataText: map['metadata_text'],
-      metadataImageList: map['metadata_image_list'] != null
-          ? List<String>.from(map['metadata_image_list'])
-          : [],
-      hashtags:
-          map['hashtags'] != null ? List<String>.from(map['hashtags']) : [],
+      metadataImageList: List<String>.from(map['metadata_image_list'] ?? []),
+      hashtags: List<String>.from(map['hashtags'] ?? []),
       rateAverage: map['rate_average'] != null
           ? double.parse(map['rate_average'].toString())
           : 0.0,

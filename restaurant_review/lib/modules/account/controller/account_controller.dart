@@ -20,8 +20,7 @@ class AccountController extends GetxController {
   var isLoadingChangeProfile = false.obs;
   var isLoadingChangePassword = false.obs;
 
-  final AvatarSelectorController avatarSelectorController =
-      Get.put(AvatarSelectorController());
+  late final AvatarSelectorController avatarSelectorController;
 
   late final String email;
   late final String fullName;
@@ -47,6 +46,8 @@ class AccountController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    Get.create(() => AvatarSelectorController());
+    avatarSelectorController = Get.find<AvatarSelectorController>();
 
     if (userId == null) {
       Get.offAllNamed(Routes.signIn);
@@ -78,6 +79,7 @@ class AccountController extends GetxController {
     reviews.value = 25;
     followers.value = 150;
     following.value = 75;
+
     if (response != null) {
       final accountModel = AccountModel.fromMap(response);
       avatarUrl = accountModel.image.path;
@@ -213,5 +215,11 @@ class AccountController extends GetxController {
     }
 
     return null; // Passwords match
+  }
+
+  void signOut() async {
+    await supabase.auth.signOut();
+    getPermission(fetchNew: true);
+    Get.offAllNamed(Routes.splash);
   }
 }

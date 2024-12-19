@@ -1,96 +1,104 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 
 class ModalUtils {
   /// Show a message without title
   static void showMessageModal(String message) {
-    Get.defaultDialog(
-      title: '',
-      contentPadding: const EdgeInsets.all(20),
-      barrierDismissible: true,
-      content: GestureDetector(
-        onTap: () => Get.back(),
-        child: Column(
-          children: [
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+    showDialog(
+      context: Get.context!, // Use GetX context
+      barrierDismissible: true, // Allow dismissing by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            message,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Get.back(), // Close dialog using GetX
+              child: Text(
+                MaterialLocalizations.of(Get.context!)
+                    .okButtonLabel, // Default localized OK label
               ),
             ),
-            const SizedBox(height: 20),
-            const Icon(Icons.close, color: AppColors.textGray),
           ],
-        ),
-      ),
-      backgroundColor: Colors.white,
-      radius: 10,
+        );
+      },
     );
   }
 
   /// Show a message with a title
   static void showMessageWithTitleModal(String title, String message) {
-    Get.defaultDialog(
-      title: title,
-      titleStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      contentPadding: const EdgeInsets.all(20),
-      barrierDismissible: true,
-      content: GestureDetector(
-        onTap: () => Get.back(),
-        child: Column(
-          children: [
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+    showDialog(
+      context: Get.context!, // Use GetX context
+      barrierDismissible: true, // Allow dismissing by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            title,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          content: Text(
+            message,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Get.back(), // Close dialog using GetX
+              child: Text(
+                MaterialLocalizations.of(context)
+                    .okButtonLabel, // Default localized OK label
               ),
             ),
           ],
-        ),
-      ),
-      backgroundColor: Colors.white,
-      radius: 10,
+        );
+      },
     );
   }
 
   /// Show a message with title and Yes/Cancel buttons
   static void showMessageWithButtonsModal(
       String title, String message, VoidCallback onYes) {
-    Get.defaultDialog(
-      title: title,
-      titleStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      contentPadding: const EdgeInsets.all(20),
-      barrierDismissible: false, // User has to choose an option
-      content: Column(
-        children: [
-          Text(
-            message,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+    showDialog(
+      context: Get.context!, // Use GetX context
+      barrierDismissible:
+          false, // Prevent dismissing without selecting an option
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            title,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 20),
-        ],
-      ),
-      backgroundColor: AppColors.white,
-      radius: 10,
-      confirm: ElevatedButton(
-        onPressed: onYes,
-        child: Text(FlutterI18n.translate(Get.context!, 'modal.yes')),
-      ),
-      cancel: ElevatedButton(
-        onPressed: () => Get.back(),
-        style: ElevatedButton.styleFrom(backgroundColor: AppColors.textGray),
-        child: Text(FlutterI18n.translate(Get.context!, 'modal.cancel')),
-      ),
+          content: Text(
+            message,
+            style: const TextStyle(fontSize: 16),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Get.back(), // Close dialog using GetX
+              child: Text(
+                MaterialLocalizations.of(context)
+                    .cancelButtonLabel, // Default localized Cancel label
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Get.back(); // Close dialog using GetX
+                onYes(); // Execute Yes callback
+              },
+              child: Text(
+                MaterialLocalizations.of(context)
+                    .okButtonLabel, // Default localized OK label
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

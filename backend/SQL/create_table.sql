@@ -244,3 +244,68 @@ CREATE TABLE permission_request (
     created_at TIMESTAMPTZ DEFAULT now(),
     status TEXT DEFAULT 'pending'
 );
+
+
+CREATE TABLE menu_item (
+    id SERIAL PRIMARY KEY,
+    restaurant_id INT REFERENCES restaurant(id) ON DELETE CASCADE,
+    name VARCHAR(255) NOT NULL DEFAULT '',
+    description TEXT,
+    price DECIMAL(10,2) DEFAULT 0,
+    image_id INT REFERENCES image(id) ON DELETE SET NULL DEFAULT NULL
+);
+
+
+CREATE TABLE notification (
+    id SERIAL PRIMARY KEY,
+    profile_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    image_id INT REFERENCES image(id) ON DELETE SET NULL,
+    created_at TIMESTAMPTZ DEFAULT now(),
+    is_read BOOLEAN DEFAULT FALSE,
+    source TEXT NOT NULL,
+    type TEXT
+);
+
+
+CREATE OR REPLACE FUNCTION notify_followers()
+RETURNS TRIGGER AS $$
+DECLARE
+    follower_profile_id UUID;
+    author_name TEXT;
+    post_image_id INT;
+BEGIN
+    -- Get the author's name
+    SELECT username INTO author_name FROM profiles WHERE id = NEW.profile_id;
+    
+    -- Get the first image ID from the post's metadata
+    SELECT unnest(image_list) INTO post_image_id FROM metadata WHERE id = NEW.metadata_id LIMIT 1;
+    
+    -- Loop through all distinct followers of the author
+    FOR follower_profile_id IN
+        SELECT DISTINCT profile_id
+        FROM following
+        WHERE source::TEXT = NEW.profile_id::TEXT
+          AND type = 'post'
+    LOOP
+        -- Insert notification for each follower
+        INSERT INTO notification (profile_id, name, description, image_id, source, type)
+        VALUES (
+            follower_profile_id,
+            'new_post',
+            author_name || ':::' || 'posted',
+            post_image_id,
+            NEW.id::TEXT,
+            'post'
+        );
+    END LOOP;
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER after_post_insert
+AFTER INSERT ON post
+FOR EACH ROW
+EXECUTE FUNCTION notify_followers();

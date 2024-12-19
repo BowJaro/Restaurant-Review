@@ -35,9 +35,9 @@ class FollowingView extends GetView<FollowingController> {
 
             return TabBarView(
               children: [
-                _buildList(
+                _buildListWrapper(
                   context,
-                  controller.followingModel.value.restaurants,
+                  controller.followingModel!.value.restaurants,
                   (item) => RestaurantCard(
                     restaurantId: item.id,
                     imageUrl: item.imageUrl,
@@ -54,9 +54,9 @@ class FollowingView extends GetView<FollowingController> {
                   ),
                   TableNameStrings.restaurant,
                 ),
-                _buildList(
+                _buildListWrapper(
                   context,
-                  controller.followingModel.value.posts,
+                  controller.followingModel!.value.posts,
                   (item) => MiniPostCard(
                     id: item.id,
                     name: item.name,
@@ -72,15 +72,16 @@ class FollowingView extends GetView<FollowingController> {
                   ),
                   TableNameStrings.post,
                 ),
-                _buildList(
+                _buildListWrapper(
                   context,
-                  controller.followingModel.value.users,
+                  controller.followingModel!.value.users,
                   (item) => UserCard(
                     userId: item.id,
                     imageUrl: item.imageUrl,
                     name: item.name,
                     userName: item.username,
                     joinDate: item.joinDate,
+                    onTap: () => controller.goToUserPage(item.id),
                   ),
                   (item) => controller.removeFollowing(
                     item.id,
@@ -93,6 +94,21 @@ class FollowingView extends GetView<FollowingController> {
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildListWrapper<T>(
+    BuildContext context,
+    List<T> items,
+    Widget Function(T item) cardBuilder,
+    void Function(T item) removeCallback,
+    String type,
+  ) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        await controller.getFollowing();
+      },
+      child: _buildList(context, items, cardBuilder, removeCallback, type),
     );
   }
 
