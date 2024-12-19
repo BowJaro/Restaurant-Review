@@ -35,8 +35,6 @@ class FeedController extends GetxController {
     isLoadingAccountPage.value = true;
     final response = await repository.getListFollowingPost(userId!, 5);
 
-    print('this is response1: ${response}');
-
     if (response != null) {
       followingPostList.addAll((response as List<dynamic>)
           .map((item) => PostDetail.fromMap(item as Map<String, dynamic>))

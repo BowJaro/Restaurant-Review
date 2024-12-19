@@ -3,6 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/modules/account/view/account_view.dart';
+import 'package:restaurant_review/modules/explore/view/explore_view.dart';
 import 'package:restaurant_review/modules/feed/view/feed_view.dart';
 import 'package:restaurant_review/modules/following/view/following_view.dart';
 import 'package:restaurant_review/routes/routes.dart';
@@ -14,33 +15,34 @@ class HomeView extends GetView<HomeController> {
 
   final List<Widget> _screens = <Widget>[
     const FeedView(),
-    Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Explore'),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.following);
-            },
-            child: const Text("Go to Following Page"),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(Routes.comment, arguments: {'post_id': 8});
-            },
-            child: const Text("Go to Comment page"),
-          ),
-          TextButton(
-            onPressed: () async {
-              await supabase.auth.signOut();
-              Get.offAllNamed(Routes.splash);
-            },
-            child: const Text("Sign out"),
-          ),
-        ],
-      ),
-    ),
+    const ExploreView(),
+    // Center(
+    //   child: Column(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       const Text('Explore'),
+    //       TextButton(
+    //         onPressed: () {
+    //           Get.toNamed(Routes.following);
+    //         },
+    //         child: const Text("Go to Following Page"),
+    //       ),
+    //       TextButton(
+    //         onPressed: () {
+    //           Get.toNamed(Routes.comment, arguments: {'post_id': 8});
+    //         },
+    //         child: const Text("Go to Comment page"),
+    //       ),
+    //       TextButton(
+    //         onPressed: () async {
+    //           await supabase.auth.signOut();
+    //           Get.offAllNamed(Routes.splash);
+    //         },
+    //         child: const Text("Sign out"),
+    //       ),
+    //     ],
+    //   ),
+    // ),
     const FollowingView(),
     const AccountView(),
   ];

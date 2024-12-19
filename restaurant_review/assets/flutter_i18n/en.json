@@ -228,6 +228,13 @@
     "your_permission_is_highest_level": "Your permission is the highest level!",
     "permission_request_detail": "Permission request detail"
   },
+  "explore": {
+    "popular_restaurants": "Popular Restaurants",
+    "top_reviewers": "Top Reviewers",
+    "nearby": "Nearby",
+    "top_rating": "Top rating",
+    "event": "Event"
+  },
   "restaurant_management": {
     "title": "Restaurant management",
     "add_restaurant": "Add restaurant",

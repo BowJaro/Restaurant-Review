@@ -1,39 +1,29 @@
+import 'package:restaurant_review/services/image_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class FeedProvider {
+class SearchProvider {
   final SupabaseClient supabase;
+  final ImageService imageService = ImageService();
 
-  FeedProvider(this.supabase);
+  SearchProvider(this.supabase);
 
-  Future<dynamic> getListFollowingPost(String userId, int limit) async {
+  Future<dynamic> searchByKeyword(
+      String filterType, String keyword, String userId) async {
     try {
-      final response = await supabase.rpc("get_all_following_post_details",
-          params: {"p_user_id": userId, "p_quality_post_per_user": limit});
-      return response;
-    } on PostgrestException catch (error) {
-      print(
-          '=========Error fetching following post details: ${error.message}=========');
-      return null;
-    } catch (error) {
-      print(
-          '=========Unknown error fetching following post details: $error=========');
-      return null;
-    }
-  }
-
-  Future<dynamic> getNewestPost(int limit, String userId) async {
-    try {
-      final response = await supabase.rpc("get_newest_post_details",
-          params: {"p_quantity": limit, "p_user_id": userId});
+      final response = await supabase.rpc("search_by_keyword", params: {
+        "filter_type": filterType,
+        "keyword": keyword,
+        "user_id": userId,
+      });
 
       return response;
     } on PostgrestException catch (error) {
       print(
-          '=========Error fetching newest post details: ${error.message}=========');
+          '=========Error fetching nearby restaurant: ${error.message}=========');
       return null;
     } catch (error) {
       print(
-          '=========Unknown error fetching newest post details: $error=========');
+          '=========Unknown error fetching nearby restaurant: $error=========');
       return null;
     }
   }

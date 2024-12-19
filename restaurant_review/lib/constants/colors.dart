@@ -22,4 +22,5 @@ abstract class AppColors {
   static const Color dividerGray = Color(0xFFECECEC);
   static const Color backgroundGray = Color(0xFFEEEEEE);
   static const Color tabTextColor1 = Color(0xFFD4D4D4);
+  static const Color boldText = Color(0xFF1C1C1C);
 }
