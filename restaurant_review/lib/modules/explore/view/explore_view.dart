@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
-import 'package:restaurant_review/global_classes/sliver_app_bar_delegate.dart';
 import 'package:restaurant_review/global_widgets/cards/mini_explore_restaurant_card.dart';
 import 'package:restaurant_review/global_widgets/cards/popular_restaurant_card.dart';
-import 'package:restaurant_review/global_widgets/cards/search_restaurant_card.dart';
 import 'package:restaurant_review/global_widgets/user/mini_user_infor.dart';
 import 'package:restaurant_review/routes/routes.dart';
 import '../controller/explore_controller.dart';
@@ -161,8 +159,9 @@ class ExploreView extends GetView<ExploreController> {
                               profileId: userItem.id!,
                               username: userItem.username!,
                               avatarUrl: userItem.avatarUrl!,
-                              goToUserDetail: (profileId) =>
-                                  print("Comment clicked on"),
+                              goToUserDetail: (profileId) => Get.toNamed(
+                                  Routes.user,
+                                  arguments: {"userId": profileId}),
                             );
                           },
                         ),

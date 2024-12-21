@@ -50,8 +50,7 @@ class PopularRestaurantCard extends StatelessWidget {
 
         return GestureDetector(
           onTap: () {
-            Get.toNamed(Routes.restaurantPage,
-                arguments: {'restaurantId': restaurantId});
+            Get.toNamed(Routes.restaurantPage, arguments: {'id': restaurantId});
           },
           child: Container(
             margin: EdgeInsets.only(
@@ -101,11 +100,16 @@ class PopularRestaurantCard extends StatelessWidget {
                           constraints: BoxConstraints(
                               maxWidth:
                                   Get.width * 2 / 3 - 30), // Set max width here
-                          child: Text(
-                            name,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                          child: SizedBox(
+                            width: 200.0,
+                            child: Text(
+                              name,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),

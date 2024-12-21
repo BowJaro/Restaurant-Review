@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/cards/search_restaurant_card.dart';
 import 'package:restaurant_review/global_widgets/posts/post_item.dart';
 import 'package:restaurant_review/global_widgets/restaurants_map/restaurants_map.dart';
