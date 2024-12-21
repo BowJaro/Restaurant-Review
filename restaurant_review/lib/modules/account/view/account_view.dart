@@ -7,7 +7,6 @@ import 'package:restaurant_review/modules/account/view/change_profile_view.dart'
 import 'package:restaurant_review/modules/account/view/policy.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
-import '../../../constants/singleton_variables.dart';
 import '../controller/account_controller.dart';
 
 class AccountView extends GetView<AccountController> {
@@ -178,19 +177,25 @@ class AccountView extends GetView<AccountController> {
                 color: AppColors.white,
                 child: Column(
                   children: [
-                    _buildButton(
-                        context,
-                        Icons.reviews,
-                        FlutterI18n.translate(
-                            context, "account_page.upgrade_to_reviewer"),
-                        onTap: () {
-                      Get.toNamed(Routes.permissionRequest);
-                    }),
-                    _buildButton(context, Icons.article,
-                        FlutterI18n.translate(context, "account_page.my_post"),
-                        onTap: () {
-                      Get.toNamed(Routes.myPost);
-                    }),
+                    controller.permission != "restaurant"
+                        ? _buildButton(
+                            context,
+                            Icons.reviews,
+                            FlutterI18n.translate(
+                                context, "account_page.upgrade_to_reviewer"),
+                            onTap: () {
+                            Get.toNamed(Routes.permissionRequest);
+                          })
+                        : const SizedBox(),
+                    controller.permission != "user"
+                        ? _buildButton(
+                            context,
+                            Icons.article,
+                            FlutterI18n.translate(
+                                context, "account_page.my_post"), onTap: () {
+                            Get.toNamed(Routes.myPost);
+                          })
+                        : const SizedBox(),
                     _buildButton(
                         context,
                         Icons.star,
@@ -213,19 +218,21 @@ class AccountView extends GetView<AccountController> {
                         onTap: () {
                       Get.toNamed(Routes.feedback);
                     }),
-                    _buildButton(
-                        context,
-                        Icons.apps,
-                        FlutterI18n.translate(
-                            context, "account_page.manage_restaurant"),
-                        onTap: () {
-                      Get.toNamed(Routes.restaurantManagement);
-                    }),
-                    _buildButton(
-                        context,
-                        Icons.feedback,
-                        FlutterI18n.translate(
-                            context, "account_page.rate_app")),
+                    controller.permission == "restaurant"
+                        ? _buildButton(
+                            context,
+                            Icons.apps,
+                            FlutterI18n.translate(
+                                context, "account_page.manage_restaurant"),
+                            onTap: () {
+                            Get.toNamed(Routes.restaurantManagement);
+                          })
+                        : const SizedBox(),
+                    // _buildButton(
+                    //     context,
+                    //     Icons.feedback,
+                    //     FlutterI18n.translate(
+                    //         context, "account_page.rate_app")),
                   ],
                 ),
               ),
@@ -238,10 +245,7 @@ class AccountView extends GetView<AccountController> {
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                   // Handle sign out
-                  onPressed: () async {
-                    await supabase.auth.signOut();
-                    Get.offAllNamed(Routes.splash);
-                  },
+                  onPressed: () => controller.signOut(),
 
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.white,
