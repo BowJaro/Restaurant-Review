@@ -160,8 +160,9 @@ class ExploreView extends GetView<ExploreController> {
                               profileId: userItem.id!,
                               username: userItem.username!,
                               avatarUrl: userItem.avatarUrl!,
-                              goToUserDetail: (profileId) =>
-                                  print("Comment clicked on"),
+                              goToUserDetail: (profileId) => Get.toNamed(
+                                  Routes.user,
+                                  arguments: {"userId": profileId}),
                             );
                           },
                         ),

@@ -19,34 +19,40 @@ class MiniUserInfor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16.0, right: 2.0, left: 8.0),
-      child: Column(
-        children: [
-          ClipOval(
-            child: CachedNetworkImage(
-              // memCacheHeight: 70,
-              // memCacheWidth: 70,
-              imageUrl:
-                  baseImageUrl + avatarUrl, // Directly using the avatarUrl
-              fit: BoxFit.cover,
-              height: 70,
-              width: 70,
-              placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator(),
-              ),
-              errorWidget: (context, url, error) => const Icon(
-                Icons.error,
-                color: AppColors.errorRed,
+    return GestureDetector(
+      onTap: () {
+        print("This is profileId $profileId");
+        goToUserDetail(profileId);
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16.0, right: 2.0, left: 8.0),
+        child: Column(
+          children: [
+            ClipOval(
+              child: CachedNetworkImage(
+                // memCacheHeight: 70,
+                // memCacheWidth: 70,
+                imageUrl:
+                    baseImageUrl + avatarUrl, // Directly using the avatarUrl
+                fit: BoxFit.cover,
+                height: 70,
+                width: 70,
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.error,
+                  color: AppColors.errorRed,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            username,
-            style: const TextStyle(fontSize: 12, color: AppColors.textBlack1),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              username,
+              style: const TextStyle(fontSize: 12, color: AppColors.textBlack1),
+            ),
+          ],
+        ),
       ),
     );
   }

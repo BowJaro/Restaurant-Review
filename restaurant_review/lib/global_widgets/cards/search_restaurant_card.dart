@@ -50,8 +50,7 @@ class SearchRestaurantCard extends StatelessWidget {
 
         return GestureDetector(
           onTap: () {
-            Get.toNamed(Routes.restaurantPage,
-                arguments: {'restaurantId': restaurantId});
+            Get.toNamed(Routes.restaurantPage, arguments: {'id': restaurantId});
           },
           child: Container(
             margin: EdgeInsets.only(

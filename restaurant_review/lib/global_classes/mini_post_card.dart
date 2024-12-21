@@ -3,7 +3,7 @@ class PostModel {
   final String name;
   final DateTime createdAt;
   final int viewCount;
-  final String imageUrl;
+  final String? imageUrl;
   final String topic;
 
   PostModel({
