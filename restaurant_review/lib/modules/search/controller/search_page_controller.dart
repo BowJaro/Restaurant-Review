@@ -3,8 +3,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/global_classes/map_restaurant.dart';
-import 'package:restaurant_review/global_widgets/modals/modals.dart';
-import 'package:restaurant_review/global_widgets/restaurants_map/restaurants_map.dart';
 import 'package:restaurant_review/modules/explore/model/mini_user_model.dart';
 import 'package:restaurant_review/modules/explore/model/popular_restaurant_model.dart';
 import 'package:restaurant_review/modules/feed/model/post_detail_model.dart';
@@ -29,10 +27,25 @@ class SearchPageController extends GetxController {
   final searchController = TextEditingController();
   var selectedOption = "restaurant".obs; // Initialize with default value
 
+  // final filterOptions = [
+  //   {'value': 'restaurant', 'label': 'Restaurant'},
+  //   {'value': 'user', 'label': 'User'},
+  //   {'value': 'post', 'label': 'Post'},
+  // ];
+
   final filterOptions = [
-    {'value': 'restaurant', 'label': 'Restaurant'},
-    {'value': 'user', 'label': 'User'},
-    {'value': 'post', 'label': 'Post'},
+    {
+      'value': 'restaurant',
+      'label': FlutterI18n.translate(Get.context!, "search_page.restaurant"),
+    },
+    {
+      'value': 'user',
+      'label': FlutterI18n.translate(Get.context!, "search_page.user"),
+    },
+    {
+      'value': 'post',
+      'label': FlutterI18n.translate(Get.context!, "search_page.post"),
+    },
   ];
 
   SearchPageController(this.repository);

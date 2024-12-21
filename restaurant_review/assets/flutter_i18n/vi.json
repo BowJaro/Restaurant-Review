@@ -231,8 +231,20 @@
     "top_reviewers": "Top reviewers",
     "nearby": "Gần đây",
     "top_rating": "Đánh giá cao",
-    "event": "Sự kiện"
-   },
+    "event": "Sự kiện",
+    "explore": "Khám phá",
+    "search_bar_text": "Tìm kiếm gì đó nào?"
+  },
+  "search_page": {
+    "restaurant": "Nhà hàng",
+    "user": "Người dùng",
+    "post": "Bài đăng",
+    "map": "Vị trí",
+    "cancel": "Hủy",
+    "search": "Tìm kiếm",
+    "filter": "Bộ lọc",
+    "nothing_found": "Không tìm thấy. Hãy thử một từ khóa khác."
+  },
   "restaurant_management": {
     "title": "Quản lí nhà hàng",
     "add_restaurant": "Thêm nhà hàng",

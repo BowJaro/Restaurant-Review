@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
-import 'package:restaurant_review/global_classes/sliver_app_bar_delegate.dart';
 import 'package:restaurant_review/global_widgets/cards/mini_explore_restaurant_card.dart';
 import 'package:restaurant_review/global_widgets/cards/popular_restaurant_card.dart';
-import 'package:restaurant_review/global_widgets/cards/search_restaurant_card.dart';
 import 'package:restaurant_review/global_widgets/user/mini_user_infor.dart';
 import 'package:restaurant_review/routes/routes.dart';
 import '../controller/explore_controller.dart';
@@ -47,10 +45,10 @@ class ExploreView extends GetView<ExploreController> {
                         color: const Color(0xFFEEEEEE),
                         borderRadius: BorderRadius.circular(24),
                       ),
-                      child: const Row(
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Icon(
                               Icons.search,
@@ -60,8 +58,9 @@ class ExploreView extends GetView<ExploreController> {
                           Expanded(
                             child: TextField(
                               decoration: InputDecoration(
-                                hintText: "Looking for something?",
-                                hintStyle: TextStyle(
+                                hintText: FlutterI18n.translate(
+                                    context, "explore.search_bar_text"),
+                                hintStyle: const TextStyle(
                                   color: Color(0xFF9B9B9B),
                                   fontSize: 16,
                                   fontWeight: FontWeight.normal,
@@ -72,7 +71,7 @@ class ExploreView extends GetView<ExploreController> {
                                   false, // Disable typing in this TextField
                             ),
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Icon(
                               Icons.filter_list,
@@ -151,7 +150,7 @@ class ExploreView extends GetView<ExploreController> {
                       ),
                       const SizedBox(height: 10),
                       SizedBox(
-                        height: 150,
+                        height: 125,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.topReviewerList.length,
@@ -167,7 +166,6 @@ class ExploreView extends GetView<ExploreController> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
@@ -178,7 +176,20 @@ class ExploreView extends GetView<ExploreController> {
                   child: DefaultTabController(
                     length: 3,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(
+                            FlutterI18n.translate(context, "explore.explore"),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.boldText,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 5),
                         TabBar(
                           indicatorColor: AppColors.primary,
                           labelColor: AppColors.primary,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
-import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/cards/search_restaurant_card.dart';
 import 'package:restaurant_review/global_widgets/posts/post_item.dart';
 import 'package:restaurant_review/global_widgets/restaurants_map/restaurants_map.dart';
@@ -137,10 +137,10 @@ class SearchView extends GetView<SearchPageController> {
               ),
 
               if (controller.isSearchResultEmpty.value)
-                const Center(
+                Center(
                   child: Text(
-                    "Nothing found. Please try another keyword",
-                    style: TextStyle(
+                    FlutterI18n.translate(context, "search_page.nothing_found"),
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -305,20 +305,22 @@ class SearchView extends GetView<SearchPageController> {
                           onPressed: () {
                             Navigator.pop(context); // Close the modal
                           },
-                          child: const Text("Cancel"),
+                          child: Text(FlutterI18n.translate(
+                              context, "search_page.cancel")),
                         ),
                         // Filters Icon and Text in the same row
-                        const Row(
+                        Row(
                           children: [
-                            SizedBox(width: 8),
-                            Icon(
+                            const SizedBox(width: 8),
+                            const Icon(
                               Icons.filter_list,
                               color: Colors.black,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Text(
-                              "FILTERS",
-                              style: TextStyle(
+                              FlutterI18n.translate(
+                                  context, "search_page.filter"),
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
@@ -338,8 +340,10 @@ class SearchView extends GetView<SearchPageController> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                           ),
-                          child: const Text("Search",
-                              style: TextStyle(color: Colors.white)),
+                          child: Text(
+                              FlutterI18n.translate(
+                                  context, "search_page.search"),
+                              style: const TextStyle(color: Colors.white)),
                         ),
                       ],
                     ),
