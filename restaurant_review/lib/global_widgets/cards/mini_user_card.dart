@@ -27,6 +27,7 @@ class UserCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap ??
           () {
+            print("This is userId $userId");
             Get.toNamed(Routes.user, arguments: {'userId': userId});
           },
       child: Container(

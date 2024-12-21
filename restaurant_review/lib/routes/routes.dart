@@ -5,6 +5,8 @@ import 'package:restaurant_review/modules/brand_page/binding/brand_page_binding.
 import 'package:restaurant_review/modules/brand_page/view/brand_page_view.dart';
 import 'package:restaurant_review/modules/comment/binding/comment_binding.dart';
 import 'package:restaurant_review/modules/comment/view/comment_view.dart';
+import 'package:restaurant_review/modules/explore/binding/explore_binding.dart';
+import 'package:restaurant_review/modules/explore/view/explore_view.dart';
 import 'package:restaurant_review/modules/feedback/binding/feedback_binding.dart';
 import 'package:restaurant_review/modules/feedback/view/report_view.dart';
 import 'package:restaurant_review/modules/following/binding/following_binding.dart';
@@ -29,6 +31,8 @@ import 'package:restaurant_review/modules/report/binding/report_binding.dart';
 import 'package:restaurant_review/modules/report/view/report_view.dart';
 import 'package:restaurant_review/modules/restaurant_detail/binding/restaurant_detail_binding.dart';
 import 'package:restaurant_review/modules/restaurant_detail/view/restaurant_detail_view.dart';
+import 'package:restaurant_review/modules/search/binding/search_binding.dart';
+import 'package:restaurant_review/modules/search/view/search_view.dart';
 import 'package:restaurant_review/modules/restaurant_management/binding/restaurant_management_binding.dart';
 import 'package:restaurant_review/modules/restaurant_management/view/restaurant_management_view.dart';
 import 'package:restaurant_review/modules/restaurant_page/binding/restaurant_page_binding.dart';
@@ -66,6 +70,7 @@ abstract class Routes {
   static const String report = '/report_page';
   static const String feedback = '/feedback_page';
   static const String permissionRequest = '/permission_request_page';
+  static const String searchPage = '/search_page';
   static const String restaurantManagement = '/restaurant_management_page';
   static const String user = '/user';
   static const String menuView = '/menu_view';
@@ -152,6 +157,18 @@ class AppPages {
       binding: PermissionRequestBinding(),
     ),
     GetPage(
+      name: Routes.searchPage,
+      page: () => const SearchView(),
+      binding: SearchBinding(),
+      transition: Transition
+          .noTransition, // Define no animation globally for this route
+    ),
+    GetPage(
+      name: Routes.explore,
+      page: () => const ExploreView(),
+      binding: ExploreBinding(),
+    ),
+    GetPage(  
       name: Routes.restaurantManagement,
       page: () => const RestaurantManagementView(),
       binding: RestaurantManagementBinding(),
