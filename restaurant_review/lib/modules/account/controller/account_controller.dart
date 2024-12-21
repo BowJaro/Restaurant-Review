@@ -19,6 +19,7 @@ class AccountController extends GetxController {
   var isLoadingAccountPage = false.obs;
   var isLoadingChangeProfile = false.obs;
   var isLoadingChangePassword = false.obs;
+  String permission = "user";
 
   late final AvatarSelectorController avatarSelectorController;
 
@@ -53,7 +54,7 @@ class AccountController extends GetxController {
       Get.offAllNamed(Routes.signIn);
     }
     await fetchAccount();
-
+    permission = await getPermission();
     channel = await repository.subscribeAcccountData(fetchAccount);
   }
 
