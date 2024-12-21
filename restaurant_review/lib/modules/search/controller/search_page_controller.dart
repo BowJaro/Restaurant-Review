@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/global_classes/map_restaurant.dart';
-import 'package:restaurant_review/global_widgets/modals/modals.dart';
-import 'package:restaurant_review/global_widgets/restaurants_map/restaurants_map.dart';
 import 'package:restaurant_review/modules/explore/model/mini_user_model.dart';
 import 'package:restaurant_review/modules/explore/model/popular_restaurant_model.dart';
 import 'package:restaurant_review/modules/feed/model/post_detail_model.dart';
@@ -13,7 +9,6 @@ import 'package:restaurant_review/routes/routes.dart';
 import '../../../constants/singleton_variables.dart';
 
 class SearchPageController extends GetxController {
-  final baseImageUrl = dotenv.env['BASE_IMAGE_URL']!;
   final SearchRepository repository;
   var isLoadingSearchPage = false.obs;
   var isMapSelected = false.obs;
