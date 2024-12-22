@@ -11,23 +11,47 @@ class LanguageSelectionView extends GetView<LocaleController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(FlutterI18n.translate(context, 'welcome')),
+        title: Text(FlutterI18n.translate(context, 'change_language')),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(FlutterI18n.translate(context, 'hello'),
-                style: const TextStyle(fontSize: 24)),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                _showLanguageDialog(context);
-              },
-              child: Text(FlutterI18n.translate(context, 'change_language')),
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          Obx(() {
+            return RadioListTile(
+              value: 'en',
+              groupValue: controller.locale.value,
+              onChanged: (value) => controller.changeLocale(value.toString()),
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/icons/usa.jpg',
+                    width: 32,
+                    height: 32,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(FlutterI18n.translate(context, "languages.en")),
+                ],
+              ),
+            );
+          }),
+          Obx(() {
+            return RadioListTile(
+              value: 'vi',
+              groupValue: controller.locale.value,
+              onChanged: (value) => controller.changeLocale(value.toString()),
+              title: Row(
+                children: [
+                  Image.asset(
+                    'assets/icons/vn.png',
+                    width: 32,
+                    height: 32,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(FlutterI18n.translate(context, "languages.vi")),
+                ],
+              ),
+            );
+          }),
+        ],
       ),
     );
   }

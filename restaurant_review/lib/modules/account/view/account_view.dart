@@ -5,6 +5,7 @@ import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/modules/account/view/about_us.dart';
 import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
 import 'package:restaurant_review/modules/account/view/policy.dart';
+import 'package:restaurant_review/modules/language/view/language_view.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
 import '../controller/account_controller.dart';
@@ -202,6 +203,11 @@ class AccountView extends GetView<AccountController> {
                         FlutterI18n.translate(
                             context, "account_page.change_profile"), onTap: () {
                       Get.to(() => const ChangeProfileView());
+                    }),
+                    _buildButton(context, Icons.language,
+                        FlutterI18n.translate(context, "change_language"),
+                        onTap: () {
+                      Get.to(() => const LanguageSelectionView());
                     }),
                     _buildButton(context, Icons.person,
                         FlutterI18n.translate(context, "account_page.about_us"),
