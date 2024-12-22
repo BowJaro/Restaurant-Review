@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
+import 'package:restaurant_review/global_classes/map_restaurant.dart';
 import 'package:restaurant_review/global_classes/mini_post_card.dart';
 import 'package:restaurant_review/global_widgets/modals/modals.dart';
+import 'package:restaurant_review/global_widgets/restaurants_map/restaurants_map.dart';
 import 'package:restaurant_review/routes/routes.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../model/get_restaurant_post_model.dart';
 import '../repository/restaurant_page_repository.dart';
@@ -72,14 +73,17 @@ class RestaurantPageController extends GetxController {
   }
 
   void goToGoogleMap() async {
-    final url = Uri.encodeFull(
-        'https://www.google.com/maps/dir/?api=1&destination=${restaurantModel.longitude},${restaurantModel.latitude}');
-    final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      ModalUtils.showMessageModal(
-          FlutterI18n.translate(Get.context!, "error.unknown"));
-    }
+    Get.to(() => RestaurantsMap(
+          restaurants: [
+            MapRestaurantModel(
+              id: restaurantId!,
+              imageUrl: restaurantModel.imageUrl,
+              name: restaurantModel.name,
+              rateAverage: restaurantModel.averageRate,
+              latitude: restaurantModel.latitude,
+              longitude: restaurantModel.longitude,
+            )
+          ],
+        ));
   }
 }
