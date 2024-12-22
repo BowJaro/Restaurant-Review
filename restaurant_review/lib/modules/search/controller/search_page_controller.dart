@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/global_classes/map_restaurant.dart';
 import 'package:restaurant_review/modules/explore/model/mini_user_model.dart';
