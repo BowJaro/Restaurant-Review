@@ -233,7 +233,19 @@
     "top_reviewers": "Top Reviewers",
     "nearby": "Nearby",
     "top_rating": "Top rating",
-    "event": "Event"
+    "event": "Event",
+    "explore": "Explore",
+    "search_bar_text": "Looking for something?"
+  },
+  "search_page": {
+    "restaurant": "Restaurant",
+    "user": "User",
+    "post": "Post",
+    "map": "Map",
+    "cancel": "Cancel",
+    "search": "Search",
+    "filter": "Filter",
+    "nothing_found": "Nothing found. Please try another keyword"
   },
   "restaurant_management": {
     "title": "Restaurant management",

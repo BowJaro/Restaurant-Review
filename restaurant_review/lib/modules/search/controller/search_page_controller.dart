@@ -24,10 +24,25 @@ class SearchPageController extends GetxController {
   final searchController = TextEditingController();
   var selectedOption = "restaurant".obs; // Initialize with default value
 
+  // final filterOptions = [
+  //   {'value': 'restaurant', 'label': 'Restaurant'},
+  //   {'value': 'user', 'label': 'User'},
+  //   {'value': 'post', 'label': 'Post'},
+  // ];
+
   final filterOptions = [
-    {'value': 'restaurant', 'label': 'Restaurant'},
-    {'value': 'user', 'label': 'User'},
-    {'value': 'post', 'label': 'Post'},
+    {
+      'value': 'restaurant',
+      'label': FlutterI18n.translate(Get.context!, "search_page.restaurant"),
+    },
+    {
+      'value': 'user',
+      'label': FlutterI18n.translate(Get.context!, "search_page.user"),
+    },
+    {
+      'value': 'post',
+      'label': FlutterI18n.translate(Get.context!, "search_page.post"),
+    },
   ];
 
   SearchPageController(this.repository);
