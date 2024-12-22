@@ -6,6 +6,7 @@ import 'package:restaurant_review/modules/explore/model/popular_restaurant_model
 import 'package:restaurant_review/modules/feed/model/post_detail_model.dart';
 import 'package:restaurant_review/modules/search/repository/search_repository.dart';
 import 'package:restaurant_review/routes/routes.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import '../../../constants/singleton_variables.dart';
 
 class SearchPageController extends GetxController {
