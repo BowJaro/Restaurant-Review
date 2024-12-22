@@ -7,7 +7,7 @@ class MyPostProvider {
 
   Future<dynamic> getUserPosts(String profileId) async {
     try {
-      final response = await supabase.rpc('get_user_posts', params: {
+      final response = await supabase.rpc('get_user_with_posts', params: {
         'p_profile_id': profileId,
       });
       return response;

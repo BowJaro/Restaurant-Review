@@ -20,6 +20,5 @@ class SplashController extends GetxController {
     } else {
       Get.offNamed(Routes.signIn);
     }
-    getPermission(fetchNew: true);
   }
 }

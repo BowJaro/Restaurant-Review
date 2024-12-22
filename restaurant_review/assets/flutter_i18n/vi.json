@@ -185,7 +185,8 @@
     "confirm_unfollow_user": "Bạn có chắc muốn bỏ theo dõi người dùng này không?"
   },
   "my_post": {
-    "my_post": "Bài viết của tôi"
+    "my_post": "Bài viết của tôi",
+    "add_post": "Viết bài"
   },
   "report": {
     "report": "Tố cáo",
