@@ -29,15 +29,21 @@ class GetDataForPostModel {
       required this.content,
       required this.hashtagList,
       required this.imageUrlList});
+
   factory GetDataForPostModel.fromMap(Map<String, dynamic> map) {
     final topicList = List<MiniTopicModel>.from(
         map['topic'].map((x) => MiniTopicModel.fromMap(x)));
     final restaurantList = List<MiniRestaurantModel>.from(
         map['restaurant'].map((x) => MiniRestaurantModel.fromMap(x)));
-    final rateList =
-        List<RateModel>.from(map['rate'].map((x) => RateModel.fromMap(x)));
-    final hashtagList = List<String>.from(map['hashtag_list']);
-    final imageUrlList = List<String>.from(map['image_url_list']);
+    final rateList = List<RateModel>.from(map['rate'] == null
+        ? []
+        : map['rate'].map((x) => RateModel.fromMap(x)));
+    final hashtagList = map['hashtag_list'] == null
+        ? <String>[]
+        : List<String>.from(map['hashtag_list'].map((x) => x));
+    final imageUrlList = map['image_url_list'] == null
+        ? <String>[]
+        : List<String>.from(map['image_url_list'].map((x) => x));
 
     return GetDataForPostModel(
       id: map['id'],

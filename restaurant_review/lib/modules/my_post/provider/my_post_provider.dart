@@ -19,4 +19,14 @@ class MyPostProvider {
       return null;
     }
   }
+
+  Future<void> removePost(int id) async {
+    try {
+      await supabase.from('post').delete().eq('id', id);
+    } on PostgrestException catch (error) {
+      print('=========Error removing post: ${error.message}=========');
+    } catch (error) {
+      print('=========Unknown error removing post: $error=========');
+    }
+  }
 }

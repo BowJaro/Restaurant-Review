@@ -186,7 +186,9 @@
   },
   "my_post": {
     "my_post": "Bài viết của tôi",
-    "add_post": "Viết bài"
+    "add_post": "Viết bài",
+    "remove_post": "Xóa bài viết",
+    "confirm_remove_post": "Bạn có chắc muốn xóa bài viết này không?"
   },
   "report": {
     "report": "Tố cáo",

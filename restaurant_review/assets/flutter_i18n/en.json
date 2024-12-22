@@ -188,7 +188,9 @@
   },
   "my_post": {
     "my_post": "My posts",
-    "add_post": "Add post"
+    "add_post": "Add post",
+    "remove_post": "Remove post",
+    "confirm_remove_post": "Are you sure you want to remove this post?"
   },
   "report": {
     "report": "Report",

@@ -28,17 +28,20 @@ class MyPostView extends GetView<MyPostController> {
           itemCount: controller.myPostList.length,
           itemBuilder: (context, index) {
             final item = controller.myPostList[index];
-            return MiniPostCard(
-              id: item.postId,
-              name: item.name,
-              imageUrl: item.imageUrl,
-              subtitle: item.createdAt.toLocal().toString().split(' ')[0],
-              viewCount: item.views,
-              topic: item.topic,
-              onTap: () {
-                Get.toNamed(Routes.postDetail,
-                    arguments: {"isNew": false, "id": item.postId});
-              },
+            return GestureDetector(
+              onLongPress: () => controller.removePost(item.postId),
+              child: MiniPostCard(
+                id: item.postId,
+                name: item.name,
+                imageUrl: item.imageUrl,
+                subtitle: item.createdAt.toLocal().toString().split(' ')[0],
+                viewCount: item.views,
+                topic: item.topic,
+                onTap: () {
+                  Get.toNamed(Routes.postDetail,
+                      arguments: {"isNew": false, "id": item.postId});
+                },
+              ),
             );
           },
         );
