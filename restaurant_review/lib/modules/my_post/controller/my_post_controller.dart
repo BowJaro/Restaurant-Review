@@ -1,5 +1,7 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
+import 'package:restaurant_review/global_widgets/modals/modals.dart';
 import 'package:restaurant_review/modules/my_post/model/my_post_model.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
@@ -10,7 +12,7 @@ class MyPostController extends GetxController {
   MyPostController(this.repository);
 
   RxBool isLoading = true.obs;
-  List<MyPostModel> myPostList = [];
+  RxList<MyPostModel> myPostList = <MyPostModel>[].obs;
 
   @override
   onInit() async {
@@ -25,7 +27,7 @@ class MyPostController extends GetxController {
   Future<void> getData() async {
     var response = await repository.getUserPosts(userId!);
     if (response != null) {
-      myPostList = (response as List<dynamic>)
+      myPostList.value = (response as List<dynamic>)
           .map((item) => MyPostModel.fromMap(item as Map<String, dynamic>))
           .toList();
     } else {
@@ -33,5 +35,16 @@ class MyPostController extends GetxController {
     }
 
     isLoading.value = false;
+  }
+
+  void removePost(int id) async {
+    ModalUtils.showMessageWithButtonsModal(
+      FlutterI18n.translate(Get.context!, "my_post.remove_post"),
+      FlutterI18n.translate(Get.context!, "my_post.confirm_remove_post"),
+      () async {
+        myPostList.removeWhere((element) => element.postId == id);
+        await repository.removePost(id);
+      },
+    );
   }
 }

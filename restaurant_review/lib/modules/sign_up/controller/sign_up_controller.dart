@@ -46,7 +46,6 @@ class SignUpController extends GetxController {
                 Get.context!, "authentication.sign_up_failed"),
             response.message);
       }
-      getPermission(fetchNew: true);
     }
   }
 

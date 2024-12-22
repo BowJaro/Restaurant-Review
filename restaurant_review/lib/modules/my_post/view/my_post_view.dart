@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/global_widgets/appbar/detail_page_app_bar.dart';
 import 'package:restaurant_review/global_widgets/cards/mini_post_card.dart';
 import 'package:restaurant_review/routes/routes.dart';
 
@@ -12,8 +13,11 @@ class MyPostView extends GetView<MyPostController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(FlutterI18n.translate(context, "my_post.my_post")),
+      appBar: DetailPageAppBar(
+        title: FlutterI18n.translate(context, "my_post.my_post"),
+        buttonLabel: FlutterI18n.translate(context, "my_post.add_post"),
+        onPressed: () =>
+            Get.toNamed(Routes.postDetail, arguments: {"isNew": true}),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
@@ -24,17 +28,20 @@ class MyPostView extends GetView<MyPostController> {
           itemCount: controller.myPostList.length,
           itemBuilder: (context, index) {
             final item = controller.myPostList[index];
-            return MiniPostCard(
-              id: item.postId,
-              name: item.name,
-              imageUrl: item.imageUrl,
-              subtitle: item.createdAt.toLocal().toString().split(' ')[0],
-              viewCount: item.views,
-              topic: item.topic,
-              onTap: () {
-                Get.toNamed(Routes.postDetail,
-                    arguments: {"isNew": false, "id": item.postId});
-              },
+            return GestureDetector(
+              onLongPress: () => controller.removePost(item.postId),
+              child: MiniPostCard(
+                id: item.postId,
+                name: item.name,
+                imageUrl: item.imageUrl,
+                subtitle: item.createdAt.toLocal().toString().split(' ')[0],
+                viewCount: item.views,
+                topic: item.topic,
+                onTap: () {
+                  Get.toNamed(Routes.postDetail,
+                      arguments: {"isNew": false, "id": item.postId});
+                },
+              ),
             );
           },
         );

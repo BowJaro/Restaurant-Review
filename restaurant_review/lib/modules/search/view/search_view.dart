@@ -35,9 +35,10 @@ class SearchView extends GetView<SearchPageController> {
                   ),
                   Expanded(
                     child: TextField(
-                      decoration: const InputDecoration(
-                        hintText: "Looking for something?",
-                        hintStyle: TextStyle(
+                      decoration: InputDecoration(
+                        hintText: FlutterI18n.translate(
+                            context, "explore.search_bar_text"),
+                        hintStyle: const TextStyle(
                           color: Color(0xFF9B9B9B),
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
