@@ -19,11 +19,12 @@ class AccountController extends GetxController {
   var isLoadingAccountPage = false.obs;
   var isLoadingChangeProfile = false.obs;
   var isLoadingChangePassword = false.obs;
+  String permission = "user";
 
   late final AvatarSelectorController avatarSelectorController;
 
-  late final String email;
-  late final String fullName;
+  String email = "";
+  String fullName = "";
 
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
@@ -52,9 +53,10 @@ class AccountController extends GetxController {
     if (userId == null) {
       Get.offAllNamed(Routes.signIn);
     }
+    permission = await getPermission();
     await fetchAccount();
-
     channel = await repository.subscribeAcccountData(fetchAccount);
+    isLoadingAccountPage.value = false;
   }
 
   @override
@@ -72,8 +74,6 @@ class AccountController extends GetxController {
   }
 
   Future<void> fetchAccount() async {
-    isLoadingAccountPage.value = true;
-
     final response = await repository.fetchAccount(userId!);
 
     reviews.value = 25;
@@ -99,7 +99,6 @@ class AccountController extends GetxController {
       ModalUtils.showMessageModal(
           FlutterI18n.translate(Get.context!, "error.unknown"));
     }
-    isLoadingAccountPage.value = false;
   }
 
   // Method to update the profile
@@ -219,7 +218,7 @@ class AccountController extends GetxController {
 
   void signOut() async {
     await supabase.auth.signOut();
-    getPermission(fetchNew: true);
+    userId = null;
     Get.offAllNamed(Routes.splash);
   }
 }

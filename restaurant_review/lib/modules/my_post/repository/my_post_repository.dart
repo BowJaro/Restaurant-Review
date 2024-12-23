@@ -8,4 +8,8 @@ class MyPostRepository {
   Future<dynamic> getUserPosts(String profileId) async {
     return await provider.getUserPosts(profileId);
   }
+
+  Future<void> removePost(int id) async {
+    await provider.removePost(id);
+  }
 }
