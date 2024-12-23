@@ -9,6 +9,11 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: AppColors.white, // Set back icon color to white
+        ),
         title: Text(
           FlutterI18n.translate(context, "account_page.about_us"),
           style: const TextStyle(

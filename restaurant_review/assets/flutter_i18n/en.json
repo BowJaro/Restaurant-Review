@@ -10,7 +10,7 @@
     "account": "Account",
     "more": "More",
     "feed": "Feed",
-    "saved": "Saved"
+    "following": "Following"
   },
   "authentication": {
     "sign_in": "Sign In",
@@ -123,7 +123,7 @@
     "my_following": "My following",
     "my_followers": "My followers",
     "change_profile": "Change Profile",
-    "upgrade_to_reviewer": "Upgrade To Reviewer",
+    "upgrade_to_reviewer": "Upgrade Permissions",
     "about_us": "About Us",
     "policy": "Policy",
     "feedback": "Feedback",

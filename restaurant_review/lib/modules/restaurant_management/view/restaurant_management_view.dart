@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:restaurant_review/global_widgets/cards/restaurant_card.dart';
@@ -17,8 +17,17 @@ class RestaurantManagementView extends GetView<RestaurantManagementController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text(FlutterI18n.translate(context, "restaurant_management.title")),
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: AppColors.white, // Set back icon color to white
+        ),
+        title: Text(
+          FlutterI18n.translate(context, "restaurant_management.title"),
+          style: const TextStyle(
+            color: AppColors.white,
+          ),
+        ),
         centerTitle: true,
       ),
       body: Obx(() {
