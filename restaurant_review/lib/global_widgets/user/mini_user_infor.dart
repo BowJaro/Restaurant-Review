@@ -28,21 +28,25 @@ class MiniUserInfor extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 16.0, right: 2.0, left: 8.0),
         child: Column(
           children: [
-            ClipOval(
-              child: CachedNetworkImage(
-                // memCacheHeight: 70,
-                // memCacheWidth: 70,
-                imageUrl:
-                    baseImageUrl + avatarUrl, // Directly using the avatarUrl
-                fit: BoxFit.cover,
-                height: 70,
-                width: 70,
-                placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                errorWidget: (context, url, error) => const Icon(
-                  Icons.error,
-                  color: AppColors.errorRed,
+            Container(
+              decoration: const BoxDecoration(
+                color: AppColors.pageBgGray, // Replace with your desired color
+                shape: BoxShape.circle, // Ensures the background is circular
+              ),
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl:
+                      baseImageUrl + avatarUrl, // Directly using the avatarUrl
+                  fit: BoxFit.cover,
+                  height: 70,
+                  width: 70,
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.person,
+                    color: AppColors.textGray,
+                  ),
                 ),
               ),
             ),

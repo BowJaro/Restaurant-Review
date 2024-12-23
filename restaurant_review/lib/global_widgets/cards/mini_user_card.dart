@@ -31,10 +31,11 @@ class UserCard extends StatelessWidget {
             Get.toNamed(Routes.user, arguments: {'userId': userId});
           },
       child: Container(
+        margin: const EdgeInsets.only(bottom: 10.0),
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
-          color: AppColors.backgroundGray,
+          color: AppColors.white,
         ),
         child: Row(
           children: [

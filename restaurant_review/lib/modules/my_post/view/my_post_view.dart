@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/global_widgets/appbar/detail_page_app_bar.dart';
 import 'package:restaurant_review/global_widgets/cards/mini_post_card.dart';
 import 'package:restaurant_review/routes/routes.dart';
@@ -24,26 +25,29 @@ class MyPostView extends GetView<MyPostController> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        return ListView.builder(
-          itemCount: controller.myPostList.length,
-          itemBuilder: (context, index) {
-            final item = controller.myPostList[index];
-            return GestureDetector(
-              onLongPress: () => controller.removePost(item.postId),
-              child: MiniPostCard(
-                id: item.postId,
-                name: item.name,
-                imageUrl: item.imageUrl,
-                subtitle: item.createdAt.toLocal().toString().split(' ')[0],
-                viewCount: item.views,
-                topic: item.topic,
-                onTap: () {
-                  Get.toNamed(Routes.postDetail,
-                      arguments: {"isNew": false, "id": item.postId});
-                },
-              ),
-            );
-          },
+        return Container(
+          color: AppColors.pageBgGray,
+          child: ListView.builder(
+            itemCount: controller.myPostList.length,
+            itemBuilder: (context, index) {
+              final item = controller.myPostList[index];
+              return GestureDetector(
+                onLongPress: () => controller.removePost(item.postId),
+                child: MiniPostCard(
+                  id: item.postId,
+                  name: item.name,
+                  imageUrl: item.imageUrl,
+                  subtitle: item.createdAt.toLocal().toString().split(' ')[0],
+                  viewCount: item.views,
+                  topic: item.topic,
+                  onTap: () {
+                    Get.toNamed(Routes.postDetail,
+                        arguments: {"isNew": false, "id": item.postId});
+                  },
+                ),
+              );
+            },
+          ),
         );
       }),
     );

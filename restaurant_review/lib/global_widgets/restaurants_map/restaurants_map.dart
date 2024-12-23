@@ -387,7 +387,6 @@ class RestaurantsMap extends StatelessWidget {
         children: [
           TileLayer(
             urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            subdomains: const ['a', 'b', 'c'],
           ),
           MarkerLayer(
             markers: controller.restaurants.map((restaurant) {

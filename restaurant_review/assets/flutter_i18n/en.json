@@ -117,9 +117,11 @@
   },
   "account_page": {
     "account": "Account",
-    "reviews": "Reviews",
+    "posts": "Posts",
     "followers": "Followers",
     "following": "Following",
+    "my_following": "My following",
+    "my_followers": "My followers",
     "change_profile": "Change Profile",
     "upgrade_to_reviewer": "Upgrade To Reviewer",
     "about_us": "About Us",

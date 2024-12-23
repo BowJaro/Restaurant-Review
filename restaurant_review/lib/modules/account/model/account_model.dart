@@ -7,6 +7,9 @@ class AccountModel {
   String? email;
   String? phone;
   ImageItem image;
+  int postCount;
+  int followerCount;
+  int followingCount;
 
   AccountModel({
     required this.id,
@@ -15,6 +18,9 @@ class AccountModel {
     required this.email,
     required this.phone,
     required this.image,
+    this.postCount = 0,
+    this.followerCount = 0,
+    this.followingCount = 0,
   });
 
   factory AccountModel.fromMap(Map<String, dynamic> json) {
@@ -27,6 +33,9 @@ class AccountModel {
       image: ImageItem(
         url: json['url'] ?? "",
       ),
+      postCount: json['post_count'] ?? 0,
+      followerCount: json['follower_count'] ?? 0,
+      followingCount: json['following_count'] ?? 0,
     );
   }
 }

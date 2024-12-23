@@ -13,8 +13,18 @@ class PermissionRequestDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(FlutterI18n.translate(
-            context, "permission_request.permission_request_detail")),
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: AppColors.white, // Set back icon color to white
+        ),
+        title: Text(
+          FlutterI18n.translate(
+              context, "permission_request.permission_request_detail"),
+          style: const TextStyle(
+            color: AppColors.white,
+          ),
+        ),
         centerTitle: true,
       ),
       body: FutureBuilder(

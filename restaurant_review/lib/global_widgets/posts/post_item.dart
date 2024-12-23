@@ -36,10 +36,12 @@ class PostItemController extends GetxController {
 
 class PostItem extends StatelessWidget {
   final int id;
+  final String userId;
   final String userAvatar;
   final String username;
-  final String restaurantAvatar;
-  final String restaurantName;
+  final int? restaurantId;
+  final String? restaurantAvatar;
+  final String? restaurantName;
   final String date;
   final String title; // New
   final String topic; // New
@@ -62,8 +64,10 @@ class PostItem extends StatelessWidget {
   PostItem({
     super.key,
     required this.id,
+    required this.userId,
     required this.userAvatar,
     required this.username,
+    required this.restaurantId,
     required this.restaurantAvatar,
     required this.restaurantName,
     required this.date,
@@ -101,44 +105,79 @@ class PostItem extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(baseImageUrl + userAvatar),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(
+                          Routes.user,
+                          arguments: {'userId': userId},
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 20,
+                        backgroundImage:
+                            NetworkImage(baseImageUrl + userAvatar),
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            username,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(
+                                Routes.user,
+                                arguments: {'userId': userId},
+                              );
+                            },
+                            child: Text(
+                              username,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
-                          Row(
-                            children: [
-                              Text(FlutterI18n.translate(
-                                  context, "post_item.reviewed")),
-                              const SizedBox(width: 4),
-                              CircleAvatar(
-                                radius: 10,
-                                backgroundImage: restaurantAvatar.isNotEmpty
-                                    ? NetworkImage(
-                                        baseImageUrl + restaurantAvatar)
-                                    : null,
-                              ),
-                              const SizedBox(width: 4),
-                              Expanded(
-                                child: Text(
-                                  restaurantName,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
+                          if (restaurantAvatar != null ||
+                              restaurantName != null)
+                            Row(
+                              children: [
+                                Text(FlutterI18n.translate(
+                                    context, "post_item.reviewed")),
+                                const SizedBox(width: 4),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(Routes.restaurantPage,
+                                        arguments: {'id': restaurantId});
+                                  },
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 10,
+                                        backgroundImage:
+                                            restaurantAvatar != null
+                                                ? NetworkImage(baseImageUrl +
+                                                    restaurantAvatar!)
+                                                : null,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      ConstrainedBox(
+                                        constraints: const BoxConstraints(
+                                            maxWidth:
+                                                200), // adjust the width as needed
+                                        child: Text(
+                                          restaurantName ?? '',
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                         ],
                       ),
                     ),

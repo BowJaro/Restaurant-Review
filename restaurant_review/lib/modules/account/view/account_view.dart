@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
+import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/modules/account/view/about_us.dart';
 import 'package:restaurant_review/modules/account/view/change_profile_view.dart';
 import 'package:restaurant_review/modules/account/view/policy.dart';
@@ -115,55 +116,77 @@ class AccountView extends GetView<AccountController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        //Reviews
-                        Column(
-                          children: [
-                            Text(
-                              controller.reviews.toString(),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                        // Reviews Button
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(Routes.myPost);
+                          },
+                          child: Column(
+                            children: [
+                              Text(
+                                controller.reviews.toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Text(
+                              Text(
                                 FlutterI18n.translate(
-                                    context, "account_page.reviews"),
-                                style: const TextStyle(fontSize: 14)),
-                          ],
+                                    context, "account_page.posts"),
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
                         ),
 
-                        //Followers
-                        Column(
-                          children: [
-                            Text(
-                              controller.followers.toString(),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                        // Followers Button
+                        GestureDetector(
+                          onTap: () {
+                            // Add your onTap logic for Followers
+                            print('Followers button tapped');
+                            Get.toNamed(Routes.userFollowers,
+                                arguments: {'id': userId});
+                          },
+                          child: Column(
+                            children: [
+                              Text(
+                                controller.followers.toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Text(
+                              Text(
                                 FlutterI18n.translate(
                                     context, "account_page.followers"),
-                                style: const TextStyle(fontSize: 14)),
-                          ],
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
                         ),
 
-                        //Following
-                        Column(
-                          children: [
-                            Text(
-                              controller.following.toString(),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                        // Following Button
+                        GestureDetector(
+                          onTap: () {
+                            // Add your onTap logic for Following
+                            Get.toNamed(Routes.userFollowing);
+                          },
+                          child: Column(
+                            children: [
+                              Text(
+                                controller.following.toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Text(
+                              Text(
                                 FlutterI18n.translate(
                                     context, "account_page.following"),
-                                style: const TextStyle(fontSize: 14)),
-                          ],
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     )
@@ -270,6 +293,8 @@ class AccountView extends GetView<AccountController> {
                   ),
                 ),
               ),
+
+              const SizedBox(height: 16),
             ],
           ),
         ),
