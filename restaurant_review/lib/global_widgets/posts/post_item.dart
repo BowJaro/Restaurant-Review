@@ -164,7 +164,7 @@ class PostItem extends StatelessWidget {
                                       ConstrainedBox(
                                         constraints: const BoxConstraints(
                                             maxWidth:
-                                                180), // adjust the width as needed
+                                                160), // adjust the width as needed
                                         child: Text(
                                           restaurantName ?? '',
                                           style: const TextStyle(

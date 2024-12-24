@@ -300,6 +300,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/constants/singleton_variables.dart';
 import 'package:restaurant_review/global_classes/map_restaurant.dart';
+import 'package:restaurant_review/routes/routes.dart';
 
 // GetX Controller
 class RestaurantsMapController extends GetxController {
@@ -396,11 +397,8 @@ class RestaurantsMap extends StatelessWidget {
                 point: LatLng(restaurant.latitude, restaurant.longitude),
                 child: GestureDetector(
                   onTap: () {
-                    Get.snackbar(
-                      'Restaurant Selected',
-                      restaurant.name,
-                      snackPosition: SnackPosition.BOTTOM,
-                    );
+                    Get.toNamed(Routes.restaurantPage,
+                        arguments: {'id': restaurant.id});
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
