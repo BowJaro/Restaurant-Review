@@ -306,7 +306,7 @@ import 'package:restaurant_review/routes/routes.dart';
 class RestaurantsMapController extends GetxController {
   var restaurants = <MapRestaurantModel>[].obs;
   final mapCenter =
-      LatLng(10.8231, 106.6297).obs; // Default to a specific location
+      const LatLng(10.8231, 106.6297).obs; // Default to a specific location
 
   @override
   void onInit() async {
@@ -369,10 +369,11 @@ class RestaurantsMapController extends GetxController {
 }
 
 class RestaurantsMap extends StatelessWidget {
-  final RestaurantsMapController controller =
-      Get.put(RestaurantsMapController());
+  late final RestaurantsMapController controller;
 
   RestaurantsMap({super.key, required List<MapRestaurantModel> restaurants}) {
+    Get.create(() => RestaurantsMapController());
+    controller = Get.find<RestaurantsMapController>();
     controller.loadRestaurants(restaurants);
   }
 
