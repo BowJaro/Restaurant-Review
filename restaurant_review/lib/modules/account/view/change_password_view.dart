@@ -22,6 +22,9 @@ class ChangePasswordView extends GetView<AccountController> {
 
       return Scaffold(
         appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: AppColors.white, // Set back icon color to white
+          ),
           backgroundColor: AppColors.primary,
           title: Text(
               FlutterI18n.translate(context, "account_page.change_password"),

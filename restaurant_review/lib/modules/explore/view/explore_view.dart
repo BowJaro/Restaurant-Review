@@ -175,7 +175,7 @@ class ExploreView extends GetView<ExploreController> {
                 SliverFillRemaining(
                   hasScrollBody: true,
                   child: DefaultTabController(
-                    length: 3,
+                    length: 2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -207,10 +207,6 @@ class ExploreView extends GetView<ExploreController> {
                               text: FlutterI18n.translate(
                                   context, "explore.top_rating"),
                             ),
-                            Tab(
-                              text: FlutterI18n.translate(
-                                  context, "explore.event"),
-                            ),
                           ],
                         ),
                         Expanded(
@@ -218,10 +214,9 @@ class ExploreView extends GetView<ExploreController> {
                             children: [
                               // Nearby Tab
                               Container(
-                                color: const Color(
-                                    0xFFF5F5F5), // Set a light gray background
+                                color: AppColors
+                                    .pageBgGray, // Set a light gray background
                                 child: ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
                                   itemCount:
                                       controller.topNearbyRestaurantList.length,
                                   itemBuilder: (context, index) {
@@ -243,10 +238,9 @@ class ExploreView extends GetView<ExploreController> {
                               ),
                               // Top Rating Tab
                               Container(
-                                color: const Color(
-                                    0xFFF5F5F5), // Set a light gray background
+                                color: AppColors
+                                    .pageBgGray, // Set a light gray background
                                 child: ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
                                   itemCount:
                                       controller.topRatingRestaurantList.length,
                                   itemBuilder: (context, index) {
@@ -264,12 +258,6 @@ class ExploreView extends GetView<ExploreController> {
                                     );
                                   },
                                 ),
-                              ),
-
-                              // Event Tab
-                              Container(
-                                color: Colors.purple,
-                                child: const Center(child: Text('Event')),
                               ),
                             ],
                           ),

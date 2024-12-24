@@ -76,10 +76,6 @@ class AccountController extends GetxController {
   Future<void> fetchAccount() async {
     final response = await repository.fetchAccount(userId!);
 
-    reviews.value = 25;
-    followers.value = 150;
-    following.value = 75;
-
     if (response != null) {
       final accountModel = AccountModel.fromMap(response);
       avatarUrl = accountModel.image.path;
@@ -94,6 +90,9 @@ class AccountController extends GetxController {
       phoneController.text = accountModel.phone ??
           FlutterI18n.translate(Get.context!, "error.no_data");
       avatarSelectorController.setImage(accountModel.image);
+      reviews.value = accountModel.postCount;
+      followers.value = accountModel.followerCount;
+      following.value = accountModel.followingCount;
     } else {
       Get.back();
       ModalUtils.showMessageModal(

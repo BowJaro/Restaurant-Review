@@ -3,26 +3,29 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/constants/strings.dart';
-import 'package:restaurant_review/global_widgets/cards/mini_post_card.dart';
 import 'package:restaurant_review/global_widgets/cards/mini_restaurant_card.dart';
 import 'package:restaurant_review/global_widgets/cards/mini_user_card.dart';
-import 'package:restaurant_review/modules/following/controller/following_controller.dart';
+import 'package:restaurant_review/modules/user_following/controller/user_following_controller.dart';
 
-class FollowingView extends GetView<FollowingController> {
-  const FollowingView({super.key});
+class UserFollowingView extends GetView<UserFollowingController> {
+  const UserFollowingView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.primary,
           elevation: 0,
+          iconTheme: const IconThemeData(
+            color: AppColors.white, // Set back icon color to white
+          ),
           title: Text(
-            FlutterI18n.translate(context, "following.following"),
+            FlutterI18n.translate(context, "account_page.my_following"),
             style: const TextStyle(
-                color: AppColors.white, fontWeight: FontWeight.bold),
+              color: AppColors.white,
+            ),
           ),
           centerTitle: true,
           bottom: TabBar(
@@ -32,7 +35,6 @@ class FollowingView extends GetView<FollowingController> {
             indicatorColor: AppColors.white, // Color for the indicator
             tabs: [
               Tab(text: FlutterI18n.translate(context, "following.restaurant")),
-              Tab(text: FlutterI18n.translate(context, "following.post")),
               Tab(text: FlutterI18n.translate(context, "following.user")),
             ],
           ),
@@ -44,65 +46,48 @@ class FollowingView extends GetView<FollowingController> {
             }
 
             return Container(
-                color: AppColors.pageBgGray,
-                child: TabBarView(
-                  children: [
-                    _buildListWrapper(
-                      context,
-                      controller.followingModel!.value.restaurants,
-                      (item) => RestaurantCard(
-                        restaurantId: item.id,
-                        imageUrl: item.imageUrl,
-                        name: item.name,
-                        rateAverage: item.rateAverage,
-                        street: item.street,
-                        provinceId: item.provinceId.toString(),
-                        districtId: item.districtId.toString(),
-                        wardId: item.wardId.toString(),
-                      ),
-                      (item) => controller.removeFollowing(
-                        item.id.toString(),
-                        TableNameStrings.restaurant,
-                      ),
+              color: AppColors.pageBgGray,
+              child: TabBarView(
+                children: [
+                  _buildListWrapper(
+                    context,
+                    controller.followingModel!.value.restaurants,
+                    (item) => RestaurantCard(
+                      restaurantId: item.id,
+                      imageUrl: item.imageUrl,
+                      name: item.name,
+                      rateAverage: item.rateAverage,
+                      street: item.street,
+                      provinceId: item.provinceId.toString(),
+                      districtId: item.districtId.toString(),
+                      wardId: item.wardId.toString(),
+                    ),
+                    (item) => controller.removeFollowing(
+                      item.id.toString(),
                       TableNameStrings.restaurant,
                     ),
-                    _buildListWrapper(
-                      context,
-                      controller.followingModel!.value.posts,
-                      (item) => MiniPostCard(
-                        id: item.id,
-                        name: item.name,
-                        imageUrl: item.imageUrl,
-                        subtitle: item.author ??
-                            FlutterI18n.translate(context, "following.unknown"),
-                        viewCount: item.viewCount,
-                        topic: item.topic,
-                      ),
-                      (item) => controller.removeFollowing(
-                        item.id.toString(),
-                        TableNameStrings.post,
-                      ),
-                      TableNameStrings.post,
+                    TableNameStrings.restaurant,
+                  ),
+                  _buildListWrapper(
+                    context,
+                    controller.followingModel!.value.users,
+                    (item) => UserCard(
+                      userId: item.id,
+                      imageUrl: item.imageUrl,
+                      name: item.name,
+                      userName: item.username,
+                      joinDate: item.joinDate,
+                      onTap: () => controller.goToUserPage(item.id),
                     ),
-                    _buildListWrapper(
-                      context,
-                      controller.followingModel!.value.users,
-                      (item) => UserCard(
-                        userId: item.id,
-                        imageUrl: item.imageUrl,
-                        name: item.name,
-                        userName: item.username,
-                        joinDate: item.joinDate,
-                        onTap: () => controller.goToUserPage(item.id),
-                      ),
-                      (item) => controller.removeFollowing(
-                        item.id,
-                        TableNameStrings.user,
-                      ),
+                    (item) => controller.removeFollowing(
+                      item.id,
                       TableNameStrings.user,
                     ),
-                  ],
-                ));
+                    TableNameStrings.user,
+                  ),
+                ],
+              ),
+            );
           },
         ),
       ),

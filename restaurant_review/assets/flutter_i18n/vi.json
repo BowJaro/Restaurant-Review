@@ -10,7 +10,8 @@
     "account": "Tài khoản",
     "more": "Mở rộng",
     "feed": "Bản tin",
-    "saved": "Đã lưu"
+    "saved": "Đã lưu",
+    "following": "Theo dõi"
   },
   "authentication": {
     "sign_in": "Đăng nhập",
@@ -115,11 +116,13 @@
   },
   "account_page": {
     "account": "Tài khoản",
-    "reviews": "Bài đánhg giá",
-    "followers": "Người theo dõi",
-    "following": "Người đang theo dõi",
+    "posts": "Bài viết",
+    "followers": "Theo dõi",
+    "following": "Đang theo dõi",
+    "my_following": "Đang theo dõi",
+    "my_followers": "Theo dõi",
     "change_profile": "Thay đổi thông tin",
-    "upgrade_to_reviewer": "Nâng cấp lên reviewer",
+    "upgrade_to_reviewer": "Nâng cấp quyền",
     "about_us": "Về chúng tôi",
     "policy": "Chính sách",
     "feedback": "Phản hồi",

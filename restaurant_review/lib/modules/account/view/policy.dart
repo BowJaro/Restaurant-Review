@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:restaurant_review/constants/colors.dart';
 
 class Policy extends StatelessWidget {
   const Policy({super.key});
@@ -8,7 +9,17 @@ class Policy extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(FlutterI18n.translate(context, "account_page.policy")),
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: AppColors.white, // Set back icon color to white
+        ),
+        title: Text(
+          FlutterI18n.translate(context, "account_page.policy"),
+          style: const TextStyle(
+            color: AppColors.white,
+          ),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

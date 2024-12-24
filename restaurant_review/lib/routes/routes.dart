@@ -45,7 +45,10 @@ import 'package:restaurant_review/modules/splash/binding/splash_binding.dart';
 import 'package:restaurant_review/modules/splash/view/splash_view.dart';
 import 'package:restaurant_review/modules/user/binding/user_binding.dart';
 import 'package:restaurant_review/modules/user/view/user_view.dart';
-
+import 'package:restaurant_review/modules/user_following/binding/user_following_binding.dart';
+import 'package:restaurant_review/modules/user_following/view/user_following_view.dart';
+import 'package:restaurant_review/modules/user_follower/binding/user_follower_binding.dart';
+import 'package:restaurant_review/modules/user_follower/view/user_follower_view.dart';
 import '../modules/account/binding/account_binding.dart';
 import '../modules/account/view/account_view.dart';
 
@@ -76,6 +79,8 @@ abstract class Routes {
   static const String menuView = '/menu_view';
   static const String menuCreation = '/menu_creation';
   static const String notification = '/notification';
+  static const String userFollowers = '/user_followers';
+  static const String userFollowing = '/user_following';
 }
 
 class AppPages {
@@ -168,7 +173,7 @@ class AppPages {
       page: () => const ExploreView(),
       binding: ExploreBinding(),
     ),
-    GetPage(  
+    GetPage(
       name: Routes.restaurantManagement,
       page: () => const RestaurantManagementView(),
       binding: RestaurantManagementBinding(),
@@ -202,6 +207,16 @@ class AppPages {
       name: Routes.notification,
       page: () => const NotificationView(),
       binding: NotificationBinding(),
+    ),
+    GetPage(
+      name: Routes.userFollowers,
+      page: () => const UserFollowerView(),
+      binding: UserFollowerBinding(),
+    ),
+    GetPage(
+      name: Routes.userFollowing,
+      page: () => const UserFollowingView(),
+      binding: UserFollowingBinding(),
     ),
   ];
 }

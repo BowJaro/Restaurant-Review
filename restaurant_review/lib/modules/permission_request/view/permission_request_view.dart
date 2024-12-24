@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/colors.dart';
 import 'package:restaurant_review/modules/permission_request/view/add_permission_request.dart';
 import 'package:restaurant_review/modules/permission_request/widget/permission_request_item.dart';
 
@@ -13,8 +14,18 @@ class PermissionRequestView extends GetView<PermissionRequestController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(FlutterI18n.translate(
-            context, "permission_request.permission_request")),
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: AppColors.white, // Set back icon color to white
+        ),
+        title: Text(
+          FlutterI18n.translate(
+              context, "permission_request.permission_request"),
+          style: const TextStyle(
+            color: AppColors.white,
+          ),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

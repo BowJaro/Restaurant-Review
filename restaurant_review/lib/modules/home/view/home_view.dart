@@ -39,7 +39,7 @@ class HomeView extends GetView<HomeController> {
                 label: FlutterI18n.translate(context, "home.explore")),
             BottomNavigationBarItem(
                 icon: const Icon(Icons.bookmark),
-                label: FlutterI18n.translate(context, "home.saved")),
+                label: FlutterI18n.translate(context, "home.following")),
             BottomNavigationBarItem(
                 icon: const Icon(Icons.account_circle),
                 label: FlutterI18n.translate(context, "home.account")),

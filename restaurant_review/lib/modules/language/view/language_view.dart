@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_review/constants/colors.dart';
 
 import '../controller/language_controller.dart';
 
@@ -11,7 +12,17 @@ class LanguageSelectionView extends GetView<LocaleController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(FlutterI18n.translate(context, 'change_language')),
+        backgroundColor: AppColors.primary,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: AppColors.white, // Set back icon color to white
+        ),
+        title: Text(
+          FlutterI18n.translate(context, 'change_language'),
+          style: const TextStyle(
+            color: AppColors.white,
+          ),
+        ),
       ),
       body: Column(
         children: [

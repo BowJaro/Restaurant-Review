@@ -3,8 +3,10 @@ import 'package:restaurant_review/global_classes/rate.dart';
 
 class PostDetail {
   final int id;
+  final String? userId;
   final String? username;
   final String? avatarUrl;
+  final int? restaurantId;
   final String? restaurantName;
   final String? restaurantImage;
   final String createdAt;
@@ -24,8 +26,10 @@ class PostDetail {
 
   PostDetail({
     required this.id,
+    required this.userId,
     required this.username,
     required this.avatarUrl,
+    required this.restaurantId,
     required this.restaurantName,
     required this.restaurantImage,
     required this.createdAt,
@@ -47,8 +51,10 @@ class PostDetail {
   factory PostDetail.fromMap(Map<String, dynamic> map) {
     return PostDetail(
       id: map['id'],
+      userId: map['user_id'],
       username: map['username'],
       avatarUrl: map['avatar_url'],
+      restaurantId: map['restaurant_id'],
       restaurantName: map['restaurant_name'],
       restaurantImage: map['restaurant_image'],
       createdAt: map['created_at'],

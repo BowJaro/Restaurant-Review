@@ -144,10 +144,12 @@ class FeedView extends GetView<FeedController> {
                   final post = controller.globalPostList[index];
                   return PostItem(
                     id: post.id,
+                    userId: post.userId ?? "",
                     userAvatar: post.avatarUrl ?? "",
                     username: post.username ?? "Unknown User",
-                    restaurantAvatar: post.restaurantImage ?? "",
-                    restaurantName: post.restaurantName ?? "Unknown Restaurant",
+                    restaurantId: post.restaurantId ?? 1,
+                    restaurantAvatar: post.restaurantImage,
+                    restaurantName: post.restaurantName,
                     date: post.createdAt,
                     title: post.title,
                     topic: post.topic,
@@ -182,10 +184,12 @@ class FeedView extends GetView<FeedController> {
                   final post = controller.followingPostList[index];
                   return PostItem(
                     id: post.id,
+                    userId: post.userId ?? "",
                     userAvatar: post.avatarUrl ?? "",
                     username: post.username ?? "Unknown User",
-                    restaurantAvatar: post.restaurantImage ?? "",
-                    restaurantName: post.restaurantName ?? "Unknown Restaurant",
+                    restaurantId: post.restaurantId ?? 1,
+                    restaurantAvatar: post.restaurantImage,
+                    restaurantName: post.restaurantName,
                     date: post.createdAt,
                     title: post.title,
                     topic: post.topic,
