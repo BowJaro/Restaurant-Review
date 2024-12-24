@@ -32,27 +32,30 @@ class AddPermissionRequest extends GetView<PermissionRequestController> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    controller.selectedPermission.value = "restaurant";
-                  },
-                  child: Text(FlutterI18n.translate(
-                      context, "permission_request.restaurant_permission")),
-                ),
-                const SizedBox(width: 8.0),
-                controller.permission == "user"
-                    ? ElevatedButton(
-                        onPressed: () {
-                          controller.selectedPermission.value = "reviewer";
-                        },
-                        child: Text(FlutterI18n.translate(
-                            context, "permission_request.reviewer_permission")),
-                      )
-                    : const SizedBox(),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      controller.selectedPermission.value = "restaurant";
+                    },
+                    child: Text(FlutterI18n.translate(
+                        context, "permission_request.restaurant_permission")),
+                  ),
+                  const SizedBox(width: 8.0),
+                  controller.permission == "user"
+                      ? ElevatedButton(
+                          onPressed: () {
+                            controller.selectedPermission.value = "reviewer";
+                          },
+                          child: Text(FlutterI18n.translate(context,
+                              "permission_request.reviewer_permission")),
+                        )
+                      : const SizedBox(),
+                ],
+              ),
             ),
             const SizedBox(height: 10.0),
             Obx(() {
