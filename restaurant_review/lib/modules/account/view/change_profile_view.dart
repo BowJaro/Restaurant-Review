@@ -111,7 +111,11 @@ class ChangeProfileView extends GetView<AccountController> {
                       title: FlutterI18n.translate(
                           context, "account_page.change_profile"),
                       onPressed: () {
-                        controller.updateAccount();
+                        controller.updateAccount().then((_) {
+                          Get.back();
+                          controller
+                              .fetchAccount(); // Notify the account page to refresh its data
+                        });
                       },
                     ),
                     const SizedBox(height: 10),

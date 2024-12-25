@@ -133,7 +133,8 @@ class SearchView extends GetView<SearchPageController> {
                               color: controller.isMapSelected.value
                                   ? Colors.orange
                                   : const Color(0xFF9B9B9B)),
-                          label: const Text("Map"),
+                          label: Text(FlutterI18n.translate(
+                              context, "search_page.map")),
                         );
                       }),
                     ],

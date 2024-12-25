@@ -117,28 +117,29 @@ class AccountView extends GetView<AccountController> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         // Reviews Button
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed(Routes.myPost);
-                          },
-                          child: Column(
-                            children: [
-                              Text(
-                                controller.reviews.toString(),
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                        controller.permission != "user"
+                            ? GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(Routes.myPost);
+                                },
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      controller.reviews.toString(),
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    Text(
+                                      FlutterI18n.translate(
+                                          context, "account_page.posts"),
+                                      style: const TextStyle(fontSize: 14),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Text(
-                                FlutterI18n.translate(
-                                    context, "account_page.posts"),
-                                style: const TextStyle(fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        ),
-
+                              )
+                            : const SizedBox(),
                         // Followers Button
                         GestureDetector(
                           onTap: () {
