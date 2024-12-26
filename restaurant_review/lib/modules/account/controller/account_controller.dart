@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -55,7 +57,7 @@ class AccountController extends GetxController {
     }
     permission = await getPermission();
     await fetchAccount();
-    channel = await repository.subscribeAcccountData(fetchAccount);
+    //channel = await repository.subscribeAcccountData(fetchAccount);
     isLoadingAccountPage.value = false;
   }
 
@@ -69,7 +71,7 @@ class AccountController extends GetxController {
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     avatarSelectorController.dispose();
-    repository.unsubscribeAcccountData(channel);
+    //repository.unsubscribeAcccountData(channel);
     super.onClose();
   }
 
@@ -78,6 +80,7 @@ class AccountController extends GetxController {
 
     if (response != null) {
       final accountModel = AccountModel.fromMap(response);
+      print("accountResponse: ${accountModel.image.path}");
       avatarUrl = accountModel.image.path;
       email = accountModel.email ?? "";
       emailController.text = accountModel.email ??

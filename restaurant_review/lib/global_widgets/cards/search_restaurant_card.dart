@@ -160,7 +160,7 @@ class SearchRestaurantCard extends StatelessWidget {
                       : ConstrainedBox(
                           constraints: BoxConstraints(
                             maxWidth: Get.width * 2 / 3 -
-                                16, // Same width as the image
+                                22, // Same width as the image
                           ),
                           child: Text(
                             '$street, ${snapshot.data!.toString()}',
