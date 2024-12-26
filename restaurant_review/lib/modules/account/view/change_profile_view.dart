@@ -113,8 +113,7 @@ class ChangeProfileView extends GetView<AccountController> {
                       onPressed: () {
                         controller.updateAccount().then((_) {
                           Get.back();
-                          controller
-                              .fetchAccount(); // Notify the account page to refresh its data
+                          controller.fetchAccount();
                         });
                       },
                     ),
