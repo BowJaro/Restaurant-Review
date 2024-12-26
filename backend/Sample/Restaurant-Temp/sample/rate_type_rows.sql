@@ -1,1 +1,0 @@
-INSERT INTO "public"."rate_type" ("id", "name", "description") VALUES ('1', 'Taste', ''), ('2', 'Service', ''), ('3', 'Price', ''), ('4', 'Ambiance', ''), ('5', 'Cleanliness', '');
