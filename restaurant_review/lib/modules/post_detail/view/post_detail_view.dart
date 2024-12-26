@@ -164,6 +164,9 @@ class PostDetailView extends GetView<PostDetailController> {
             return StarRating(
               value: rate.value.value,
               size: size,
+              onPressed: (value) {
+                rate.value.value = value + 0.0;
+              },
             );
           }),
         ),
