@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -76,6 +74,7 @@ class AccountController extends GetxController {
   }
 
   Future<void> fetchAccount() async {
+    isLoadingAccountPage.value = true;
     final response = await repository.fetchAccount(userId!);
 
     if (response != null) {
@@ -101,6 +100,7 @@ class AccountController extends GetxController {
       ModalUtils.showMessageModal(
           FlutterI18n.translate(Get.context!, "error.unknown"));
     }
+    isLoadingAccountPage.value = false;
   }
 
   // Method to update the profile
