@@ -26,7 +26,8 @@ class RestaurantFollowingModel {
       id: int.parse(map['id']),
       imageUrl: map['image_url'],
       name: map['name'],
-      rateAverage: map['rate_average'] ?? 0.0,
+      rateAverage: double.parse(
+          map['rate_average'] == null ? "0.0" : map['rate_average'].toString()),
       provinceId: map['province_id'],
       districtId: map['district_id'],
       wardId: map['ward_id'],
