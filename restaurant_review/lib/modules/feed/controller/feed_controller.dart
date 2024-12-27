@@ -10,7 +10,7 @@ import '../repository/feed_repository.dart';
 class FeedController extends GetxController {
   final baseImageUrl = dotenv.env['BASE_IMAGE_URL']!;
   final FeedRepository repository;
-  var isLoadingAccountPage = false.obs;
+  var isLoadingAccountPage = true.obs;
 
   var followingPostList = <PostDetail>[].obs;
   var globalPostList = <PostDetail>[].obs;
@@ -24,6 +24,8 @@ class FeedController extends GetxController {
     }
     await fetchFollowingPostList();
     await fetchNewestPostList();
+
+    isLoadingAccountPage.value = false;
   }
 
   @override
@@ -32,7 +34,6 @@ class FeedController extends GetxController {
   }
 
   Future<void> fetchFollowingPostList() async {
-    isLoadingAccountPage.value = true;
     final response = await repository.getListFollowingPost(userId!, 5);
 
     if (response != null) {
@@ -44,11 +45,9 @@ class FeedController extends GetxController {
       ModalUtils.showMessageModal(
           FlutterI18n.translate(Get.context!, "error.unknown"));
     }
-    isLoadingAccountPage.value = false;
   }
 
   Future<void> fetchNewestPostList() async {
-    isLoadingAccountPage.value = true;
     final response = await repository.getNewestPost(5, userId!);
     if (response != null) {
       globalPostList.addAll((response as List<dynamic>)
@@ -60,7 +59,6 @@ class FeedController extends GetxController {
       ModalUtils.showMessageModal(
           FlutterI18n.translate(Get.context!, "error.unknown"));
     }
-    isLoadingAccountPage.value = false;
   }
 
   void updateSavedPostInDatabase(int postId, bool isSaved) {

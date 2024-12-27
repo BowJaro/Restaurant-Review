@@ -138,84 +138,98 @@ class FeedView extends GetView<FeedController> {
           body: TabBarView(
             children: [
               // Tab 1: Global Feed
-              ListView.builder(
-                itemCount: controller.globalPostList.length,
-                itemBuilder: (context, index) {
-                  final post = controller.globalPostList[index];
-                  return PostItem(
-                    id: post.id,
-                    userId: post.userId ?? "",
-                    userAvatar: post.avatarUrl ?? "",
-                    username: post.username ?? "Unknown User",
-                    restaurantId: post.restaurantId ?? 1,
-                    restaurantAvatar: post.restaurantImage,
-                    restaurantName: post.restaurantName,
-                    date: post.createdAt,
-                    title: post.title,
-                    topic: post.topic,
-                    content: post.metadataText,
-                    hashtags: post.hashtags ?? [],
-                    rateList: post.rateList ?? [],
-                    mediaUrls: post.metadataImageList ?? [],
-                    isLike: post.isLike,
-                    isDislike: post.isDislike,
-                    isSaved: post.isSaved,
-                    dislikeCount: post.dislikeCount,
-                    likeCount:
-                        post.likeCount, // Replace with actual react count
-                    commentCount:
-                        post.commentCount, // Replace with actual comment count
-                    updateIsSavedInDatabase: (postId, isSaved) {
-                      controller.updateSavedPostInDatabase(postId, isSaved);
-                    },
-                    onComment: () => print("Comment clicked on ${post.title}"),
-                    updateIsLikeInDatabase:
-                        (int postId, bool isLike, bool isDislike) {
-                      controller.updateReactionPostInDatabase(
-                          postId, isLike, isDislike);
-                    },
-                  );
+              RefreshIndicator(
+                onRefresh: () async {
+                  // Call the controller's function to refresh the global feed
+                  await controller.fetchNewestPostList();
                 },
+                child: ListView.builder(
+                  itemCount: controller.globalPostList.length,
+                  itemBuilder: (context, index) {
+                    final post = controller.globalPostList[index];
+                    return PostItem(
+                      id: post.id,
+                      userId: post.userId ?? "",
+                      userAvatar: post.avatarUrl ?? "",
+                      username: post.username ?? "Unknown User",
+                      restaurantId: post.restaurantId ?? 1,
+                      restaurantAvatar: post.restaurantImage,
+                      restaurantName: post.restaurantName,
+                      date: post.createdAt,
+                      title: post.title,
+                      topic: post.topic,
+                      content: post.metadataText,
+                      hashtags: post.hashtags ?? [],
+                      rateList: post.rateList ?? [],
+                      mediaUrls: post.metadataImageList ?? [],
+                      isLike: post.isLike,
+                      isDislike: post.isDislike,
+                      isSaved: post.isSaved,
+                      dislikeCount: post.dislikeCount,
+                      likeCount:
+                          post.likeCount, // Replace with actual react count
+                      commentCount: post
+                          .commentCount, // Replace with actual comment count
+                      updateIsSavedInDatabase: (postId, isSaved) {
+                        controller.updateSavedPostInDatabase(postId, isSaved);
+                      },
+                      onComment: () =>
+                          print("Comment clicked on ${post.title}"),
+                      updateIsLikeInDatabase:
+                          (int postId, bool isLike, bool isDislike) {
+                        controller.updateReactionPostInDatabase(
+                            postId, isLike, isDislike);
+                      },
+                    );
+                  },
+                ),
               ),
               // Tab 2: Following Feed
-              ListView.builder(
-                itemCount: controller.followingPostList.length,
-                itemBuilder: (context, index) {
-                  final post = controller.followingPostList[index];
-                  return PostItem(
-                    id: post.id,
-                    userId: post.userId ?? "",
-                    userAvatar: post.avatarUrl ?? "",
-                    username: post.username ?? "Unknown User",
-                    restaurantId: post.restaurantId ?? 1,
-                    restaurantAvatar: post.restaurantImage,
-                    restaurantName: post.restaurantName,
-                    date: post.createdAt,
-                    title: post.title,
-                    topic: post.topic,
-                    content: post.metadataText,
-                    hashtags: post.hashtags ?? [],
-                    rateList: post.rateList ?? [],
-                    mediaUrls: post.metadataImageList ?? [],
-                    isLike: post.isLike,
-                    isDislike: post.isDislike,
-                    isSaved: post.isSaved,
-                    dislikeCount: post.dislikeCount,
-                    likeCount:
-                        post.likeCount, // Replace with actual react count
-                    commentCount:
-                        post.commentCount, // Replace with actual comment count
-                    updateIsSavedInDatabase: (postId, isSaved) {
-                      controller.updateSavedPostInDatabase(postId, isSaved);
-                    },
-                    onComment: () => print("Comment clicked on ${post.title}"),
-                    updateIsLikeInDatabase:
-                        (int postId, bool isLike, bool isDislike) {
-                      controller.updateReactionPostInDatabase(
-                          postId, isLike, isDislike);
-                    },
-                  );
+              RefreshIndicator(
+                onRefresh: () async {
+                  // Call the controller's function to refresh the following feed
+                  await controller.fetchFollowingPostList();
                 },
+                child: ListView.builder(
+                  itemCount: controller.followingPostList.length,
+                  itemBuilder: (context, index) {
+                    final post = controller.followingPostList[index];
+                    return PostItem(
+                      id: post.id,
+                      userId: post.userId ?? "",
+                      userAvatar: post.avatarUrl ?? "",
+                      username: post.username ?? "Unknown User",
+                      restaurantId: post.restaurantId ?? 1,
+                      restaurantAvatar: post.restaurantImage,
+                      restaurantName: post.restaurantName,
+                      date: post.createdAt,
+                      title: post.title,
+                      topic: post.topic,
+                      content: post.metadataText,
+                      hashtags: post.hashtags ?? [],
+                      rateList: post.rateList ?? [],
+                      mediaUrls: post.metadataImageList ?? [],
+                      isLike: post.isLike,
+                      isDislike: post.isDislike,
+                      isSaved: post.isSaved,
+                      dislikeCount: post.dislikeCount,
+                      likeCount:
+                          post.likeCount, // Replace with actual react count
+                      commentCount: post
+                          .commentCount, // Replace with actual comment count
+                      updateIsSavedInDatabase: (postId, isSaved) {
+                        controller.updateSavedPostInDatabase(postId, isSaved);
+                      },
+                      onComment: () =>
+                          print("Comment clicked on ${post.title}"),
+                      updateIsLikeInDatabase:
+                          (int postId, bool isLike, bool isDislike) {
+                        controller.updateReactionPostInDatabase(
+                            postId, isLike, isDislike);
+                      },
+                    );
+                  },
+                ),
               ),
             ],
           ),
