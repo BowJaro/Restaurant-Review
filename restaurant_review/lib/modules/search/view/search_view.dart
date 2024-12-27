@@ -6,6 +6,7 @@ import 'package:restaurant_review/global_widgets/cards/search_restaurant_card.da
 import 'package:restaurant_review/global_widgets/posts/post_item.dart';
 import 'package:restaurant_review/global_widgets/restaurants_map/restaurants_map.dart';
 import 'package:restaurant_review/global_widgets/user/mini_user_infor.dart';
+import 'package:restaurant_review/routes/routes.dart';
 import '../controller/search_page_controller.dart';
 
 class SearchView extends GetView<SearchPageController> {
@@ -208,8 +209,9 @@ class SearchView extends GetView<SearchPageController> {
                                 profileId: item.id!,
                                 username: item.username!,
                                 avatarUrl: item.avatarUrl!,
-                                goToUserDetail: (profileId) =>
-                                    print("Clicked on user: ${item.username}"),
+                                goToUserDetail: (profileId) => Get.toNamed(
+                                    Routes.user,
+                                    arguments: {"userId": profileId}),
                               );
                             },
                           );
