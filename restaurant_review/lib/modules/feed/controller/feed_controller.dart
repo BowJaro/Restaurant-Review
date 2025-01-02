@@ -34,7 +34,7 @@ class FeedController extends GetxController {
   }
 
   Future<void> fetchFollowingPostList() async {
-    final response = await repository.getListFollowingPost(userId!, 5);
+    final response = await repository.getListFollowingPost(userId!, 20);
 
     if (response != null) {
       followingPostList.addAll((response as List<dynamic>)
@@ -48,7 +48,7 @@ class FeedController extends GetxController {
   }
 
   Future<void> fetchNewestPostList() async {
-    final response = await repository.getNewestPost(5, userId!);
+    final response = await repository.getNewestPost(20, userId!);
     if (response != null) {
       globalPostList.addAll((response as List<dynamic>)
           .map((item) => PostDetail.fromMap(item as Map<String, dynamic>))
